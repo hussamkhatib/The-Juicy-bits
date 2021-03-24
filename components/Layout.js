@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
+import Cart from './Cart/Cart'
+import CartSvg from './Cart/CartSvg'
 
 function Layout({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -31,7 +33,7 @@ function Layout({ children }) {
                   fill="currentColor"
                 />
               </svg>
-              <span className="mx-1 text-sm">NY</span>
+              <span className="mx-1 text-sm">BLR</span>
             </div>
             <div className="w-full text-gray-700 md:text-center text-2xl font-semibold">
               Pulp Inc.
@@ -41,25 +43,15 @@ function Layout({ children }) {
                 onClick={handleOpen}
                 className="text-gray-600 focus:outline-none mx-4 sm:mx-0"
               >
-                <svg
-                  className="h-5 w-5"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
+                <CartSvg />
               </button>
 
               <div className="flex sm:hidden">
                 <button
                   onClick={handleMenu}
                   type="button"
-                  className="text-gray-600 hover:text-gray-500 focus:outline-none focus:text-gray-500"
                   aria-label="toggle menu"
+                  className="text-gray-600 hover:text-gray-500 focus:outline-none focus:text-gray-500"
                 >
                   <svg viewBox="0 0 24 24" className="h-6 w-6 fill-current">
                     <path
@@ -119,10 +111,10 @@ function Layout({ children }) {
           </div>
         </div>
       </header>
-      {/*
-      // This Cart doesn't really work… yet!
+      
+      {/* // This Cart doesn't really work… yet! */}
       <Cart cartOpen={cartOpen} handleOpen={handleOpen} />
-      */}
+      
       <main className="my-8">{children}</main>
       <footer className="bg-gray-200">
         <div className="container mx-auto px-6 py-3 flex justify-between items-center">
@@ -138,5 +130,6 @@ function Layout({ children }) {
     </div>
   );
 }
+
 
 export default Layout;

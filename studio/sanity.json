@@ -1,10 +1,10 @@
 {
   "root": true,
   "api": {
-    "projectId": "placeholder",
-    "dataset": "placeholder"
+    "projectId": "wltlles4",
+    "dataset": "production"
   },
-  "project": {
+  "project": { 
     "name": "Next.JS E-commerce example",
     "basePath": "/studio"
   },
