@@ -1,5 +1,7 @@
 import React from 'react';
+import RightArrow from '../Svg/RightArrow';
 import CartItems from './CartItems'
+import CancelIcon from '../Svg/CancelIcon'
 
 function Cart({ cartOpen, handleOpen }) {
 
@@ -16,17 +18,7 @@ function Cart({ cartOpen, handleOpen }) {
           onClick={handleOpen}
           className="text-gray-600 focus:outline-none"
         >
-          <svg
-            className="h-5 w-5"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path d="M6 18L18 6M6 6l12 12" />
-          </svg>
+          <CancelIcon />
         </button>
       </div>
       <hr className="my-3" />
@@ -46,17 +38,7 @@ function Cart({ cartOpen, handleOpen }) {
       </div>
       <a className="flex items-center justify-center mt-4 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
         <span>Chechout</span>
-        <svg
-          className="h-5 w-5 mx-2"
-          fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path d="M17 8l4 4m0 0l-4 4m4-4H3" />
-        </svg>
+      <RightArrow />
       </a>
     </div>
   );

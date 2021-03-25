@@ -1,4 +1,4 @@
-const CartSvg = () => {
+const CartIcon = () => {
     return (
             <svg
             className="h-5 w-5"
@@ -14,4 +14,4 @@ const CartSvg = () => {
     )
 }
 
-export default CartSvg
+export default CartIcon

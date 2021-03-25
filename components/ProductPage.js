@@ -1,11 +1,19 @@
 import {useState} from 'react'
 import { urlFor, PortableText, getClient } from "../utils/sanity";
-import CartSvg from './Cart/CartSvg';
+import { useSelector, useDispatch } from 'react-redux';
+import { addItem } from './Cart/cartSlice';
+
+
+import CartIcon from './Svg/CartIcon';
+import Plus from './Svg/Plus'
+import Minus from './Svg/Minus'
 
 function ProductPage(props) {
   const [count, setCount] = useState(1)
   const handleCount = (value) => !(count === 0 && value === -1) ? setCount(count + value) : count
   const { title, defaultProductVariant, mainImage, body } = props;
+  const dispatch = useDispatch();
+
   return (
     <div className="container mx-auto px-6">
       <div className="md:flex md:items-center">
@@ -32,31 +40,11 @@ function ProductPage(props) {
             </label>
             <div className="flex items-center mt-1">
               <button onClick={() => handleCount(1)}className="text-gray-500 focus:outline-none focus:text-gray-600">
-                <svg
-                  className="h-5 w-5"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+                <Plus />
               </button>
               <span className="text-gray-700 text-lg mx-2">{count}</span>
               <button onClick={() => handleCount(-1)} className="text-gray-500 focus:outline-none focus:text-gray-600">
-                <svg
-                  className="h-5 w-5"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+                <Minus />
               </button>
             </div>
           </div>
@@ -64,8 +52,9 @@ function ProductPage(props) {
             <button className="px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500">
               Order Now
             </button>
-            <button className="mx-2 text-gray-600 border rounded-md p-2 hover:bg-gray-200 focus:outline-none">
-              <CartSvg />
+            <button onClick={()=> dispatch(addItem([title,count]))}
+            className="mx-2 text-gray-600 border rounded-md p-2 hover:bg-gray-200 focus:outline-none">
+              <CartIcon />
             </button>
           </div>
         </div>

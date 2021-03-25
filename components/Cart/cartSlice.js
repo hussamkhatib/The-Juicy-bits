@@ -6,13 +6,13 @@ export const slice = createSlice({
     value: [
      {title: 'Mac Iphone',quantity : 1},
      {title: 'Mac Burns', quantity: 1}
-  ]},
+  ]}, 
   reducers: {
-    addItem: state => {
-      state.value.push({title: 'Max Flurry',quantity:1})  
+    addItem: (state,action) => {
+      state.value.push({title:action.payload[0],quantity:action.payload[1]})  
     },
     removeItem: (state,action) => {
-      state.value.splice(action.payload.index, 1)
+      state.value.splice(action.payload, 1)
     }
   },
 });

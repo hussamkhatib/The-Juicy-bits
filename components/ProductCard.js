@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { urlFor } from "../utils/sanity";
-import CartSvg from "./Cart/CartSvg";
+import CartIcon from "./Svg/CartIcon";
 
 function ProductCard({ _id, title, mainImage, slug, defaultProductVariant }) {
   return (
@@ -18,7 +18,7 @@ function ProductCard({ _id, title, mainImage, slug, defaultProductVariant }) {
           }}
         >
           <button className="p-2 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
-            <CartSvg />
+            <CartIcon />
           </button>
         </div>
         <div className="px-5 py-3">

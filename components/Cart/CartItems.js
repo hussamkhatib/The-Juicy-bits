@@ -1,15 +1,20 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { selectItem,addItem,removeItem } from './cartSlice';
-
+import Plus from '../Svg/Plus'
+import Minus from '../Svg/Minus'
 
 const CartItems = () => {
     
 const dispatch = useDispatch();
 const item = useSelector(selectItem);
-    return (
+
+if(!item.length){
+  return <div>Your Cart is Empty</div>;
+}
+return (
         <>
-            {item.map((item) => (
+            {item.map((item,index) => (
         <div 
         key={item.title} className="flex justify-between mt-6">
           <div className="flex">
@@ -24,38 +29,18 @@ const item = useSelector(selectItem);
                 <button
                 onClick={() => dispatch(addItem())} 
                 className="text-gray-500 focus:outline-none focus:text-gray-600">
-                  <svg
-                    className="h-5 w-5"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+                 <Plus />
                 </button>
                 <span className="text-gray-700 mx-2">{item.quantity}</span>
                 <button className="text-gray-500 focus:outline-none focus:text-gray-600">
-                  <svg
-                    className="h-5 w-5"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+                  <Minus />
                 </button>
               </div>
             </div>
           </div>
           <div className='flex flex-col'>
             <span className="text-gray-600">15$</span>
-            <button onClick={()=> dispatch(removeItem(item))}
+            <button onClick={()=> dispatch(removeItem(index))}
              className='text-red-500 border-2 border-red-500'>Delete</button>
           </div>
         </div>
