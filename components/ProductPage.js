@@ -10,9 +10,36 @@ import Minus from './Svg/Minus'
 
 function ProductPage(props) {
   const [count, setCount] = useState(1)
+  const [addedToCart,setAddedToCart] = useState(false)
   const handleCount = (value) => !(count === 0 && value === -1) ? setCount(count + value) : count
   const { title, defaultProductVariant, mainImage, body } = props;
   const dispatch = useDispatch();
+
+  const addItemToCart = () => {
+    dispatch(addItem([title,count]))
+    setAddedToCart(true)
+  }
+
+  function addOrMoveToCart() {
+    if(!addedToCart){
+    return (
+      <button onClick={addItemToCart}
+      className="flex px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500">
+        Add to Cart   <CartIcon />
+      </button>
+    )
+    }else{
+      return (
+        <>
+        <div className='px-4'>Item added</div>
+        <button onClick={()=>console.log('Open Cart')}
+        className="flex px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500">
+          Move to cart
+        </button>
+        </>
+      )
+    }
+  }
 
   return (
     <div className="container mx-auto px-6">
@@ -49,13 +76,7 @@ function ProductPage(props) {
             </div>
           </div>
           <div className="flex items-center mt-6">
-            <button className="px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500">
-              Order Now
-            </button>
-            <button onClick={()=> dispatch(addItem([title,count]))}
-            className="mx-2 text-gray-600 border rounded-md p-2 hover:bg-gray-200 focus:outline-none">
-              <CartIcon />
-            </button>
+              {addOrMoveToCart()}
           </div>
         </div>
       </div>
