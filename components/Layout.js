@@ -5,12 +5,16 @@ import CartIcon from './Svg/CartIcon'
 import Location from './Svg/Location'
 import SearchIcon from './Svg/SearchIcon'
 import Hamburger from './Svg/Hamburger'
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleCart,openOrClose } from './Cart/openCartSlice';
 
 function Layout({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [cartOpen, setCartOpen] = useState(false);
   const handleMenu = () => setMenuOpen(!menuOpen);
-  const handleOpen = () => setCartOpen(!cartOpen);
+  
+  const dispatch = useDispatch();
+  const cartState = useSelector(openOrClose);
+
   return (
     <div className="bg-white">
       <header>
@@ -21,11 +25,11 @@ function Layout({ children }) {
               <span className="mx-1 text-sm">BLR</span>
             </div>
             <div className="w-full text-gray-700 md:text-center text-2xl font-semibold">
-              Pulp Inc.
+              Evolution
             </div>
             <div className="flex items-center justify-end w-full">
               <button
-                onClick={handleOpen}
+                onClick={()=> dispatch(toggleCart())}
                 className="text-gray-600 focus:outline-none mx-4 sm:mx-0"
               >
                 <CartIcon />
@@ -80,8 +84,7 @@ function Layout({ children }) {
         </div>
       </header>
       
-      {/* // This Cart doesn't really work… yet! */}
-      <Cart cartOpen={cartOpen} handleOpen={handleOpen} />
+      <Cart cartOpen={cartState} />
       
       <main className="my-8">{children}</main>
       <footer className="bg-gray-200">
@@ -90,7 +93,7 @@ function Layout({ children }) {
             href="#"
             className="text-xl font-bold text-gray-500 hover:text-gray-400"
           >
-            Pulp Inc.
+            Evolution.
           </a>
           <p className="py-2 text-gray-500 sm:py-0">All rights reserved</p>
         </div>

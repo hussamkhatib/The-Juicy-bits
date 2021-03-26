@@ -2,11 +2,15 @@ import React from 'react';
 import RightArrow from '../Svg/RightArrow';
 import CartItems from './CartItems'
 import CancelIcon from '../Svg/CancelIcon'
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleCart,openOrClose } from './openCartSlice';
 
-function Cart({ cartOpen, handleOpen }) {
+function Cart({ cartOpen }) {
 
+const dispatch = useDispatch()
+const cartState = useSelector(openOrClose);
 
-  return (
+return (
     <div
       className={`${
         cartOpen ? "translate-x-0 ease-out" : "translate-x-full ease-in"
@@ -15,7 +19,7 @@ function Cart({ cartOpen, handleOpen }) {
       <div className="flex items-center justify-between">
         <h3 className="text-2xl font-medium text-gray-700">Your cart</h3>
         <button
-          onClick={handleOpen}
+          onClick={()=> dispatch(toggleCart())}
           className="text-gray-600 focus:outline-none"
         >
           <CancelIcon />

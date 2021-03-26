@@ -1,8 +1,8 @@
 import {useState} from 'react'
 import { urlFor, PortableText, getClient } from "../utils/sanity";
-import { useSelector, useDispatch } from 'react-redux';
 import { addItem } from './Cart/cartSlice';
-
+import { useDispatch } from 'react-redux';
+import { openCart } from './Cart/openCartSlice';
 
 import CartIcon from './Svg/CartIcon';
 import Plus from './Svg/Plus'
@@ -13,6 +13,7 @@ function ProductPage(props) {
   const [addedToCart,setAddedToCart] = useState(false)
   const handleCount = (value) => !(count === 0 && value === -1) ? setCount(count + value) : count
   const { title, defaultProductVariant, mainImage, body } = props;
+  
   const dispatch = useDispatch();
 
   const addItemToCart = () => {
@@ -23,16 +24,30 @@ function ProductPage(props) {
   function addOrMoveToCart() {
     if(!addedToCart){
     return (
+      <div className="mt-2">
+            <label className="text-gray-700 text-sm" htmlFor="count">
+              Count:
+            </label>
+            <div className="flex items-center mt-1">
+              <button onClick={() => handleCount(1)}className="text-gray-500 focus:outline-none focus:text-gray-600">
+                <Plus />
+              </button>
+              <span className="text-gray-700 text-lg mx-2">{count}</span>
+              <button onClick={() => handleCount(-1)} className="text-gray-500 focus:outline-none focus:text-gray-600">
+                <Minus />
+              </button>
+            </div>
       <button onClick={addItemToCart}
       className="flex px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500">
         Add to Cart   <CartIcon />
       </button>
+      </div>
     )
     }else{
       return (
         <>
         <div className='px-4'>Item added</div>
-        <button onClick={()=>console.log('Open Cart')}
+        <button onClick={()=>dispatch(openCart())}
         className="flex px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500">
           Move to cart
         </button>
@@ -61,20 +76,7 @@ function ProductPage(props) {
             ${defaultProductVariant?.price}
           </span>
           <hr className="my-3" />
-          <div className="mt-2">
-            <label className="text-gray-700 text-sm" htmlFor="count">
-              Count:
-            </label>
-            <div className="flex items-center mt-1">
-              <button onClick={() => handleCount(1)}className="text-gray-500 focus:outline-none focus:text-gray-600">
-                <Plus />
-              </button>
-              <span className="text-gray-700 text-lg mx-2">{count}</span>
-              <button onClick={() => handleCount(-1)} className="text-gray-500 focus:outline-none focus:text-gray-600">
-                <Minus />
-              </button>
-            </div>
-          </div>
+          
           <div className="flex items-center mt-6">
               {addOrMoveToCart()}
           </div>
