@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { selectItem,removeItem } from './cartSlice';
+import { selectItem,removeItem,increment,decrement } from './cartSlice';
 import { urlFor } from "../../utils/sanity";
 import Plus from '../Svg/Plus'
 import Minus from '../Svg/Minus'
@@ -11,9 +11,12 @@ const CartItems = () => {
 const dispatch = useDispatch();
 const item = useSelector(selectItem);
 
+
 if(!item.length){
   return <div>Your Cart is Empty</div>;
 }
+
+
 return (
         <>
             {item.map((item,index) => (
@@ -32,12 +35,15 @@ return (
             <div className="mx-3">
               <h3 className="text-sm text-gray-600">{item.title}</h3>
               <div className="flex items-center mt-2">
-                <button
+                <button onClick={() => dispatch(increment(index))}
                 className="text-gray-500 focus:outline-none focus:text-gray-600">
                  <Plus />
                 </button>
                 <span className="text-gray-700 mx-2">{item.quantity}</span>
-                <button className="text-gray-500 focus:outline-none focus:text-gray-600">
+                <button 
+                disabled={item.quantity<2}
+                onClick={()=> dispatch(decrement(index))}
+                className="text-gray-500 focus:outline-none focus:text-gray-600">
                   <Minus />
                 </button>
               </div>

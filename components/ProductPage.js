@@ -1,12 +1,13 @@
-import {useState} from 'react'
+import { useState ,useEffect } from 'react'
 import { urlFor, PortableText, getClient } from "../utils/sanity";
 import { addItem } from './Cart/cartSlice';
-import { useDispatch } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import { openCart } from './Cart/openCartSlice';
 
 import CartIcon from './Svg/CartIcon';
 import Plus from './Svg/Plus'
 import Minus from './Svg/Minus'
+import { selectItem } from './Cart/cartSlice'
 
 function ProductPage(props) {
   const [count, setCount] = useState(1)
@@ -15,11 +16,16 @@ function ProductPage(props) {
   const { title, defaultProductVariant, mainImage, body } = props;
   
   const dispatch = useDispatch();
-
-  const addItemToCart = () => {
-    dispatch(addItem([title,count,mainImage,defaultProductVariant?.price]))
-    setAddedToCart(true)
-  }
+  const cartItems = useSelector(selectItem)
+  const cartTitles = cartItems.map(i=>i.title)
+  
+  useEffect(() => {    
+    if(cartTitles.includes(title)){
+      setAddedToCart(true)
+    }else{
+    setAddedToCart(false)
+    }
+  });
 
   function addOrMoveToCart() {
     if(!addedToCart){
@@ -37,7 +43,7 @@ function ProductPage(props) {
                 <Minus />
               </button>
             </div>
-      <button onClick={addItemToCart}
+      <button onClick={()=> dispatch(addItem([title,count,mainImage,defaultProductVariant?.price]))}
       className="flex px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500">
         Add to Cart   <CartIcon />
       </button>
