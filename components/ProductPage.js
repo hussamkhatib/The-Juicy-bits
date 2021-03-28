@@ -17,7 +17,7 @@ function ProductPage(props) {
   const dispatch = useDispatch();
 
   const addItemToCart = () => {
-    dispatch(addItem([title,count]))
+    dispatch(addItem([title,count,mainImage,defaultProductVariant?.price]))
     setAddedToCart(true)
   }
 
@@ -73,7 +73,7 @@ function ProductPage(props) {
         <div className="w-full max-w-lg mx-auto mt-5 md:ml-8 md:mt-0 md:w-1/2">
           <h3 className="text-gray-700 uppercase text-lg">{title}</h3>
           <span className="text-gray-500 mt-3">
-            ${defaultProductVariant?.price}
+            Rs {defaultProductVariant?.price}
           </span>
           <hr className="my-3" />
           

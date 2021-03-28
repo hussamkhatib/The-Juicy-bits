@@ -2,13 +2,14 @@ import React from 'react';
 import RightArrow from '../Svg/RightArrow';
 import CartItems from './CartItems'
 import CancelIcon from '../Svg/CancelIcon'
-import { useSelector, useDispatch } from 'react-redux';
-import { toggleCart,openOrClose } from './openCartSlice';
+import { useDispatch } from 'react-redux';
+import { toggleCart } from './openCartSlice';
+
+//const query = groq`*[_type == "product" && slug.current == $slug][0]`;
 
 function Cart({ cartOpen }) {
 
 const dispatch = useDispatch()
-const cartState = useSelector(openOrClose);
 
 return (
     <div
@@ -24,7 +25,7 @@ return (
         >
           <CancelIcon />
         </button>
-      </div>
+      </div> 
       <hr className="my-3" />
       <CartItems />
 

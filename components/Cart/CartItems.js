@@ -1,8 +1,10 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { selectItem,addItem,removeItem } from './cartSlice';
+import { selectItem,removeItem } from './cartSlice';
+import { urlFor } from "../../utils/sanity";
 import Plus from '../Svg/Plus'
 import Minus from '../Svg/Minus'
+import Trash from '../Svg/Trash'
 
 const CartItems = () => {
     
@@ -20,14 +22,17 @@ return (
           <div className="flex">
             <img
               className="h-20 w-20 object-cover rounded"
-              src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80"
-              alt=""
+              src={urlFor(item.imgSrc)
+                .auto("format")
+                .width(200)
+                .fit("crop")
+                .quality(80)}
+              alt={item.imgSrc?.alt || `Photo of ${item.title}`}
             />
             <div className="mx-3">
               <h3 className="text-sm text-gray-600">{item.title}</h3>
               <div className="flex items-center mt-2">
                 <button
-                onClick={() => dispatch(addItem())} 
                 className="text-gray-500 focus:outline-none focus:text-gray-600">
                  <Plus />
                 </button>
@@ -38,10 +43,12 @@ return (
               </div>
             </div>
           </div>
-          <div className='flex flex-col'>
-            <span className="text-gray-600">15$</span>
+          <div className='flex flex-col items-center'>
+            <span className="text-gray-600">Rs {item.price}</span>
             <button onClick={()=> dispatch(removeItem(index))}
-             className='text-red-500 border-2 border-red-500'>Delete</button>
+             className=''>
+               <Trash />
+             </button>
           </div>
         </div>
       ))}
