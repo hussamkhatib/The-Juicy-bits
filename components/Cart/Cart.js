@@ -5,8 +5,6 @@ import CancelIcon from '../Svg/CancelIcon'
 import { useDispatch } from 'react-redux';
 import { toggleCart } from './openCartSlice';
 
-//const query = groq`*[_type == "product" && slug.current == $slug][0]`;
-
 function Cart({ cartOpen }) {
 
 const dispatch = useDispatch()

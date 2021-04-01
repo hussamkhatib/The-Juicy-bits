@@ -63,6 +63,11 @@ function Layout({ children }) {
                   Shop
                 </a>
               </Link>
+              <Link href="/categories">
+                <a className="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0">
+                  Categories
+                </a>
+              </Link>
               <Link href="/about">
                 <a className="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0">
                   About
