@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import Cart from './Cart/Cart'
 import CartIcon from './Svg/CartIcon'
 import Location from './Svg/Location'
@@ -7,13 +8,22 @@ import SearchIcon from './Svg/SearchIcon'
 import Hamburger from './Svg/Hamburger'
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleCart,openOrClose } from './Cart/openCartSlice';
+import SignupContainer from "./Form/SignupContainer";
+import SignUp from "./Form/SignUp";
 
 function Layout({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [signUp,setSignUp] = useState(false)
   const handleMenu = () => setMenuOpen(!menuOpen);
-  
+  const handleSignUp = () => {
+    setSignUp(!signUp)
+  };
+
+  const [isAuth,setIsAuth] = useState(false)   
   const dispatch = useDispatch();
   const cartState = useSelector(openOrClose);
+  
+  const router = useRouter();
 
   return (
     <div className="bg-white">
@@ -28,6 +38,9 @@ function Layout({ children }) {
               Evolution
             </div>
             <div className="flex items-center justify-end w-full">
+              <button onClick={handleSignUp}>
+                {isAuth? 'Notification': 'Sign up'}
+              </button>
               <button
                 onClick={()=> dispatch(toggleCart())}
                 className="text-gray-600 focus:outline-none mx-4 sm:mx-0"
@@ -52,28 +65,28 @@ function Layout({ children }) {
               menuOpen ? "" : "hidden"
             } sm:flex sm:justify-center sm:items-center mt-4`}
           >
-            <div className="flex flex-col sm:flex-row">
+            <ul className="flex flex-col sm:flex-row">
               <Link href="/">
-                <a className="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0">
+                <a className={router.pathname == "/" ? "mt-3 text-blue-500 hover:underline sm:mx-3 sm:mt-0" : "mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0"} >
                   Home
                 </a>
               </Link>
               <Link href="/products">
-                <a className="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0">
+                <a className={router.pathname.startsWith("/products") ? "mt-3 text-blue-500 hover:underline sm:mx-3 sm:mt-0" : "mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0"}>
                   Shop
                 </a>
               </Link>
               <Link href="/categories">
-                <a className="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0">
+                <a className={router.pathname.startsWith("/categories") ? "mt-3 text-blue-500 hover:underline sm:mx-3 sm:mt-0" : "mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0"}>
                   Categories
                 </a>
               </Link>
               <Link href="/about">
-                <a className="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0">
+                <a className={router.pathname == "/about" ? "mt-3 text-blue-500 hover:underline sm:mx-3 sm:mt-0" : "mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0"}>
                   About
                 </a>
               </Link>
-            </div>
+            </ul>
           </nav>
           <div className="relative mt-6 max-w-lg mx-auto">
             <span className="absolute inset-y-0 left-0 pl-3 flex items-center">
@@ -92,6 +105,11 @@ function Layout({ children }) {
       <Cart cartOpen={cartState} />
       
       <main className="my-8">{children}</main>
+      {signUp && 
+        <SignupContainer 
+        handleSignUp={handleSignUp}
+        />
+      }
       <footer className="bg-gray-200">
         <div className="container mx-auto px-6 py-3 flex justify-between items-center">
           <a

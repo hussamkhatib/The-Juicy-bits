@@ -1,0 +1,10 @@
+.flexEnds{
+    flex: 0 0 16px;
+}
+.minW16{
+    min-height: 4em;
+}
+.pos{
+    top: 1.25em;
+    left: 1em;
+}

@@ -3,15 +3,12 @@ import { useRouter } from "next/router";
 import { getClient, usePreviewSubscription } from "../../utils/sanity";
 import CategoriesPage from '../../components/Category/CategoriesPage'
 
-/*const query = `*[_type == "category" && defined(slug.current)]{
-  title
-}`;*/
 const query = `*[_type == 'category' && defined(slug.current)]{
   title,
  'id':*[defined(categories) && _type == 'product' && references(^._id)][0]{
  _id
 }
-}`
+}[defined(id)]`
 
 function CategoriesPageContainer({ categoriesData, preview }) {
   const router = useRouter();
