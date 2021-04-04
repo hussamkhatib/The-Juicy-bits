@@ -26,7 +26,8 @@
     },
     "envVars": {
       "projectId": ["NEXT_PUBLIC_SANITY_PROJECT_ID"],
-      "dataset": ["NEXT_PUBLIC_SANITY_DATASET"]
+      "dataset": ["NEXT_PUBLIC_SANITY_DATASET"],
+      "apiKey": ["NEXT_PUBLIC_API_KEY"]
     },
     "corsOrigins": [
       {

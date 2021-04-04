@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Cart from './Cart/Cart'
@@ -9,22 +9,55 @@ import Hamburger from './Svg/Hamburger'
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleCart,openOrClose } from './Cart/openCartSlice';
 import SignupContainer from "./Form/SignupContainer";
-import SignUp from "./Form/SignUp";
+import { auth } from '../firebase/config'
+import { userLoggedState,LogInUser,LogOutUser } from "../redux/userSlice";
 
 function Layout({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [signUp,setSignUp] = useState(false)
+
   const handleMenu = () => setMenuOpen(!menuOpen);
-  const handleSignUp = () => {
+
+  const dispatch = useDispatch()
+  const router = useRouter();
+  const cartState = useSelector(openOrClose);
+  
+//Sign 
+    const [signUp,setSignUp] = useState(false)
+    const [logIn,setLogIn] = useState(false)
+    const userAuthState = useSelector(userLoggedState)
+ 
+    const openorClosePopUp = () => {
     setSignUp(!signUp)
   };
 
-  const [isAuth,setIsAuth] = useState(false)   
-  const dispatch = useDispatch();
-  const cartState = useSelector(openOrClose);
+  const signInUser= () => {
+    setSignIn(true)
+  }
+  const signUpUser=()=>{
+    setSignIn(false)
+  }
+  const signInOrUp = logIn? 'Sign in' : 'Sign up'
+  const logOut = () => {
+    auth.signOut()
+  }
+  function onAuthStateChange() {
+    return auth.onAuthStateChanged(user => {
+      if (user) {
+        console.log(user.displayName)
+        dispatch(LogInUser(user.displayName))
+      }
+       else {
+        dispatch(LogOutUser())
+      }
+    });
+  }
+  useEffect(() => {
+    const unsubscribe =onAuthStateChange();
+    return () => {
+      unsubscribe();
+    };
+  }, []);
   
-  const router = useRouter();
-
   return (
     <div className="bg-white">
       <header>
@@ -38,9 +71,18 @@ function Layout({ children }) {
               Evolution
             </div>
             <div className="flex items-center justify-end w-full">
-              <button onClick={handleSignUp}>
-                {isAuth? 'Notification': 'Sign up'}
+              <div>
+                {userAuthState.logIn ? `Logged in as ${userAuthState.name}` : 'logged Out '}
+              </div>
+              {!userAuthState.logIn ?
+              <button onClick={openorClosePopUp}>
+                Sign Up
               </button>
+              :
+              <button className='bg-red-500 px-4 mx-2' onClick={logOut}>
+              click to Log out
+              </button>
+              }
               <button
                 onClick={()=> dispatch(toggleCart())}
                 className="text-gray-600 focus:outline-none mx-4 sm:mx-0"
@@ -105,11 +147,15 @@ function Layout({ children }) {
       <Cart cartOpen={cartState} />
       
       <main className="my-8">{children}</main>
-      {signUp && 
+      {(signUp || logIn) && 
         <SignupContainer 
-        handleSignUp={handleSignUp}
+        SignInOrUp={signInOrUp}
+        Close={openorClosePopUp}
+        SignInUser={signInUser}
+        SignUpUser={signUpUser}
         />
       }
+      
       <footer className="bg-gray-200">
         <div className="container mx-auto px-6 py-3 flex justify-between items-center">
           <a

@@ -1,23 +1,47 @@
 import firebase from 'firebase/app'
-import "firebase/analytics";
 import "firebase/auth";
-import "firebase/firestore"
-import 'firebase/storage'
+import "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBGGp1PpgOjPTrXk-OeTxCuIHo_vlugGJA",
-  authDomain: "evolution-3d12a.firebaseapp.com",
-  databaseURL: "https://evolution-3d12a-default-rtdb.firebaseio.com",
-  projectId: "evolution-3d12a",
-  storageBucket: "evolution-3d12a.appspot.com",
-  messagingSenderId: "143379502680",
-  appId: "1:143379502680:web:7d64de205c2e5e679d9c2d",
-  measurementId: "G-FBDY04G1D1"
+  apiKey: process.env.NEXT_PUBLIC_API_KEY,
+  authDomain: "evolution-58334.firebaseapp.com",
+  projectId: "evolution-58334",
+  storageBucket: "evolution-58334.appspot.com",
+  messagingSenderId: "3932018608",
+  appId: "1:3932018608:web:13cf0e62debf99067ce875"
 };
-firebase.initializeApp(firebaseConfig);
-firebase.analytics();
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 
-//const projectStorage = firebase.storage();
-//const projectFireStore = firebase.firestore();
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+  if (!userAuth) return;
 
-//export { projectStorage,projectFireStore };
+  const userRef = firestore.doc(`users/${userAuth.uid}`);
+  const snapShot = await userRef.get();
+
+  if (!snapShot.exists) {
+    const { displayName, email } = userAuth;
+    const createdAt = new Date();
+    try {
+      await userRef.set({
+        displayName,
+        email,
+        createdAt,
+        ...additionalData,
+      });
+    } catch (error) {
+      console.log("error creating user", error.message);
+    }
+  }
+  return userRef;
+};
+
+
+const provider = new firebase.auth.GoogleAuthProvider();
+export const signInWithGoogle = () => {
+  auth.signInWithPopup(provider);
+};
+
+export const auth = firebase.auth();
+export const firestore = firebase.firestore();
