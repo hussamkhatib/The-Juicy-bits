@@ -8,8 +8,6 @@ const query = groq`*[_type == "category"  && slug.current == $slug][0]{
 	slug,title,_id,
   "products":*[_type == "product" && references(^._id)] 
 }`;
-//const query = groq`*[_type == "category" && slug.current == $slug][0]`;
-
 
 function CategoryContainer({ categoryData, preview }) {
   const router = useRouter();

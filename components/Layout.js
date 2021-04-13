@@ -11,12 +11,13 @@ import { toggleCart,openOrClose } from './Cart/openCartSlice';
 import SignupContainer from "./Form/SignupContainer";
 import { auth } from '../firebase/config'
 import { userLoggedState,LogInUser,LogOutUser } from "../redux/userSlice";
+import Profile from './Profile'
 
 function Layout({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  
   const handleMenu = () => setMenuOpen(!menuOpen);
-
   const dispatch = useDispatch()
   const router = useRouter();
   const cartState = useSelector(openOrClose);
@@ -43,7 +44,6 @@ function Layout({ children }) {
   function onAuthStateChange() {
     return auth.onAuthStateChanged(user => {
       if (user) {
-        console.log(user.displayName)
         dispatch(LogInUser(user.displayName))
       }
        else {
@@ -71,23 +71,20 @@ function Layout({ children }) {
               Evolution
             </div>
             <div className="flex items-center justify-end w-full">
-              <div>
-                {userAuthState.logIn ? `Logged in as ${userAuthState.name}` : 'logged Out '}
+              <div className='px-4'>
+                {userAuthState.logIn ? <Profile /> : 'logged Out '}
               </div>
-              {!userAuthState.logIn ?
+              {!userAuthState.logIn &&
               <button onClick={openorClosePopUp}>
                 Sign Up
-              </button>
-              :
-              <button className='bg-red-500 px-4 mx-2' onClick={logOut}>
-              click to Log out
               </button>
               }
               <button
                 onClick={()=> dispatch(toggleCart())}
-                className="text-gray-600 focus:outline-none mx-4 sm:mx-0"
+                className="text-gray-600 text-xs focus:outline-none px-4"
               >
                 <CartIcon />
+                Cart
               </button>
 
               <div className="flex sm:hidden">
