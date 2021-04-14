@@ -7,11 +7,13 @@ import Location from './Svg/Location'
 import SearchIcon from './Svg/SearchIcon'
 import Hamburger from './Svg/Hamburger'
 import { useSelector, useDispatch } from 'react-redux';
-import { toggleCart,openOrClose } from './Cart/openCartSlice';
 import SignupContainer from "./Form/SignupContainer";
 import { auth } from '../firebase/config'
 import { userLoggedState,LogInUser,LogOutUser } from "../redux/userSlice";
-import Profile from './Profile'
+import ProfileNavLink from './Profile/ProfileNavLink'
+import Profile from "./Profile/Profile";
+import { cartOrProfile, openCart } from "../redux/sliderSlice";
+import SliderContainer from "./SliderContainer";
 
 function Layout({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -20,9 +22,8 @@ function Layout({ children }) {
   const handleMenu = () => setMenuOpen(!menuOpen);
   const dispatch = useDispatch()
   const router = useRouter();
-  const cartState = useSelector(openOrClose);
-  
-//Sign 
+  const cartOrProfileState = useSelector(cartOrProfile)
+
     const [signUp,setSignUp] = useState(false)
     const [logIn,setLogIn] = useState(false)
     const userAuthState = useSelector(userLoggedState)
@@ -72,7 +73,7 @@ function Layout({ children }) {
             </div>
             <div className="flex items-center justify-end w-full">
               <div className='px-4'>
-                {userAuthState.logIn ? <Profile /> : 'logged Out '}
+                {userAuthState.logIn ? <ProfileNavLink /> : 'logged Out '}
               </div>
               {!userAuthState.logIn &&
               <button onClick={openorClosePopUp}>
@@ -80,7 +81,7 @@ function Layout({ children }) {
               </button>
               }
               <button
-                onClick={()=> dispatch(toggleCart())}
+                onClick={()=> dispatch(openCart())}
                 className="text-gray-600 text-xs focus:outline-none px-4"
               >
                 <CartIcon />
@@ -121,7 +122,7 @@ function Layout({ children }) {
                 </a>
               </Link>
               <Link href="/about">
-                <a className={router.pathname == "/about" ? "mt-3 text-blue-500 hover:underline sm:mx-3 sm:mt-0" : "mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0"}>
+                <a className={router.pathname == "/[slug]" ? "mt-3 text-blue-500 hover:underline sm:mx-3 sm:mt-0" : "mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0"}>
                   About
                 </a>
               </Link>
@@ -141,8 +142,15 @@ function Layout({ children }) {
         </div>
       </header>
       
-      <Cart cartOpen={cartState} />
-      
+      <SliderContainer>
+        {cartOrProfileState === 'cart' ?
+         <Cart />
+         :
+         <Profile />      
+      }
+       
+      </SliderContainer>
+     
       <main className="my-8">{children}</main>
       {(signUp || logIn) && 
         <SignupContainer 

@@ -3,22 +3,18 @@ import RightArrow from '../Svg/RightArrow';
 import CartItems from './CartItems'
 import CancelIcon from '../Svg/CancelIcon'
 import { useDispatch } from 'react-redux';
-import { toggleCart } from './openCartSlice';
+import { cancel } from '../../redux/sliderSlice';
 
-function Cart({ cartOpen }) {
+function Cart() {
 
 const dispatch = useDispatch()
 
 return (
-    <div
-      className={`${
-        cartOpen ? "translate-x-0 ease-out" : "translate-x-full ease-in"
-      } fixed right-0 top-0 max-w-xs w-full h-full px-6 py-4 transition duration-300 transform overflow-y-auto bg-white border-l-2 border-gray-300`}
-    >
+      <>
       <div className="flex items-center justify-between">
         <h3 className="text-2xl font-medium text-gray-700">Your cart</h3>
         <button
-          onClick={()=> dispatch(toggleCart())}
+          onClick={()=> dispatch(cancel())}
           className="text-gray-600 focus:outline-none"
         >
           <CancelIcon />
@@ -43,7 +39,7 @@ return (
         <span>Chechout</span>
       <RightArrow />
       </a>
-    </div>
+    </>
   );
 }
 

@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit'
 import itemReducer from '../components/Cart/cartSlice'
-import openCartReducer from '../components/Cart/openCartSlice'
+
 import userReducer from './userSlice'
+import sliderReducer from './sliderSlice'
+
 
 export default configureStore({
     reducer:{
         item: itemReducer,
-        openCart: openCartReducer,
+        openSlider: sliderReducer,
         currentUser: userReducer
     } 
 })
