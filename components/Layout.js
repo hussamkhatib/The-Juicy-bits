@@ -12,8 +12,9 @@ import { auth } from '../firebase/config'
 import { userLoggedState,LogInUser,LogOutUser } from "../redux/userSlice";
 import ProfileNavLink from './Profile/ProfileNavLink'
 import Profile from "./Profile/Profile";
-import { cartOrProfile, openCart } from "../redux/sliderSlice";
+import { openSliderComponentState,openSliderComponent } from "../redux/sliderSlice";
 import SliderContainer from "./SliderContainer";
+import Order from './Orders/Order'
 
 function Layout({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -22,7 +23,7 @@ function Layout({ children }) {
   const handleMenu = () => setMenuOpen(!menuOpen);
   const dispatch = useDispatch()
   const router = useRouter();
-  const cartOrProfileState = useSelector(cartOrProfile)
+  const sliderState = useSelector(openSliderComponentState)
 
     const [signUp,setSignUp] = useState(false)
     const [logIn,setLogIn] = useState(false)
@@ -81,7 +82,7 @@ function Layout({ children }) {
               </button>
               }
               <button
-                onClick={()=> dispatch(openCart())}
+                onClick={()=> dispatch(openSliderComponent('cart'))}
                 className="text-gray-600 text-xs focus:outline-none px-4"
               >
                 <CartIcon />
@@ -143,12 +144,9 @@ function Layout({ children }) {
       </header>
       
       <SliderContainer>
-        {cartOrProfileState === 'cart' ?
-         <Cart />
-         :
-         <Profile />      
-      }
-       
+        {sliderState === 'cart' && <Cart />}
+        {sliderState === 'profile' && <Profile />} 
+        {sliderState === 'order' && <Order />}         
       </SliderContainer>
      
       <main className="my-8">{children}</main>

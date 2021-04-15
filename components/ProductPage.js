@@ -2,12 +2,12 @@ import { useState ,useEffect } from 'react'
 import { urlFor, PortableText, getClient } from "../utils/sanity";
 import { addItem } from './Cart/cartSlice';
 import { useSelector,useDispatch } from 'react-redux';
-import { openCart } from './Cart/openCartSlice';
 
 import CartIcon from './Svg/CartIcon';
 import Plus from './Svg/Plus'
 import Minus from './Svg/Minus'
 import { selectItem } from './Cart/cartSlice'
+import { openSliderComponent } from '../redux/sliderSlice';
 
 function ProductPage(props) {
   const [count, setCount] = useState(1)
@@ -53,7 +53,7 @@ function ProductPage(props) {
       return (
         <>
         <div className='px-4'>Item added</div>
-        <button onClick={()=>dispatch(openCart())}
+        <button onClick={()=>dispatch(openSliderComponent('cart'))}
         className="flex px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500">
           Move to cart
         </button>

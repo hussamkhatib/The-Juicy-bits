@@ -5,7 +5,7 @@ export const slice = createSlice({
   initialState: {
     value:{
       logIn: false,
-      name: ''
+      name: null
     }
   }, 
   reducers: {
@@ -18,7 +18,7 @@ export const slice = createSlice({
     LogOutUser: state => {
       state.value = {
         logIn:false,
-        name: ''
+        name: null
       }
     }
   },

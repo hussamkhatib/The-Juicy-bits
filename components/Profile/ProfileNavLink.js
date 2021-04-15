@@ -1,12 +1,12 @@
 import ProfileIcon from '../Svg/ProfileIcon'
 import { useDispatch } from 'react-redux';
-import { openProfile } from '../../redux/sliderSlice';
+import { openSliderComponent } from '../../redux/sliderSlice';
 
 const ProfileNavLink = () => {
     const dispatch = useDispatch()
     return (
         <button
-        onClick={()=> dispatch(openProfile())}
+        onClick={()=> dispatch(openSliderComponent('profile'))}
         className="text-gray-600 flex flex-col items-center w-full ">
             <ProfileIcon />
             <div className='text-xs focus:outline-none sm:mx-0'>

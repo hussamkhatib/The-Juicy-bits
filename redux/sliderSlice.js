@@ -7,15 +7,10 @@ export const slice = createSlice({
       open: ''
     }, 
   reducers: {
-    openCart: state => {
-        state.value = true
-        state.open = 'cart'
+    openSliderComponent: (state,action) => {
+      state.value = true
+      state.open = action.payload 
     },
-    openProfile: state => {
-        state.value = true
-        state.open = 'profile' 
-    }
-    ,
     cancel: state => {
         state.value = !state.value
         state.open = null
@@ -23,8 +18,8 @@ export const slice = createSlice({
   },
 });
 
-export const { openCart,openProfile,cancel } = slice.actions;
+export const { cancel,openSliderComponent } = slice.actions;
 export const openOrClose = state => state.openSlider.value;
-export const cartOrProfile = state =>  (state.openSlider.open || '');
+export const openSliderComponentState = state =>  state.openSlider.open;
 
 export default slice.reducer;
