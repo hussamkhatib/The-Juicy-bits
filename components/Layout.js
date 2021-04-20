@@ -8,7 +8,7 @@ import SearchIcon from './Svg/SearchIcon'
 import Hamburger from './Svg/Hamburger'
 import { useSelector, useDispatch } from 'react-redux';
 import SignupContainer from "./Form/SignupContainer";
-import { auth } from '../firebase/config'
+import { auth,getUserDetails } from '../firebase/config'
 import { userLoggedState,LogInUser,LogOutUser } from "../redux/userSlice";
 import ProfileNavLink from './Profile/ProfileNavLink'
 import Profile from "./Profile/Profile";
@@ -34,25 +34,30 @@ function Layout({ children }) {
   };
 
   const signInUser= () => {
-    setSignIn(true)
+    setLogIn(true)
   }
   const signUpUser=()=>{
-    setSignIn(false)
-  }
+    setLogIn(false)
+  } 
   const signInOrUp = logIn? 'Sign in' : 'Sign up'
   const logOut = () => {
+    dispatch(cancel())
     auth.signOut()
   }
-  function onAuthStateChange() {
-    return auth.onAuthStateChanged(user => {
+   async function onAuthStateChange() {
+     return  auth.onAuthStateChanged(async (user) => {
       if (user) {
         dispatch(LogInUser(user.displayName))
+        const userDetails = await getUserDetails(auth.currentUser.uid)
+        console.log(userDetails)
+        const {products} = userDetails
+        console.log({products})
       }
        else {
         dispatch(LogOutUser())
       }
     });
-  }
+  } 
   useEffect(() => {
     const unsubscribe =onAuthStateChange();
     return () => {
@@ -60,6 +65,7 @@ function Layout({ children }) {
     };
   }, []);
   
+
   return (
     <div className="bg-white">
       <header>
@@ -145,7 +151,7 @@ function Layout({ children }) {
       
       <SliderContainer>
         {sliderState === 'cart' && <Cart />}
-        {sliderState === 'profile' && <Profile />} 
+        {sliderState === 'profile' && <Profile Logout={logOut}/>} 
         {sliderState === 'order' && <Order />}         
       </SliderContainer>
      

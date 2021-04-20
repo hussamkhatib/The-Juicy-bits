@@ -1,7 +1,7 @@
 import React,{ useState } from 'react'
 import { auth,createUserProfileDocument, signInWithGoogle } from '../../firebase/config'
 
-const SignUp = ({SignInUser,Close}) => {
+const SignUp = ({ SignInUser }) => {
     const [state, setState] = useState({
         displayName: "",
         email: "",
@@ -119,7 +119,7 @@ const SignUp = ({SignInUser,Close}) => {
           <button 
           onClick={SignInUser}
           className="text-blue-500 hover:text-blue-600">
-            Sign in here
+            Sign in here 
           </button>
         </p>
         </form>

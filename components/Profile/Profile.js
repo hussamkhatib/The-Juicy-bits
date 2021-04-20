@@ -4,7 +4,7 @@ import { cancel } from '../../redux/sliderSlice';
 import ProfileItems from './ProfileItems';
 import { userLoggedState } from '../../redux/userSlice'
 
-const Profile = () => {
+const Profile = ({Logout}) => {
     const dispatch = useDispatch()
     const { name } = useSelector(userLoggedState)
 
@@ -20,7 +20,7 @@ const Profile = () => {
             </button>
         </div>
         <hr className="my-3" />
-        <ProfileItems />
+        <ProfileItems Logout={Logout}/>
         </>
     )
 }

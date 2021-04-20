@@ -10,7 +10,8 @@ export const slice = createSlice({
       state.value.push({title:action.payload[0],
                       quantity:action.payload[1],
                       imgSrc:action.payload[2],
-                      price:action.payload[3]
+                      price:action.payload[3],
+                      id:action.payload[4]
                       })  
     },
     removeItem: (state,action) => {

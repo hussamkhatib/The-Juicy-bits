@@ -2,19 +2,20 @@ import { useState ,useEffect } from 'react'
 import { urlFor, PortableText, getClient } from "../utils/sanity";
 import { addItem } from './Cart/cartSlice';
 import { useSelector,useDispatch } from 'react-redux';
-
+import { addProductId, auth } from '../firebase/config'
 import CartIcon from './Svg/CartIcon';
 import Plus from './Svg/Plus'
 import Minus from './Svg/Minus'
 import { selectItem } from './Cart/cartSlice'
 import { openSliderComponent } from '../redux/sliderSlice';
 
+
 function ProductPage(props) {
   const [count, setCount] = useState(1)
   const [addedToCart,setAddedToCart] = useState(false)
   const handleCount = (value) => !(count === 0 && value === -1) ? setCount(count + value) : count
-  const { title, defaultProductVariant, mainImage, body } = props;
-  
+  const { title, defaultProductVariant, mainImage, body,id } = props;
+
   const dispatch = useDispatch();
   const cartItems = useSelector(selectItem)
   const cartTitles = cartItems.map(i=>i.title)
@@ -26,6 +27,12 @@ function ProductPage(props) {
     setAddedToCart(false)
     }
   });
+
+  const addToCart = () => {
+    dispatch(addItem([title,count,mainImage,defaultProductVariant?.price,id]))
+    addProductId(auth.currentUser.uid,id)
+    console.log('called')
+  }
 
   function addOrMoveToCart() {
     if(!addedToCart){
@@ -43,8 +50,9 @@ function ProductPage(props) {
                 <Minus />
               </button>
             </div>
-      <button onClick={()=> dispatch(addItem([title,count,mainImage,defaultProductVariant?.price]))}
-      className="flex px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500">
+      <button 
+        onClick={addToCart}
+        className="flex px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500">
         Add to Cart   <CartIcon />
       </button>
       </div>

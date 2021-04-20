@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { openSliderComponent } from '../../redux/sliderSlice'
 
-const ProfileItems = () => {
+const ProfileItems = ({Logout}) => {
     const dispatch = useDispatch()
 
     return (
@@ -23,9 +23,11 @@ const ProfileItems = () => {
             <div className='hover:bg-gray-200 py-1'>
                 Edit Profile
             </div>
-            <div className='hover:bg-gray-200 py-1'>
+            <button
+            onClick={Logout}
+            className='hover:bg-gray-200 py-1'>
                 Logout
-            </div>
+            </button>
         </div>
     )
 }

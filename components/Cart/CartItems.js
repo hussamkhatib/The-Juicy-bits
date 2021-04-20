@@ -1,21 +1,37 @@
-import React from 'react'
+import React,{ useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { selectItem,removeItem,increment,decrement } from './cartSlice';
 import { urlFor } from "../../utils/sanity";
 import Plus from '../Svg/Plus'
 import Minus from '../Svg/Minus'
 import Trash from '../Svg/Trash'
+import { auth, deleteProductId, setCartItems } from '../../firebase/config'
 
 const CartItems = () => {
     
 const dispatch = useDispatch();
 const item = useSelector(selectItem);
 
-
 if(!item.length){
   return <div>Your Cart is Empty</div>;
 }
 
+const removeProductFromCart = (index) => {
+  dispatch(removeItem(index))
+  deleteProductId(auth.currentUser.uid,item[index].id)
+  console.log('deletion product from cart called')
+}
+
+/*useEffect(()=>{
+  console.log('useEffect called')
+  const items = setCartItems()
+    return () => {
+      items()
+    }
+},[])*/
+useEffect(() => {
+  console.log('layout useEffect')
+}, []);
 
 return (
         <>
@@ -51,7 +67,7 @@ return (
           </div>
           <div className='flex flex-col items-center'>
             <span className="text-gray-600">Rs {item.price}</span>
-            <button onClick={()=> dispatch(removeItem(index))}
+            <button onClick={()=>removeProductFromCart(index)}
              className=''>
                <Trash />
              </button>

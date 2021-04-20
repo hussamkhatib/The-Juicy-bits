@@ -19,7 +19,7 @@ const SignupContainer = ({Close,SignInOrUp,SignInUser,SignUpUser}) => {
                     <div className={`${styles.flexEnds} text-right`}>
                     </div>
                 </header>
-            {SignInOrUp === 'Sign up' ? <SignUp Close={Close} SignInUser={SignInUser}/> : <SignIn SignUpUser={SignUpUser}/>}        
+            {SignInOrUp === 'Sign up' ? <SignUp SignInUser={SignInUser}/> : <SignIn SignUpUser={SignUpUser}/>}        
             </div>
         </div>
     )
