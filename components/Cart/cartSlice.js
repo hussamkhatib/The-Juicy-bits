@@ -7,12 +7,7 @@ export const slice = createSlice({
   }, 
   reducers: {
     addItem: (state,action) => {
-      state.value.push({title:action.payload[0],
-                      quantity:action.payload[1],
-                      imgSrc:action.payload[2],
-                      price:action.payload[3],
-                      id:action.payload[4]
-                      })  
+      state.value.push(action.payload)  
     },
     removeItem: (state,action) => {
       state.value.splice(action.payload, 1)

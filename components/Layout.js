@@ -15,6 +15,8 @@ import Profile from "./Profile/Profile";
 import { openSliderComponentState,openSliderComponent } from "../redux/sliderSlice";
 import SliderContainer from "./SliderContainer";
 import Order from './Orders/Order'
+import { getClient } from "../utils/sanity";
+import { addItem } from "./Cart/cartSlice";
 
 function Layout({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -49,9 +51,24 @@ function Layout({ children }) {
       if (user) {
         dispatch(LogInUser(user.displayName))
         const userDetails = await getUserDetails(auth.currentUser.uid)
-        console.log(userDetails)
         const {products} = userDetails
-        console.log({products})
+        const query = `*[_type == "product" && _id in 
+        [
+          ${products
+            .map(i=>`'${i}'`)
+            .join(',')
+          }
+          ]
+        ]
+        `
+        const cartData = []
+        await getClient().fetch(query).then(product=> {
+          product.forEach((pro) => {
+            cartData.push(pro)
+          })
+        })
+        //console.log(cartData)
+        dispatch(addItem(cartData[0]))
       }
        else {
         dispatch(LogOutUser())

@@ -1,12 +1,11 @@
 import { useState ,useEffect } from 'react'
 import { urlFor, PortableText, getClient } from "../utils/sanity";
-import { addItem } from './Cart/cartSlice';
 import { useSelector,useDispatch } from 'react-redux';
 import { addProductId, auth } from '../firebase/config'
 import CartIcon from './Svg/CartIcon';
 import Plus from './Svg/Plus'
 import Minus from './Svg/Minus'
-import { selectItem } from './Cart/cartSlice'
+import { selectItem,addItem } from './Cart/cartSlice'
 import { openSliderComponent } from '../redux/sliderSlice';
 
 
@@ -15,7 +14,7 @@ function ProductPage(props) {
   const [addedToCart,setAddedToCart] = useState(false)
   const handleCount = (value) => !(count === 0 && value === -1) ? setCount(count + value) : count
   const { title, defaultProductVariant, mainImage, body,id } = props;
-
+  //console.log(props)
   const dispatch = useDispatch();
   const cartItems = useSelector(selectItem)
   const cartTitles = cartItems.map(i=>i.title)
@@ -29,7 +28,7 @@ function ProductPage(props) {
   });
 
   const addToCart = () => {
-    dispatch(addItem([title,count,mainImage,defaultProductVariant?.price,id]))
+    dispatch(addItem(props))
     addProductId(auth.currentUser.uid,id)
     console.log('called')
   }

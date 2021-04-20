@@ -1,11 +1,11 @@
-import React,{ useEffect } from 'react'
+import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { selectItem,removeItem,increment,decrement } from './cartSlice';
 import { urlFor } from "../../utils/sanity";
 import Plus from '../Svg/Plus'
 import Minus from '../Svg/Minus'
 import Trash from '../Svg/Trash'
-import { auth, deleteProductId, setCartItems } from '../../firebase/config'
+import { auth, deleteProductId } from '../../firebase/config'
 
 const CartItems = () => {
     
@@ -22,17 +22,6 @@ const removeProductFromCart = (index) => {
   console.log('deletion product from cart called')
 }
 
-/*useEffect(()=>{
-  console.log('useEffect called')
-  const items = setCartItems()
-    return () => {
-      items()
-    }
-},[])*/
-useEffect(() => {
-  console.log('layout useEffect')
-}, []);
-
 return (
         <>
             {item.map((item,index) => (
@@ -41,12 +30,12 @@ return (
           <div className="flex">
             <img
               className="h-20 w-20 object-cover rounded"
-              src={urlFor(item.imgSrc)
+              src={urlFor(item.mainImage)
                 .auto("format")
                 .width(200)
                 .fit("crop")
                 .quality(80)}
-              alt={item.imgSrc?.alt || `Photo of ${item.title}`}
+              alt={item.mainImage?.alt || `Photo of ${item.title}`}
             />
             <div className="mx-3">
               <h3 className="text-sm text-gray-600">{item.title}</h3>
@@ -66,7 +55,7 @@ return (
             </div>
           </div>
           <div className='flex flex-col items-center'>
-            <span className="text-gray-600">Rs {item.price}</span>
+            <span className="text-gray-600">Rs {item.defaultProductVariant?.price}</span>
             <button onClick={()=>removeProductFromCart(index)}
              className=''>
                <Trash />
