@@ -3,16 +3,12 @@ import { urlFor, PortableText, getClient } from "../utils/sanity";
 import { useSelector,useDispatch } from 'react-redux';
 import { addProductId, auth } from '../firebase/config'
 import CartIcon from './Svg/CartIcon';
-import Plus from './Svg/Plus'
-import Minus from './Svg/Minus'
 import { selectItem,addItem } from './Cart/cartSlice'
 import { openSliderComponent } from '../redux/sliderSlice';
 
 
 function ProductPage(props) {
-  const [count, setCount] = useState(1)
   const [addedToCart,setAddedToCart] = useState(false)
-  const handleCount = (value) => !(count === 0 && value === -1) ? setCount(count + value) : count
   const { title, defaultProductVariant, mainImage, body,id } = props;
   //console.log(props)
   const dispatch = useDispatch();
@@ -37,24 +33,12 @@ function ProductPage(props) {
     if(!addedToCart){
     return (
       <div className="mt-2">
-            <label className="text-gray-700 text-sm" htmlFor="count">
-              Count:
-            </label>
-            <div className="flex items-center mt-1">
-              <button onClick={() => handleCount(1)}className="text-gray-500 focus:outline-none focus:text-gray-600">
-                <Plus />
-              </button>
-              <span className="text-gray-700 text-lg mx-2">{count}</span>
-              <button onClick={() => handleCount(-1)} className="text-gray-500 focus:outline-none focus:text-gray-600">
-                <Minus />
-              </button>
-            </div>
-      <button 
-        onClick={addToCart}
-        className="flex px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500">
-        Add to Cart   <CartIcon />
-      </button>
-      </div>
+        <button 
+          onClick={addToCart}
+          className="flex px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500">
+          Add to Cart   <CartIcon />
+        </button>
+        </div>
     )
     }else{
       return (
