@@ -6,6 +6,7 @@ import Plus from '../Svg/Plus'
 import Minus from '../Svg/Minus'
 import Trash from '../Svg/Trash'
 import { auth, deleteProductId } from '../../firebase/config'
+import EmptyCart from './EmptyCart';
 
 const CartItems = () => {
     
@@ -14,7 +15,7 @@ const item = useSelector(selectItem);
 const counter = useSelector(selectCounter)
 
 if(!item.length){
-  return <div>Your Cart is Empty</div>;
+  return <EmptyCart />
 }
 
 const removeProductFromCart = (index) => {
