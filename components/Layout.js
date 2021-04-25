@@ -1,76 +1,70 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { getClient } from "../utils/sanity";
+import { auth,getUserDetails } from '../firebase/config'
+
+import SignupContainer from "./Form/SignupContainer";
+import ProfileNavLink from './Profile/ProfileNavLink'
+import Profile from "./Profile/Profile";
 import Cart from './Cart/Cart'
+import SliderContainer from "./SliderContainer";
+import Order from './Orders/Order'
 import CartIcon from './Svg/CartIcon'
 import Location from './Svg/Location'
 import SearchIcon from './Svg/SearchIcon'
 import Hamburger from './Svg/Hamburger'
+
 import { useSelector, useDispatch } from 'react-redux';
-import SignupContainer from "./Form/SignupContainer";
-import { auth,getUserDetails } from '../firebase/config'
+import { addItem,setInitiial } from "./Cart/cartSlice";
 import { userLoggedState,LogInUser,LogOutUser } from "../redux/userSlice";
-import ProfileNavLink from './Profile/ProfileNavLink'
-import Profile from "./Profile/Profile";
+import { cancel } from '../redux/sliderSlice';
+import { toggleForm,openOrCloseFormComponent } from '../redux/formSlice'
 import { openSliderComponentState,openSliderComponent } from "../redux/sliderSlice";
-import SliderContainer from "./SliderContainer";
-import Order from './Orders/Order'
-import { getClient } from "../utils/sanity";
-import { addItem } from "./Cart/cartSlice";
 
 function Layout({ children }) {
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  
+  const [menuOpen, setMenuOpen] = useState(false);  
   const handleMenu = () => setMenuOpen(!menuOpen);
   const dispatch = useDispatch()
   const router = useRouter();
   const sliderState = useSelector(openSliderComponentState)
 
-    const [signUp,setSignUp] = useState(false)
-    const [logIn,setLogIn] = useState(false)
+    const renderForm = useSelector(openOrCloseFormComponent)
     const userAuthState = useSelector(userLoggedState)
- 
-    const openorClosePopUp = () => {
-    setSignUp(!signUp)
-  };
 
-  const signInUser= () => {
-    setLogIn(true)
-  }
-  const signUpUser=()=>{
-    setLogIn(false)
-  } 
-  const signInOrUp = logIn? 'Sign in' : 'Sign up'
+
   const logOut = () => {
     dispatch(cancel())
     auth.signOut()
+    dispatch(setInitiial())
   }
    async function onAuthStateChange() {
      return  auth.onAuthStateChanged(async (user) => {
       if (user) {
-        dispatch(LogInUser(user.displayName))
+        dispatch(toggleForm(true))
         const userDetails = await getUserDetails(auth.currentUser.uid)
-        const {products} = userDetails
-        const query = `*[_type == "product" && _id in 
-        [
-          ${products
-            .map(i=>`'${i}'`)
-            .join(',')
+          if(userDetails){
+            dispatch(LogInUser(user.displayName))
+            const {products} = userDetails
+            const query = `*[_type == "product" && _id in 
+            [
+              ${products
+                .map(i=>`'${i}'`)
+                .join(',')
+              }
+              ]
+            ]
+            `
+            const cartData = []
+            await getClient().fetch(query).then(product=> {
+              product.forEach((pro) => {
+                cartData.push(pro)
+              })
+            })
+            dispatch(addItem(cartData[0]))
           }
-          ]
-        ]
-        `
-        const cartData = []
-        await getClient().fetch(query).then(product=> {
-          product.forEach((pro) => {
-            cartData.push(pro)
-          })
-        })
-        //console.log(cartData)
-        dispatch(addItem(cartData[0]))
       }
-       else {
+      else {
         dispatch(LogOutUser())
       }
     });
@@ -100,7 +94,7 @@ function Layout({ children }) {
                 {userAuthState.logIn ? <ProfileNavLink /> : 'logged Out '}
               </div>
               {!userAuthState.logIn &&
-              <button onClick={openorClosePopUp}>
+              <button onClick={()=>dispatch(toggleForm())}>
                 Sign Up
               </button>
               }
@@ -173,12 +167,8 @@ function Layout({ children }) {
       </SliderContainer>
      
       <main className="my-8">{children}</main>
-      {(signUp || logIn) && 
+      {renderForm && 
         <SignupContainer 
-        SignInOrUp={signInOrUp}
-        Close={openorClosePopUp}
-        SignInUser={signInUser}
-        SignUpUser={signUpUser}
         />
       }
       

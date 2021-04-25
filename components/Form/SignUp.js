@@ -1,8 +1,18 @@
-import React,{ useState } from 'react'
+import React,{ useState,useRef,useEffect } from 'react'
 import { auth,createUserProfileDocument, signInWithGoogle } from '../../firebase/config'
+import ToggleForm from './ToggleForm'
+import { useDispatch } from 'react-redux'
+import { LogInUser } from '../../redux/userSlice'
 
-const SignUp = ({ SignInUser }) => {
-    const [state, setState] = useState({
+const SignUp = () => {
+  const _isMounted = useRef(true)
+  useEffect(() => {
+    return () => {
+        _isMounted.current = false;
+    }
+  }, []);
+  const dispatch = useDispatch()
+  const [state, setState] = useState({
         displayName: "",
         email: "",
         password:'',
@@ -41,6 +51,7 @@ const SignUp = ({ SignInUser }) => {
         displayName: state.displayName,
       })
       await createUserProfileDocument(user, {displayName});
+      dispatch(LogInUser(state.displayName))     
     }
     catch(error){
       console.log(error.message)
@@ -114,14 +125,9 @@ const SignUp = ({ SignInUser }) => {
             >
           Sign In with Google
         </button>
-        <p className="text-center">
-          Already have an account?{" "}
-          <button 
-          onClick={SignInUser}
-          className="text-blue-500 hover:text-blue-600">
-            Sign in here 
-          </button>
-        </p>
+        <ToggleForm 
+          Account= {['Already','in']}
+        />
         </form>
     )
 }

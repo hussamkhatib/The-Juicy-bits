@@ -1,8 +1,17 @@
-import React,{ useState } from 'react'
-import { signInWithGoogle } from '../../firebase/config'
+import React,{ useState,useRef,useEffect } from 'react'
+import { auth,signInWithGoogle } from '../../firebase/config'
+import ToggleForm from './ToggleForm'
+import { useDispatch } from 'react-redux'
+import { toggleForm } from '../../redux/formSlice' 
 
-const SignIn = ({SignUpUser}) => {
-
+const SignIn = () => {
+  const _isMounted = useRef(true)
+  useEffect(() => {
+    return () => {
+        _isMounted.current = false;
+    }
+  }, []);
+  const dispatch = useDispatch()
   const [state, setState] = useState({
     email: "",
     password:''
@@ -12,6 +21,7 @@ const SignIn = ({SignUpUser}) => {
   const { email,password } = state
   try {
     await auth.signInWithEmailAndPassword(email, password);
+    dispatch(toggleForm())
     setState({
       email: "",
       password:''
@@ -68,13 +78,10 @@ function handleChange(evt) {
             >
           Sign In with Google
         </button>
-        <p className="text-center">
-          Dont have an account?{" "}
-          <button onClick={SignUpUser}
-          className="text-blue-500 hover:text-blue-600">
-            Sign up here
-          </button>
-        </p>
+  
+        <ToggleForm 
+          Account= {['Dont','up']}
+        />
         </form>
     )
 }

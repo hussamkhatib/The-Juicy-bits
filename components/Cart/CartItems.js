@@ -46,7 +46,7 @@ return (
                 className="text-gray-500 focus:outline-none focus:text-gray-600">
                  <Plus />
                 </button>
-                <span className="text-gray-700 mx-2">{counter}</span>
+                <span className="text-gray-700 mx-2">{counter[index]}</span>
                 <button 
                 disabled={counter<2}
                 onClick={()=> dispatch(decrement(index))}

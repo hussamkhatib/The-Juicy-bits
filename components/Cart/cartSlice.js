@@ -4,25 +4,31 @@ export const slice = createSlice({
   name: 'item',
   initialState: {
     value: [],
-    counter: 1
+    counter: []
   }, 
   reducers: {
     addItem: (state,action) => {
       state.value.push(action.payload)  
+      state.counter.push(1)
     },
     removeItem: (state,action) => {
-      state.value.splice(action.payload, 1)
+      state.value.splice(action.payload,1)
+      state.counter.splice(action.payload,1)
     },
-    increment: state => {
-      state.counter += 1
+    setInitiial: state => {
+      state.value = []
+      state.quantity = []
     },
-    decrement: state => {
-      state.counter -= 1
+    increment: (state,action) => {
+      state.counter[action.payload] += 1 
+    },
+    decrement: (state,action) => {
+      state.counter[action.payload] -= 1 
     },
   },
 });
 
-export const { addItem,removeItem,increment,decrement } = slice.actions;
+export const { addItem,removeItem,setInitiial,increment,decrement } = slice.actions;
 export const selectItem = state => state.item.value;
 export const  selectCounter = state => state.item.counter
 
