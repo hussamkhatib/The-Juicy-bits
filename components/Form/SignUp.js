@@ -67,7 +67,7 @@ const SignUp = () => {
   };
     return (
         <form onSubmit={handleSubmit} className='p-6 overflow-y-auto'>
-            <div className='py-2 flex flex-col'>
+            <div className='py-1 md:py-2 flex flex-col'>
                 <label>Display name</label>
                 <input 
                     value={state.displayName}
@@ -78,7 +78,7 @@ const SignUp = () => {
                     required>
                 </input>
             </div>
-            <div className='py-2 flex flex-col'>
+            <div className='py:1 md:py-2 flex flex-col'>
                 <label htmlFor="email">email</label>
                 <input 
                 value={state.email}
@@ -89,7 +89,7 @@ const SignUp = () => {
                 required>
                 </input>
             </div>
-            <div className='py-2 flex flex-col'>    
+            <div className='py-1 md:py-2 flex flex-col'>    
                 <label htmlFor="pass">Password</label>
                 <input  
                     className='border-b-2 border-gray-400 border-solid'
@@ -101,7 +101,7 @@ const SignUp = () => {
                     required> 
                 </input>
             </div>
-            <div className='py-2 flex flex-col'>    
+            <div className='py-1 md:py-2 flex flex-col'>    
                 <label htmlFor="pass">Confirm Password</label>
                 <input  
                 className='border-b-2 border-gray-400 border-solid' 
@@ -112,7 +112,7 @@ const SignUp = () => {
                 minLength="8" 
                 required></input>
             </div>
-            <div className='flex py-4'>
+            <div className='flex py-2 md:py-4'>
             <button 
             type='submit' className='py-2 bg-blue-500 text-white w-full'>
                 Sign up
@@ -121,7 +121,7 @@ const SignUp = () => {
             <p className="text-center">or</p>
             <button
             onClick={signInWithGoogle}
-            className="bg-red-500 hover:bg-red-600 w-full py-2 text-white"
+            className="bg-red-500 hover:bg-red-600 w-full py-1 md:py-2 text-white"
             >
           Sign In with Google
         </button>

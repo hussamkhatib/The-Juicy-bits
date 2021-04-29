@@ -21,6 +21,7 @@ import { userLoggedState,LogInUser,LogOutUser } from "../redux/userSlice";
 import { cancel } from '../redux/sliderSlice';
 import { toggleForm,openOrCloseFormComponent } from '../redux/formSlice'
 import { openSliderComponentState,openSliderComponent } from "../redux/sliderSlice";
+import ContactUs from "./ContactUs";
 
 function Layout({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);  
@@ -46,6 +47,7 @@ function Layout({ children }) {
           if(userDetails){
             dispatch(LogInUser(user.displayName))
             const {products} = userDetails
+            if(products != []){
             const query = `*[_type == "product" && _id in 
             [
               ${products
@@ -62,6 +64,7 @@ function Layout({ children }) {
               })
             })
             dispatch(addItem(cartData[0]))
+          }
           }
       }
       else {
@@ -91,10 +94,12 @@ function Layout({ children }) {
             </div>
             <div className="flex items-center justify-end w-full">
               <div className='px-4'>
-                {userAuthState.logIn ? <ProfileNavLink /> : 'logged Out '}
+                {userAuthState.logIn && <ProfileNavLink />}
               </div>
               {!userAuthState.logIn &&
-              <button onClick={()=>dispatch(toggleForm())}>
+              <button 
+              className='bg-blue-500 hover:bg-blue-300 text-white p-2'
+              onClick={()=>dispatch(toggleForm())}>
                 Sign Up
               </button>
               }
@@ -146,7 +151,7 @@ function Layout({ children }) {
               </Link>
             </ul>
           </nav>
-          <div className="relative mt-6 max-w-lg mx-auto">
+          {/* <div className="relative mt-6 max-w-lg mx-auto">
             <span className="absolute inset-y-0 left-0 pl-3 flex items-center">
               <SearchIcon />
             </span>
@@ -156,14 +161,15 @@ function Layout({ children }) {
               type="text"
               placeholder="Search"
             />
-          </div>
+          </div>  */}
         </div>
       </header>
       
       <SliderContainer>
-        {sliderState === 'cart' && <Cart />}
+        {sliderState === 'Cart' && <Cart />}
         {sliderState === 'profile' && <Profile Logout={logOut}/>} 
-        {sliderState === 'order' && <Order />}         
+        {sliderState === 'Your Orders' && <Order />}
+        {sliderState === 'Contact us' && <ContactUs />}         
       </SliderContainer>
      
       <main className="my-8">{children}</main>
