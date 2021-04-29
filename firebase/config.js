@@ -17,7 +17,7 @@ if (!firebase.apps.length) {
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
-export const createUserProfileDocument = async (userAuth, additionalData) => {
+export const createUserProfileDocument = async (userAuth) => {
   if (!userAuth) return;
 
   const userRef = firestore.doc(`users/${userAuth.uid}`);
@@ -25,14 +25,11 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
  
   if (!snapShot.exists) {
     const { displayName, email } = userAuth;
-    const createdAt = new Date();
     try {
       await userRef.set({
         displayName,
         email,
-        createdAt,
-        products: [],
-        ...additionalData,
+        products: []
       });
     } catch (error) {
       console.log("error creating user", error.message);
@@ -91,9 +88,26 @@ export const getUserDetails = async (userAuth) => {
     return data
 };
 
-const provider = new firebase.auth.GoogleAuthProvider();
-export const signInWithGoogle = () => {
-  auth.signInWithPopup(provider).then((result) => {
+export const signInWithGoogle = async() => {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  const credentials = await auth.signInWithPopup(provider)
+  return updateGoogleUserData(credentials.user)
+}
+
+function updateGoogleUserData(user) {
+  const userRef = firestore.doc(`users/${user.uid}`); 
+
+  const data = {  
+    email: user.email, 
+    displayName: user.displayName,
+    products: [] 
+  } 
+
+  return userRef.set(data, { merge: true })
+}
+
+
+  /*.then((result) => {
 
     var credential = result.credential;
     
@@ -121,4 +135,4 @@ export const signInWithGoogle = () => {
     // ...
   });
 }; 
- 
+ */
