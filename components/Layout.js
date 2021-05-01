@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { getClient } from "../utils/sanity";
 import { auth,getUserDetails } from '../firebase/config'
+import Image from 'next/image'
 
 import SignupContainer from "./Form/SignupContainer";
 import ProfileNavLink from './Profile/ProfileNavLink'
@@ -12,7 +13,6 @@ import SliderContainer from "./SliderContainer";
 import Order from './Orders/Order'
 import CartIcon from './Svg/CartIcon'
 import Location from './Svg/Location'
-import SearchIcon from './Svg/SearchIcon'
 import Hamburger from './Svg/Hamburger'
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -85,13 +85,19 @@ function Layout({ children }) {
       <header>
         <div className="container mx-auto px-6 py-3">
           <div className="flex items-center justify-between">
-            <div className="hidden w-full text-gray-600 md:flex md:items-center">
+            <address className="hidden w-full text-gray-600 md:flex md:items-center">
               <Location />
               <span className="mx-1 text-sm">BLR</span>
-            </div>
-            <div className="w-full text-gray-700 md:text-center text-2xl font-semibold">
+            </address>
+            <h1 className="hidden w-full text-gray-700 md:text-center text-2xl font-semibold">
               Evolution
-            </div>
+            </h1>
+            <Image 
+              src='/static/logo.png'
+              alt='logo'
+              height={192}
+              width={518}
+            />
             <div className="flex items-center justify-end w-full">
               <div className='px-4'>
                 {userAuthState.logIn && <ProfileNavLink />}
@@ -104,7 +110,7 @@ function Layout({ children }) {
               </button>
               }
               <button
-                onClick={()=> dispatch(openSliderComponent('cart'))}
+                onClick={()=> dispatch(openSliderComponent('Cart'))}
                 className="text-gray-600 text-xs focus:outline-none px-4"
               >
                 <CartIcon />
@@ -151,17 +157,22 @@ function Layout({ children }) {
               </Link>
             </ul>
           </nav>
-          {/* <div className="relative mt-6 max-w-lg mx-auto">
+          {/* <form role='search' className="relative mt-6 max-w-lg mx-auto">
+            <button type='submit'>
             <span className="absolute inset-y-0 left-0 pl-3 flex items-center">
               <SearchIcon />
             </span>
-
+            </button>
+            <label for="products-input"><span className='hidden'>Search</span></label>
             <input
               className="w-full border rounded-md pl-10 pr-4 py-2 focus:border-blue-500 focus:outline-none focus:shadow-outline"
               type="text"
+              title='Search'
+              autocomplete='off'
               placeholder="Search"
             />
-          </div>  */}
+          
+          </form>  */}
         </div>
       </header>
       
