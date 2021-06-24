@@ -25,14 +25,13 @@ import { openSliderComponentState,openSliderComponent } from "../redux/sliderSli
 import ContactUs from "./ContactUs";
 
 function Layout({ children }) {
+  const router = useRouter();
+  const dispatch = useDispatch()
   const [menuOpen, setMenuOpen] = useState(false);  
   const handleMenu = () => setMenuOpen(!menuOpen);
-  const dispatch = useDispatch()
-  const router = useRouter();
   const sliderState = useSelector(openSliderComponentState)
-
-    const renderForm = useSelector(openOrCloseFormComponent)
-    const userAuthState = useSelector(userLoggedState)
+  const renderForm = useSelector(openOrCloseFormComponent)
+  const userAuthState = useSelector(userLoggedState)
 
 
   const logOut = () => {
@@ -203,8 +202,13 @@ function Layout({ children }) {
      
       <main className="my-8">{children}</main>
       {renderForm && 
+      <>
         <SignupContainer 
         />
+        <div className='fixed opacity-66 bg-black inset-0 overflow-y-auto'>
+
+        </div>
+        </>
       }
       
       <footer className="bg-gray-200">

@@ -9,6 +9,9 @@ module.exports = {
       colors: {
         'accent-1': '#333',
       },
+      opacity: {
+        '66': '0.66',
+      }
     },
   },
   variants: {},
