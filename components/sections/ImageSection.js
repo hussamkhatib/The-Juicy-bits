@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import Cta from "../Cta";
 import { PortableText, urlFor } from "../../utils/sanity";
+import Image from 'next/image'
 
 function ImageSection(props) {
   const { heading, label, text, image, cta } = props;
@@ -15,7 +16,7 @@ function ImageSection(props) {
         <div className="flex items-center">
           <div>
             <figure>
-              <img
+              <Image
                 className="rounded-md object-cover mx-auto"
                 src={urlFor(image).auto("format").width(2000).url()}
                 alt={heading}

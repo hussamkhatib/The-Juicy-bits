@@ -5,6 +5,7 @@ import { addProductId, auth } from "../firebase/config";
 import CartIcon from "./Svg/CartIcon";
 import { selectItem, addItem } from "./Cart/cartSlice";
 import { openSliderComponent } from "../redux/sliderSlice";
+import Image from 'next/image'
 
 function ProductPage(props) {
   const [addedToCart, setAddedToCart] = useState(false);
@@ -20,7 +21,7 @@ function ProductPage(props) {
     } else {
       setAddedToCart(false);
     }
-  });
+  },[cartTitles,title]);
 
   const addToCart = () => {
     dispatch(addItem(props));
@@ -59,7 +60,7 @@ function ProductPage(props) {
     <div className="container mx-auto px-6">
       <div className="md:flex md:items-center">
         <div className="w-full h-64 md:w-1/2 lg:h-96">
-          <img
+          <Image
             className="h-full w-full rounded-md object-cover max-w-lg mx-auto"
             src={urlFor(mainImage)
               .auto("format")

@@ -77,6 +77,7 @@ function Layout({ children }) {
     return () => {
       unsubscribe();
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const fullUrl = router.pathname;
   const slashIndex = fullUrl.slice(1).indexOf("/");

@@ -13,6 +13,7 @@ import Minus from "../Svg/Minus";
 import Trash from "../Svg/Trash";
 import { auth, deleteProductId } from "../../firebase/config";
 import EmptyCart from "./EmptyCart";
+import Image from 'next/image'
 
 const CartItems = () => {
   const dispatch = useDispatch();
@@ -34,7 +35,7 @@ const CartItems = () => {
       {item.map((item, index) => (
         <div key={item.title} className="flex justify-between mt-6">
           <div className="flex">
-            <img
+            <Image
               className="h-20 w-20 object-cover rounded"
               src={urlFor(item.mainImage)
                 .auto("format")

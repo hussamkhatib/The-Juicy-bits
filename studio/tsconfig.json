@@ -3,5 +3,6 @@
     "./node_modules/@sanity/base/types/**/*.ts",
     "./**/*.ts",
     "./**/*.tsx"
-  ]
+  ],
+  "exclude": ["node_modules"]
 }
