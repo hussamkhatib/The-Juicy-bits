@@ -5,8 +5,7 @@ import CartIcon from "./Svg/CartIcon";
 function ProductCard({ _id, title, mainImage, slug, defaultProductVariant }) {
   return (
     <Link href={`/products/${slug.current}`}>
-      <a
- className="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
+      <a className="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
         <div
           className="flex items-end justify-end h-56 w-full bg-cover"
           style={{

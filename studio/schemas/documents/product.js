@@ -63,7 +63,8 @@ export default {
       title: "Vendor",
       type: "reference",
       to: { type: "vendor" },
-    },{
+    },
+    {
       name: "hiddeninfo",
       title: "HiddenInfo",
       type: "localeBlockContent",

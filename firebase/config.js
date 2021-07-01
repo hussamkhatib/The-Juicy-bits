@@ -1,4 +1,4 @@
-import firebase from 'firebase/app'
+import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 
@@ -8,7 +8,7 @@ const firebaseConfig = {
   projectId: "evolution-58334",
   storageBucket: "evolution-58334.appspot.com",
   messagingSenderId: "3932018608",
-  appId: "1:3932018608:web:13cf0e62debf99067ce875"
+  appId: "1:3932018608:web:13cf0e62debf99067ce875",
 };
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
@@ -22,14 +22,14 @@ export const createUserProfileDocument = async (userAuth) => {
 
   const userRef = firestore.doc(`users/${userAuth.uid}`);
   const snapShot = await userRef.get();
- 
+
   if (!snapShot.exists) {
     const { displayName, email } = userAuth;
     try {
       await userRef.set({
         displayName,
         email,
-        products: []
+        products: [],
       });
     } catch (error) {
       console.log("error creating user", error.message);
@@ -41,73 +41,71 @@ export const createUserProfileDocument = async (userAuth) => {
 export const addProductId = async (userAuth, id) => {
   if (!userAuth) return;
 
-  const productRef = firestore.collection('/users').doc(`/${userAuth}`);
-    try {
-      await productRef.update({
-        products: firebase.firestore.FieldValue.arrayUnion(id)
-      });
-      console.log('added')
-    } catch (error) {
-      console.log("error adding product", error.message);
-    }
+  const productRef = firestore.collection("/users").doc(`/${userAuth}`);
+  try {
+    await productRef.update({
+      products: firebase.firestore.FieldValue.arrayUnion(id),
+    });
+    console.log("added");
+  } catch (error) {
+    console.log("error adding product", error.message);
+  }
   return productRef;
 };
 
 export const deleteProductId = async (userAuth, id) => {
   if (!userAuth) return;
 
-  const productRef = firestore.collection('users').doc(`${userAuth}`)
- 
-    try {
-      await productRef.update({
-        products: firebase.firestore.FieldValue.arrayRemove(id)
-      });
-    } catch (error) {
-      console.log("error deleting product", error.message);
-    }
+  const productRef = firestore.collection("users").doc(`${userAuth}`);
+
+  try {
+    await productRef.update({
+      products: firebase.firestore.FieldValue.arrayRemove(id),
+    });
+  } catch (error) {
+    console.log("error deleting product", error.message);
+  }
   return productRef;
 };
 
 export const getUserDetails = async (userAuth) => {
   if (!userAuth) return;
 
-  const userRef = firestore.collection('users').doc(`${userAuth}`)
-  let data
-    try {
-      await userRef.get()
-        .then(doc=> {
-          if(doc.exists){
-            data = doc.data()
-          }else{
-            console.log('doc not found')
-          }
-        })
-    } catch (error) {
-      console.log("error setting products", error.message);
-    } 
-    return data
+  const userRef = firestore.collection("users").doc(`${userAuth}`);
+  let data;
+  try {
+    await userRef.get().then((doc) => {
+      if (doc.exists) {
+        data = doc.data();
+      } else {
+        console.log("doc not found");
+      }
+    });
+  } catch (error) {
+    console.log("error setting products", error.message);
+  }
+  return data;
 };
 
-export const signInWithGoogle = async() => {
+export const signInWithGoogle = async () => {
   const provider = new firebase.auth.GoogleAuthProvider();
-  const credentials = await auth.signInWithPopup(provider)
-  return updateGoogleUserData(credentials.user)
-}
+  const credentials = await auth.signInWithPopup(provider);
+  return updateGoogleUserData(credentials.user);
+};
 
 function updateGoogleUserData(user) {
-  const userRef = firestore.doc(`users/${user.uid}`); 
+  const userRef = firestore.doc(`users/${user.uid}`);
 
-  const data = {  
-    email: user.email, 
+  const data = {
+    email: user.email,
     displayName: user.displayName,
-    products: [] 
-  } 
+    products: [],
+  };
 
-  return userRef.set(data, { merge: true })
+  return userRef.set(data, { merge: true });
 }
 
-
-  /*.then((result) => {
+/*.then((result) => {
 
     var credential = result.credential;
     

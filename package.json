@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "concurrently \"next --port $PORT\" \"cd studio && sanity start\"",
     "build": "echo 'Building Sanity to public/studio…' && cd studio && sanity build ../public/studio -y && cd .. && next build",
+    "lint": "next lint",
+    "pretty": "prettier --write \"./**/*.{js,jsx,json,ts,tsx}\"",
     "start": "vercel dev",
     "postinstall": "lerna bootstrap",
     "check-template": "sanity-template check"
@@ -18,11 +20,13 @@
     "@reduxjs/toolkit": "^1.5.0",
     "@sanity/client": "^2.7.1",
     "@sanity/image-url": "^0.140.22",
+    "eslint": "^7.29.0",
+    "eslint-config-next": "^11.0.1",
     "firebase": "^8.3.2",
-    "next": "^10.0.5",
+    "next": "^11.0.1",
     "next-sanity": "^0.1.8",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-firebase-hooks": "^3.0.3",
     "react-redux": "^7.2.2",
     "redux": "^4.0.5"
@@ -30,6 +34,7 @@
   "devDependencies": {
     "@sanity/cli": "^2.7.1",
     "concurrently": "^5.3.0",
+    "eslint-config-prettier": "^8.3.0",
     "lerna": "^3.22.1",
     "postcss-flexbugs-fixes": "4.2.1",
     "postcss-preset-env": "^6.7.0",

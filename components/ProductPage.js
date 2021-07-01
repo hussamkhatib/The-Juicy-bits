@@ -1,55 +1,57 @@
-import { useState ,useEffect } from 'react'
+import { useState, useEffect } from "react";
 import { urlFor, PortableText, getClient } from "../utils/sanity";
-import { useSelector,useDispatch } from 'react-redux';
-import { addProductId, auth } from '../firebase/config'
-import CartIcon from './Svg/CartIcon';
-import { selectItem,addItem } from './Cart/cartSlice'
-import { openSliderComponent } from '../redux/sliderSlice';
-
+import { useSelector, useDispatch } from "react-redux";
+import { addProductId, auth } from "../firebase/config";
+import CartIcon from "./Svg/CartIcon";
+import { selectItem, addItem } from "./Cart/cartSlice";
+import { openSliderComponent } from "../redux/sliderSlice";
 
 function ProductPage(props) {
-  const [addedToCart,setAddedToCart] = useState(false)
-  const { title, defaultProductVariant, mainImage, body,id } = props;
+  const [addedToCart, setAddedToCart] = useState(false);
+  const { title, defaultProductVariant, mainImage, body, id } = props;
   //console.log(props)
   const dispatch = useDispatch();
-  const cartItems = useSelector(selectItem)
-  const cartTitles = cartItems.map(i=>i.title)
-  
-  useEffect(() => {    
-    if(cartTitles.includes(title)){
-      setAddedToCart(true)
-    }else{
-    setAddedToCart(false)
+  const cartItems = useSelector(selectItem);
+  const cartTitles = cartItems.map((i) => i.title);
+
+  useEffect(() => {
+    if (cartTitles.includes(title)) {
+      setAddedToCart(true);
+    } else {
+      setAddedToCart(false);
     }
   });
 
   const addToCart = () => {
-    dispatch(addItem(props))
-    addProductId(auth.currentUser.uid,id)
-    console.log('called')
-  }
+    dispatch(addItem(props));
+    addProductId(auth.currentUser.uid, id);
+    console.log("called");
+  };
 
   function addOrMoveToCart() {
-    if(!addedToCart){
-    return (
-      <div className="mt-2">
-        <button 
-          onClick={addToCart}
-          className="flex px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500">
-          Add to Cart   <CartIcon />
-        </button>
+    if (!addedToCart) {
+      return (
+        <div className="mt-2">
+          <button
+            onClick={addToCart}
+            className="flex px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500"
+          >
+            Add to Cart <CartIcon />
+          </button>
         </div>
-    )
-    }else{
+      );
+    } else {
       return (
         <>
-        <div className='px-4'>Item added</div>
-        <button onClick={()=>dispatch(openSliderComponent('Cart'))}
-        className="flex px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500">
-          Move to cart
-        </button>
+          <div className="px-4">Item added</div>
+          <button
+            onClick={() => dispatch(openSliderComponent("Cart"))}
+            className="flex px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500"
+          >
+            Move to cart
+          </button>
         </>
-      )
+      );
     }
   }
 
@@ -64,7 +66,7 @@ function ProductPage(props) {
               .width(1051)
               .fit("crop")
               .quality(80)}
-            alt={mainImage?.alt || `Photo of ${title}`}
+            alt={mainImage?.alt || `Photo of ${title}`}
           />
         </div>
         <div className="w-full max-w-lg mx-auto mt-5 md:ml-8 md:mt-0 md:w-1/2">
@@ -73,10 +75,8 @@ function ProductPage(props) {
             Rs {defaultProductVariant?.price}
           </span>
           <hr className="my-3" />
-          
-          <div className="flex items-center mt-6">
-              {addOrMoveToCart()}
-          </div>
+
+          <div className="flex items-center mt-6">{addOrMoveToCart()}</div>
         </div>
       </div>
       <div className="mt-16 md:w-2/3">

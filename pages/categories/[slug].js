@@ -2,7 +2,7 @@ import Error from "next/error";
 import { groq } from "next-sanity";
 import { useRouter } from "next/router";
 import { getClient, usePreviewSubscription } from "../../utils/sanity";
-import CategoryPage from '../../components/Category/CategoryPage'
+import CategoryPage from "../../components/Category/CategoryPage";
 
 const query = groq`*[_type == "category"  && slug.current == $slug][0]{
 	slug,title,_id,
@@ -21,12 +21,7 @@ function CategoryContainer({ categoryData, preview }) {
     enabled: preview || router.query.preview !== null,
   });
 
-  const {
-    _id,
-    title,
-    slug,
-    products
-  } = category;
+  const { _id, title, slug, products } = category;
   return (
     <CategoryPage
       id={_id}

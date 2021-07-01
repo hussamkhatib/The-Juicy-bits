@@ -1,23 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 export const slice = createSlice({
-  name: 'form',
+  name: "form",
   initialState: {
-      value: false,
-    }, 
+    value: false,
+  },
   reducers: {
-    toggleForm : (state,action) => {
-      state.value = action.payload ? false: !state.value
-      state.formState = 'Sign up'
+    toggleForm: (state, action) => {
+      state.value = action.payload ? false : !state.value;
+      state.formState = "Sign up";
     },
-    toggleSignInSignUp : state => {
-        state.formState = 'Sign up' ? 'Sign in' : 'Sign up'
-    }
+    toggleSignInSignUp: (state) => {
+      state.formState = "Sign up" ? "Sign in" : "Sign up";
+    },
   },
 });
 
-export const { toggleForm,toggleSignInSignUp } = slice.actions;
-export const openOrCloseFormComponent = state => state.form.value;
-export const signInOrSignOutComponent = state => state.form.formState;
+export const { toggleForm, toggleSignInSignUp } = slice.actions;
+export const openOrCloseFormComponent = (state) => state.form.value;
+export const signInOrSignOutComponent = (state) => state.form.formState;
 
 export default slice.reducer;
