@@ -61,9 +61,10 @@ function Layout({ children }) {
             await getClient().fetch(query).then(product=> {
               product.forEach((pro) => {
                 cartData.push(pro)
+                dispatch(addItem(pro))
               })
             })
-            dispatch(addItem(cartData[0]))
+       
           }
           }
       }

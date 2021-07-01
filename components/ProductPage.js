@@ -44,7 +44,7 @@ function ProductPage(props) {
       return (
         <>
         <div className='px-4'>Item added</div>
-        <button onClick={()=>dispatch(openSliderComponent('cart'))}
+        <button onClick={()=>dispatch(openSliderComponent('Cart'))}
         className="flex px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500">
           Move to cart
         </button>

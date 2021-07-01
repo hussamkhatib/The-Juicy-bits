@@ -48,7 +48,7 @@ return (
                 </button>
                 <span className="text-gray-700 mx-2">{counter[index]}</span>
                 <button 
-                disabled={counter<2}
+                disabled={counter[index]<2}
                 onClick={()=> dispatch(decrement(index))}
                 className="text-gray-500 focus:outline-none focus:text-gray-600">
                   <Minus />
@@ -57,7 +57,7 @@ return (
             </div>
           </div>
           <div className='flex flex-col items-center'>
-            <span className="text-gray-600">Rs {item.defaultProductVariant?.price * counter}</span>
+            <span className="text-gray-600">Rs {item.defaultProductVariant?.price * counter[index]}</span>
             <button onClick={()=>removeProductFromCart(index)}
              className=''>
                <Trash />
