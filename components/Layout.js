@@ -48,7 +48,14 @@ function Layout({ children }) {
         dispatch(toggleForm(true));
         const userDetails = await getUserDetails(auth.currentUser.uid);
         if (userDetails) {
-          dispatch(LogInUser(user.displayName));
+          dispatch(
+            LogInUser([
+              user.displayName,
+              userDetails.mobileNumber,
+              userDetails.location,
+              userDetails.pincode,
+            ])
+          );
           const { products } = userDetails;
           if (products != []) {
             const query = `*[_type == "product" && _id in 

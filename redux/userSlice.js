@@ -6,13 +6,19 @@ export const slice = createSlice({
     value: {
       logIn: false,
       name: null,
+      mobileNumber: "",
+      location: "",
+      pincode: "",
     },
   },
   reducers: {
     LogInUser: (state, action) => {
       state.value = {
         logIn: true,
-        name: action.payload,
+        name: action.payload[0],
+        mobileNumber: action.payload[1],
+        location: action.payload[2],
+        pincode: action.payload[3],
       };
     },
     LogOutUser: (state) => {

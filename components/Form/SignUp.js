@@ -58,7 +58,7 @@ const SignUp = () => {
         displayName: state.displayName,
       });
       await createUserProfileDocument(user, { displayName });
-      dispatch(LogInUser(state.displayName));
+      dispatch(LogInUser([state.displayName, "", "", ""]));
     } catch (error) {
       console.log(error.message);
     }

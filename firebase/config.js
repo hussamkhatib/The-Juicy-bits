@@ -97,27 +97,28 @@ function updateGoogleUserData(user) {
   const userRef = firestore.doc(`users/${user.uid}`);
   userRef.get().then((doc) => {
     if (doc.exists) {
-        return;
-    } 
-    else{
+      return;
+    } else {
       const data = {
         email: user.email,
         displayName: user.displayName,
-        products: [] 
+        products: [],
       };
       return userRef.set(data);
     }
- })
+  });
 }
+
 export const updateShippingDetails = async (user) => {
   const userRef = firestore.doc(`users/${auth.currentUser.uid}`);
   const data = {
     mobileNumber: user.mobileNumber,
     location: user.location,
-    pincode: user.pincode
+    pincode: user.pincode,
   };
   return userRef.set(data, { merge: true });
-}
+};
+
 /*.then((result) => {
 
     var credential = result.credential;
