@@ -14,6 +14,7 @@ function ProductPageContainer({ pageData, preview, slug }) {
     return <Error statusCode={404} />;
   }
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { data: { page = {} } = {} } = usePreviewSubscription(query, {
     params: { slug },
     initialData: pageData,

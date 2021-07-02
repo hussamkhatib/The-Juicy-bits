@@ -15,6 +15,7 @@ function CategoryContainer({ categoryData, preview }) {
     return <Error statusCode={404} />;
   }
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { data: category = {} } = usePreviewSubscription(query, {
     params: { slug: categoryData?.slug?.current },
     initialData: categoryData,

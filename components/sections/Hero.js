@@ -1,7 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 import PropTypes from "prop-types";
 import Cta from "../Cta";
 import { PortableText, urlFor } from "../../utils/sanity";
-import Image from 'next/image'
 
 function Hero(props) {
   const { heading, backgroundImage, tagline, ctas } = props;
@@ -22,7 +22,7 @@ function Hero(props) {
             )}
           </div>
           <div className="w-full h-64 md:w-1/2 lg:h-96">
-            <Image
+            <img
               className="h-full w-full rounded-md object-cover max-w-lg mx-auto"
               src={urlFor(backgroundImage)
                 .auto("format")

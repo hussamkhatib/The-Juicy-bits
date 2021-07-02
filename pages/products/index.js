@@ -12,6 +12,7 @@ function ProductsPageContainer({ productsData, preview }) {
   if (!router.isFallback && !productsData) {
     return <Error statusCode={404} />;
   }
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { data: products } = usePreviewSubscription(query, {
     initialData: productsData,
     enabled: preview || router.query.preview !== null,
