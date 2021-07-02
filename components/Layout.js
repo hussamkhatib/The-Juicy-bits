@@ -26,6 +26,7 @@ import {
   openSliderComponent,
 } from "../redux/sliderSlice";
 import ContactUs from "./ContactUs";
+import EditProfile from "./Profile/EditProfile";
 
 function Layout({ children }) {
   const router = useRouter();
@@ -77,7 +78,7 @@ function Layout({ children }) {
     return () => {
       unsubscribe();
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const fullUrl = router.pathname;
   const slashIndex = fullUrl.slice(1).indexOf("/");
@@ -240,6 +241,7 @@ function Layout({ children }) {
           {sliderState === "profile" && <Profile Logout={logOut} />}
           {sliderState === "Your Orders" && <Order />}
           {sliderState === "Contact us" && <ContactUs />}
+          {sliderState === "Edit Profile" && <EditProfile />}
         </SliderContainer>
 
         <main className="my-8">{children}</main>
