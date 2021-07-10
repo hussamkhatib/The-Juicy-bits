@@ -11,8 +11,6 @@ import {
 import { urlFor } from "../../utils/sanity";
 import Plus from "../Svg/Plus";
 import Minus from "../Svg/Minus";
-import Trash from "../Svg/Trash";
-import { auth, deleteProductId } from "../../firebase/config";
 import EmptyCart from "./EmptyCart";
 
 const CartItems = () => {
@@ -26,7 +24,6 @@ const CartItems = () => {
 
   const removeProductFromCart = (index) => {
     dispatch(removeItem(index));
-    deleteProductId(auth.currentUser.uid, item[index].id);
     console.log("deletion product from cart called");
   };
 
@@ -47,12 +44,7 @@ const CartItems = () => {
             <div className="mx-3">
               <h3 className="text-sm text-gray-600">{item.title}</h3>
               <div className="flex items-center mt-2">
-                <button
-                  onClick={() => dispatch(increment(index))}
-                  className="text-gray-500 focus:outline-none focus:text-gray-600"
-                >
-                  <Plus />
-                </button>
+            
                 <span className="text-gray-700 mx-2">{counter[index]}</span>
                 <button
                   disabled={counter[index] < 2}
@@ -65,11 +57,9 @@ const CartItems = () => {
             </div>
           </div>
           <div className="flex flex-col items-center">
-            <span className="text-gray-600">
-              Rs {item.defaultProductVariant?.price * counter[index]}
-            </span>
+      
             <button onClick={() => removeProductFromCart(index)} className="">
-              <Trash />
+              trash
             </button>
           </div>
         </div>
