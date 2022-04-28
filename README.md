@@ -4,13 +4,6 @@ This is an e-commerce apllication that features a studio with Next.js frontend.
 
 It uses the [Next.js toolkit for Sanity.io](https://github.com/sanity-io/next-sanity).
 
-**Features:**
-* Live previews, including website preview for products
-* Cart
-* auth
-[ ] Search,filter
-[ ] Promocode  
-[ ] Checkoout
 ## Getting started
 
 The quickest way to get up and running is to go to https://www.sanity.io/create?template=sanity-io%2Fsanity-template-nextjs-ecommerce and create a new project by following the instructions there.
