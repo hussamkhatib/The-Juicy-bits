@@ -159,7 +159,6 @@ function Layout({ children }) {
                   <CartIcon />
                   Cart
                 </button>
-
                 <div className="flex sm:hidden">
                   <button
                     onClick={handleMenu}
@@ -226,7 +225,6 @@ function Layout({ children }) {
             </nav>
           </div>
         </header>
-
         <SliderContainer>
           {sliderState === "Cart" && <Cart />}
           {sliderState === "profile" && <Profile Logout={logOut} />}
@@ -234,7 +232,6 @@ function Layout({ children }) {
           {sliderState === "Contact us" && <ContactUs />}
           {sliderState === "Edit Profile" && <EditProfile />}
         </SliderContainer>
-
         <main className="my-8">{children}</main>
         {renderForm && (
           <>

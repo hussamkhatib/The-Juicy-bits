@@ -33,14 +33,16 @@
   },
   "devDependencies": {
     "@sanity/cli": "^2.7.1",
+    "autoprefixer": "^10.4.5",
     "concurrently": "^5.3.0",
     "eslint-config-prettier": "^8.3.0",
     "lerna": "^3.22.1",
+    "postcss": "^8.4.12",
     "postcss-flexbugs-fixes": "4.2.1",
     "postcss-preset-env": "^6.7.0",
     "prettier": "^2.1.2",
     "sanity-template": "^2.1.1",
-    "tailwindcss": "^1.9.6"
+    "tailwindcss": "^3.0.24"
   },
   "keywords": [],
   "author": "Sanity.io <hello@sanity.io>",
