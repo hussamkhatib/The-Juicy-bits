@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { updateShippingDetails } from "../../firebase/config";
+// import { updateShippingDetails } from "../../firebase/config";
 import SliderHeader from "../SliderHeader";
 import { useSelector } from "react-redux";
 import { userLoggedState } from "../../redux/userSlice";

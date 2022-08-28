@@ -1,10 +1,11 @@
 {
-  "name": "sanity-template-nextjs-ecommerce",
+  "name": "evolution",
   "version": "1.0.0",
   "private": true,
   "description": "Sanity.io and Next.js Ecommerce Starter template",
   "scripts": {
-    "dev": "concurrently \"next --port $PORT\" \"cd studio && sanity start\"",
+    "dev": "next dev",
+    "studio": "cd studio && sanity start",
     "build": "echo 'Building Sanity to public/studio…' && cd studio && sanity build ../public/studio -y && cd .. && next build",
     "lint": "next lint",
     "pretty": "prettier --write \"./**/*.{js,jsx,json,ts,tsx}\"",
@@ -14,25 +15,27 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sanity-io/sanity-template-nextjs-ecommerce.git"
+    "url": "git+https://github.com/hussamkhatib/evolution.git"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^1.5.0",
+    "@headlessui/react": "^1.6.6",
+    "@reduxjs/toolkit": "^1.8.5",
     "@sanity/client": "^2.7.1",
     "@sanity/image-url": "^0.140.22",
     "eslint": "^7.29.0",
     "eslint-config-next": "^11.0.1",
-    "firebase": "^8.3.2",
+    "firebase": "^9.9.3",
     "next": "^11.0.1",
     "next-sanity": "^0.1.8",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-firebase-hooks": "^3.0.3",
-    "react-redux": "^7.2.2",
-    "redux": "^4.0.5"
+    "react-firebase-hooks": "^5.0.3",
+    "react-hook-form": "^7.34.2",
+    "react-redux": "^8.0.2",
+    "redux": "^4.2.0"
   },
   "devDependencies": {
-    "@sanity/cli": "^2.7.1",
+    "@sanity/cli": "^2.31.0",
     "autoprefixer": "^10.4.5",
     "concurrently": "^5.3.0",
     "eslint-config-prettier": "^8.3.0",
@@ -45,7 +48,7 @@
     "tailwindcss": "^3.0.24"
   },
   "keywords": [],
-  "author": "Sanity.io <hello@sanity.io>",
+  "author": "Hussam Khatib <hussamkhatib20@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/sanity-io/sanity-template-nextjs-ecommerce/issues"

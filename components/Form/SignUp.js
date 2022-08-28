@@ -1,108 +1,62 @@
-import React, { useState, useRef, useEffect } from "react";
-import {
-  auth,
-  createUserProfileDocument,
-  signInWithGoogle,
-} from "../../firebase/config";
-import ToggleForm from "./ToggleForm";
+import React from "react";
 import { useDispatch } from "react-redux";
-import { LogInUser } from "../../redux/userSlice";
+import { signInUser } from "../../redux/userSlice";
+import { useForm } from "react-hook-form";
+import { createUserWithEmailAndPassword } from "../../src/firebase/util";
 
-const SignUp = () => {
-  const _isMounted = useRef(true);
-  useEffect(() => {
-    return () => {
-      _isMounted.current = false;
-    };
-  }, []);
+const SignUp = ({ closeDialog, toggleForm }) => {
+  // const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+
   const dispatch = useDispatch();
-  const [state, setState] = useState({
-    displayName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    passwordMatch: true,
-  });
-  function handleChange(evt) {
-    const value = evt.target.value;
-    setState({
-      ...state,
-      [evt.target.name]: value,
-    });
-  }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const {
-      displayName,
-      email,
-      password,
-      confirmPassword,
-      passwordMatch,
-    } = state;
-    if (password !== confirmPassword) {
-      //   alert("passwords dont's match");
-      setState({
-        ...state,
-        passwordMatch: false,
+  const onSubmit = async (data) => {
+    const { email, password, confirmPassword } = data;
+    console.log(email, password);
+    if (password === confirmPassword) {
+      const user = await createUserWithEmailAndPassword(email, password, {
+        sendEmailVerification: false,
       });
-      console.log({ passwordMatch });
-      return;
+      user && dispatch(signInUser(user));
+      alert("Profile Updated");
+      closeDialog();
     }
-    try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-      await user.updateProfile({
-        displayName: state.displayName,
-      });
-      await createUserProfileDocument(user, { displayName });
-      dispatch(LogInUser([state.displayName, "", "", ""]));
-    } catch (error) {
-      console.log(error.message);
-    }
-
-    setState({
-      displayName: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      passwordMatch: true,
-    });
   };
+
   return (
-    <form onSubmit={handleSubmit} className="p-6 overflow-y-auto">
+    <form onSubmit={handleSubmit(onSubmit)} className="p-6 overflow-y-auto">
       <div className="py-1 md:py-2 flex flex-col">
         <label>Display name</label>
         <input
-          value={state.displayName}
-          onChange={handleChange}
+          {...register("displayName", { required: "Name Address is required" })}
           className="border-b-2 border-gray-400 border-solid"
           type="text"
-          name="displayName"
           required
         ></input>
       </div>
       <div className="py:1 md:py-2 flex flex-col">
         <label htmlFor="email">email</label>
         <input
-          value={state.email}
-          onChange={handleChange}
           className="border-b-2 border-gray-400 border-solid"
+          {...register("email", { required: "Email Address is required" })}
           type="email"
-          name="email"
           required
-        ></input>
+        />
       </div>
       <div className="py-1 md:py-2 flex flex-col">
         <label htmlFor="pass">Password</label>
         <input
           className="border-b-2 border-gray-400 border-solid"
-          value={state.password}
-          onChange={handleChange}
+          {...register("password", {
+            minLength: 8,
+            required: "Password is required",
+          })}
           type="password"
-          name="password"
           minLength="8"
           required
         ></input>
@@ -111,10 +65,11 @@ const SignUp = () => {
         <label htmlFor="pass">Confirm Password</label>
         <input
           className="border-b-2 border-gray-400 border-solid"
-          value={state.confirmPassword}
-          onChange={handleChange}
+          {...register("confirmPassword", {
+            minLength: 8,
+            required: "Password is required",
+          })}
           type="password"
-          name="confirmPassword"
           minLength="8"
           required
         ></input>
@@ -126,12 +81,20 @@ const SignUp = () => {
       </div>
       <p className="text-center">or</p>
       <button
-        onClick={signInWithGoogle}
+        // onClick={signInWithGoogle}
         className="bg-red-500 hover:bg-red-600 w-full py-1 md:py-2 text-white"
       >
         Sign In with Google
       </button>
-      <ToggleForm Account={["Already", "in"]} />
+      <p className="text-center">
+        Already have an account?
+        <button
+          onClick={() => toggleForm()}
+          className="text-blue-500 hover:text-blue-600"
+        >
+          Sign in here
+        </button>
+      </p>
     </form>
   );
 };

@@ -1,67 +1,43 @@
-import React, { useState, useRef, useEffect } from "react";
-import { auth, signInWithGoogle } from "../../firebase/config";
-import ToggleForm from "./ToggleForm";
+import React from "react";
+import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { toggleForm } from "../../redux/formSlice";
+import { signInWithEmailAndPassword } from "../../src/firebase/util";
+import { signInUser } from "../../redux/userSlice";
 
-const SignIn = () => {
-  const _isMounted = useRef(true);
-  useEffect(() => {
-    return () => {
-      _isMounted.current = false;
-    };
-  }, []);
+const SignIn = ({ closeDialog, toggleForm }) => {
   const dispatch = useDispatch();
-  const [state, setState] = useState({
-    email: "",
-    password: "",
-  });
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const { email, password } = state;
-    try {
-      await auth.signInWithEmailAndPassword(email, password);
-      dispatch(toggleForm());
-      setState({
-        email: "",
-        password: "",
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-  function handleChange(evt) {
-    const value = evt.target.value;
-    setState({
-      ...state,
-      [evt.target.name]: value,
-    });
-  }
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    const { email, password } = data;
+    const user = await signInWithEmailAndPassword(email, password);
+    console.log(user);
+    dispatch(signInUser(user));
+  };
   return (
-    <form onSubmit={handleSubmit} className="p-6 overflow-y-auto">
+    <form onSubmit={handleSubmit(onSubmit)} className="p-6 overflow-y-auto">
       <div className="py-2 flex flex-col">
         <label htmlFor="email">email</label>
         <input
-          value={state.email}
-          onChange={handleChange}
           className="border-b-2 border-gray-400 border-solid"
-          type="email"
-          name="email"
-          required
-        ></input>
+          {...register("email", { required: "Email Address is required" })}
+        />
       </div>
       <div className="py-2 flex flex-col">
         <label htmlFor="pass">Password</label>
         <input
           className="border-b-2 border-gray-400 border-solid"
-          value={state.password}
-          onChange={handleChange}
+          {...register("password", {
+            required: "Password is required",
+            minLength: 8,
+          })}
           type="password"
-          name="password"
-          minLength="8"
-          required
-        ></input>
+        />
       </div>
 
       <div className="flex py-4">
@@ -71,13 +47,21 @@ const SignIn = () => {
       </div>
       <p className="text-center">or</p>
       <button
-        onClick={signInWithGoogle}
+        // onClick={signInWithGoogle}
         className="bg-red-500 hover:bg-red-600 w-full py-2 text-white"
       >
         Sign In with Google
       </button>
 
-      <ToggleForm Account={["Dont", "up"]} />
+      <p className="text-center">
+        Dont have an account?{" "}
+        <button
+          onClick={() => toggleForm()}
+          className="text-blue-500 hover:text-blue-600"
+        >
+          Sign up here
+        </button>
+      </p>
     </form>
   );
 };
