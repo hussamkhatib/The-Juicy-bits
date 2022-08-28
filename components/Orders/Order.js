@@ -1,6 +1,6 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
-import { selectPurchasedItem } from "../../redux/orderSlice";
+import { selectPurchasedItem } from "../../src/redux/orderSlice";
 import EmptyCart from "../Cart/EmptyCart";
 import SliderHeader from "../SliderHeader";
 

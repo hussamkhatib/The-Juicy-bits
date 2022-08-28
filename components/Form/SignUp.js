@@ -2,8 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 
-import { signInUser } from "../../redux/userSlice";
 import { createUserWithEmailAndPassword } from "../../src/firebase/util";
+import { signInUser } from "../../src/redux/userSlice";
 
 const SignUp = ({ closeDialog, toggleForm }) => {
   // const [updateProfile, updating, updateError] = useUpdateProfile(auth);

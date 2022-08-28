@@ -1,9 +1,9 @@
 import { useDispatch } from "react-redux";
 
-import { openSliderComponent } from "../../redux/sliderSlice";
-import { cancel } from "../../redux/sliderSlice";
-import { signOutUser } from "../../redux/userSlice";
 import { getFirebase } from "../../src/firebase";
+import { openSliderComponent } from "../../src/redux/sliderSlice";
+import { cancel } from "../../src/redux/sliderSlice";
+import { signOutUser } from "../../src/redux/userSlice";
 import PrimaryProfileItems from "./PrimaryProfileItems";
 const { auth } = getFirebase();
 

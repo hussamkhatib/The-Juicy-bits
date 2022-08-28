@@ -1,14 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
+import { cartSelector } from "../../src/redux/cartSlice";
 import Cancel from "../Buttons/Cancel";
 import CartItems from "./CartItems";
-import { selectItem } from "./cartSlice";
 import Checkout from "./Checkout";
 
 function Cart() {
-  const item = useSelector(selectItem);
-  const isProductExist = item.length ? true : false;
+  const cart = useSelector(cartSelector);
 
   return (
     <>
@@ -18,7 +17,7 @@ function Cart() {
       </div>
       <hr />
       <CartItems />
-      {isProductExist && <Checkout />}
+      {Array.isArray(cart) && cart.length ? <Checkout /> : null}
     </>
   );
 }

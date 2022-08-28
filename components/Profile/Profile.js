@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 
-import { userSelector } from "../../redux/userSlice";
+import { userSelector } from "../../src/redux/userSlice";
 import Cancel from "../Buttons/Cancel";
 import ProfileItems from "./ProfileItems";
 

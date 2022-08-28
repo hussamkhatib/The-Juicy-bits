@@ -1,61 +1,21 @@
 /* eslint-disable @next/next/no-img-element */
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+import { useDispatch } from "react-redux";
 
-// import { addProductId, auth } from "../firebase/config";
-import { openSliderComponent } from "../redux/sliderSlice";
-import { getClient, PortableText, urlFor } from "../utils/sanity";
-import { addItem, selectItem } from "./Cart/cartSlice";
-import CartIcon from "./Svg/CartIcon";
+import { addProduct } from "../src/redux/cartSlice";
+import { openSliderComponent } from "../src/redux/sliderSlice";
+import { PortableText, urlFor } from "../utils/sanity";
 
 function ProductPage(props) {
-  const [addedToCart, setAddedToCart] = useState(false);
   const { title, defaultProductVariant, mainImage, body, id } = props;
-  //console.log(props)
   const dispatch = useDispatch();
-  const cartItems = useSelector(selectItem);
-  const cartTitles = cartItems.map((i) => i.title);
-
-  useEffect(() => {
-    if (cartTitles.includes(title)) {
-      setAddedToCart(true);
-    } else {
-      setAddedToCart(false);
-    }
-  }, [cartTitles, title]);
 
   const addToCart = () => {
-    dispatch(addItem(props));
-    // addProductId(auth.currentUser.uid, id);
-    console.log("called");
+    // dispatch(addItem(props));
+    console.log("add to cart called", props);
+    dispatch(addProduct(props));
+    dispatch(openSliderComponent("Cart"));
   };
-
-  function addOrMoveToCart() {
-    if (!addedToCart) {
-      return (
-        <div className="mt-2">
-          <button
-            onClick={addToCart}
-            className="flex px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500"
-          >
-            Add to Cart <CartIcon />
-          </button>
-        </div>
-      );
-    } else {
-      return (
-        <>
-          <div className="px-4">Item added</div>
-          <button
-            onClick={() => dispatch(openSliderComponent("Cart"))}
-            className="flex px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500"
-          >
-            Move to cart
-          </button>
-        </>
-      );
-    }
-  }
 
   return (
     <div className="container mx-auto px-6">
@@ -78,7 +38,17 @@ function ProductPage(props) {
           </span>
           <hr className="my-3" />
 
-          <div className="flex items-center mt-6">{addOrMoveToCart()}</div>
+          <div className="flex items-center mt-6">
+            <div className="mt-2">
+              <button
+                onClick={() => addToCart()}
+                className="flex px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500"
+              >
+                Add to Cart
+                <ShoppingCartIcon className="h-5 w-5 ml-2" aria-hidden />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
       <div className="mt-16 md:w-2/3">

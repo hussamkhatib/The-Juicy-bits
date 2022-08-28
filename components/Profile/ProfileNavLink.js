@@ -1,7 +1,7 @@
 import { UserIcon } from "@heroicons/react/24/outline";
 import { useDispatch } from "react-redux";
 
-import { openSliderComponent } from "../../redux/sliderSlice";
+import { openSliderComponent } from "../../src/redux/sliderSlice";
 
 const ProfileNavLink = () => {
   const dispatch = useDispatch();

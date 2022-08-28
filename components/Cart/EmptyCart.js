@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 
-import { cancel } from "../../redux/sliderSlice";
+import { cancel } from "../../src/redux/sliderSlice";
 import EmptyCartIcon from "../Svg/EmptyCartIcon";
 
 const EmptyCart = () => {

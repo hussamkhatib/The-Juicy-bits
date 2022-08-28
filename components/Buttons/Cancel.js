@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 
-import { cancel } from "../../redux/sliderSlice";
+import { cancel } from "../../src/redux/sliderSlice";
 import CancelIcon from "../Svg/CancelIcon";
 
 const Cancel = () => {

@@ -5,10 +5,10 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useDispatch } from "react-redux";
 
-import { openSliderComponent } from "../../redux/sliderSlice";
-import { signInUser } from "../../redux/userSlice";
 import { getFirebase } from "../../src/firebase";
 import { getUser } from "../../src/firebase/util";
+import { openSliderComponent } from "../../src/redux/sliderSlice";
+import { signInUser } from "../../src/redux/userSlice";
 import Authenticate from "../Form/Authenticate";
 import ProfileNavLink from "../Profile/ProfileNavLink";
 import Nav from "./Nav";

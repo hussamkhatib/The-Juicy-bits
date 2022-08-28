@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { openSliderComponentState } from "../../redux/sliderSlice";
+import { openSliderComponentState } from "../../src/redux/sliderSlice";
 import Cart from "../Cart/Cart";
 import ContactUs from "../ContactUs";
 import Order from "../Orders/Order";
