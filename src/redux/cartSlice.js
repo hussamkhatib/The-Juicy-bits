@@ -5,13 +5,13 @@ export const slice = createSlice({
   name: "item",
   initialState,
   reducers: {
-    addProduct: (state, action) => {
+    addProductToCart: (state, action) => {
       state.push({
         ...action.payload,
         count: 1,
       });
     },
-    removeProduct: (state, action) => {
+    removeProductFromCart: (state, action) => {
       return state.filter((item) => item.id !== action.payload);
     },
     setInitiial: () => {
@@ -31,8 +31,8 @@ export const slice = createSlice({
 });
 
 export const {
-  addProduct,
-  removeProduct,
+  addProductToCart,
+  removeProductFromCart,
   setInitiial,
   increment,
   decrement,
@@ -41,20 +41,3 @@ export const {
 export const cartSelector = (state) => state.cart;
 
 export default slice.reducer;
-
-export const addProductToCart = (payload) => (dispatch) => {
-  console.log("Hey HEo");
-  dispatch(addProduct(payload));
-};
-
-export const removeProductFromCart = (payload) => async (dispatch) => {
-  dispatch(removeProduct(payload));
-};
-
-export const incrementProductCount = (payload) => (dispatch) => {
-  dispatch(increment(payload));
-};
-
-export const decrementProductCount = (payload) => (dispatch) => {
-  dispatch(decrement(payload));
-};

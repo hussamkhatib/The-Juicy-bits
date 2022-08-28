@@ -1,21 +1,21 @@
 /* eslint-disable @next/next/no-img-element */
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+import { doc } from "firebase/firestore";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useDocument } from "react-firebase-hooks/firestore";
 import { useDispatch } from "react-redux";
 
-import { addProduct } from "../src/redux/cartSlice";
+import { getFirebase } from "../src/firebase";
+import { addProductToCartFB } from "../src/firebase/helper";
+import { addProductToCart } from "../src/redux/cartSlice";
 import { openSliderComponent } from "../src/redux/sliderSlice";
 import { PortableText, urlFor } from "../utils/sanity";
 
-function ProductPage(props) {
-  const { title, defaultProductVariant, mainImage, body, id } = props;
-  const dispatch = useDispatch();
+const { firestore, auth } = getFirebase();
 
-  const addToCart = () => {
-    // dispatch(addItem(props));
-    console.log("add to cart called", props);
-    dispatch(addProduct(props));
-    dispatch(openSliderComponent("Cart"));
-  };
+function ProductPage(props) {
+  const { title, defaultProductVariant, mainImage, body } = props;
+  const [user, isloading, error] = useAuthState(auth);
 
   return (
     <div className="container mx-auto px-6">
@@ -39,15 +39,7 @@ function ProductPage(props) {
           <hr className="my-3" />
 
           <div className="flex items-center mt-6">
-            <div className="mt-2">
-              <button
-                onClick={() => addToCart()}
-                className="flex px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500"
-              >
-                Add to Cart
-                <ShoppingCartIcon className="h-5 w-5 ml-2" aria-hidden />
-              </button>
-            </div>
+            {user?.uid ? <CTA props={props} useruid={user.uid} /> : null}
           </div>
         </div>
       </div>
@@ -60,3 +52,39 @@ function ProductPage(props) {
 }
 
 export default ProductPage;
+
+const CTA = ({ props, useruid }) => {
+  const dispatch = useDispatch();
+  const [value, loading, error] = useDocument(
+    doc(firestore, "users", useruid, "cart", props.id)
+  );
+  const addToCart = () => {
+    dispatch(addProductToCart(props));
+    addProductToCartFB(props.id);
+  };
+
+  // TODO LOADING AND ERROR
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+  return value?.exists() ? (
+    <>
+      <div className="px-4">Item added</div>
+      <button
+        onClick={() => dispatch(openSliderComponent("Cart"))}
+        className="flex px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500"
+      >
+        Move to cart
+      </button>
+    </>
+  ) : (
+    <div className="mt-2">
+      <button
+        onClick={() => addToCart()}
+        className="flex px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500"
+      >
+        Add to Cart
+        <ShoppingCartIcon className="h-5 w-5 ml-2" aria-hidden />
+      </button>
+    </div>
+  );
+};
