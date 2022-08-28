@@ -1,7 +1,8 @@
-import SignUp from "./SignUp";
-import SignIn from "./SignIn";
-import Modal from "../Modal";
 import { useState } from "react";
+
+import Modal from "../common/Modal";
+import SignIn from "./SignIn";
+import SignUp from "./SignUp";
 
 const map = new Map();
 

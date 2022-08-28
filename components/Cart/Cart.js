@@ -1,9 +1,10 @@
 import React from "react";
-import CartItems from "./CartItems";
 import { useSelector } from "react-redux";
+
+import Cancel from "../Buttons/Cancel";
+import CartItems from "./CartItems";
 import { selectItem } from "./cartSlice";
 import Checkout from "./Checkout";
-import Cancel from "../Buttons/Cancel";
 
 function Cart() {
   const item = useSelector(selectItem);

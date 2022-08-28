@@ -1,16 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  selectItem,
-  selectCounter,
-  removeItem,
-  increment,
-  decrement,
-} from "./cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+
 import { urlFor } from "../../utils/sanity";
-import Plus from "../Svg/Plus";
 import Minus from "../Svg/Minus";
+// import Plus from "../Svg/Plus";
+import {
+  decrement,
+  // increment,
+  removeItem,
+  selectCounter,
+  selectItem,
+} from "./cartSlice";
 import EmptyCart from "./EmptyCart";
 
 const CartItems = () => {
@@ -44,7 +45,6 @@ const CartItems = () => {
             <div className="mx-3">
               <h3 className="text-sm text-gray-600">{item.title}</h3>
               <div className="flex items-center mt-2">
-            
                 <span className="text-gray-700 mx-2">{counter[index]}</span>
                 <button
                   disabled={counter[index] < 2}
@@ -57,7 +57,6 @@ const CartItems = () => {
             </div>
           </div>
           <div className="flex flex-col items-center">
-      
             <button onClick={() => removeProductFromCart(index)} className="">
               trash
             </button>

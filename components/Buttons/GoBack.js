@@ -1,5 +1,6 @@
-import { openSliderComponent } from "../../redux/sliderSlice";
 import { useDispatch } from "react-redux";
+
+import { openSliderComponent } from "../../redux/sliderSlice";
 import Back from "../Svg/Back";
 
 const GoBack = () => {

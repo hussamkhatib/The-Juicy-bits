@@ -1,6 +1,7 @@
 import Error from "next/error";
-import { groq } from "next-sanity";
 import { useRouter } from "next/router";
+import { groq } from "next-sanity";
+
 import ProductPage from "../../components/ProductPage";
 import { getClient, usePreviewSubscription } from "../../utils/sanity";
 

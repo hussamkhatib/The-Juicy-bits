@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 import { urlFor } from "../utils/sanity";
 import CartIcon from "./Svg/CartIcon";
 

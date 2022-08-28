@@ -1,5 +1,5 @@
-import GoBack from "./Buttons/GoBack";
 import Cancel from "./Buttons/Cancel";
+import GoBack from "./Buttons/GoBack";
 
 const SliderHeader = (props) => {
   return (

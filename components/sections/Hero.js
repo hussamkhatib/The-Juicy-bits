@@ -1,7 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import PropTypes from "prop-types";
-import Cta from "../Cta";
+
 import { PortableText, urlFor } from "../../utils/sanity";
+import Cta from "../Cta";
 
 function Hero(props) {
   const { heading, backgroundImage, tagline, ctas } = props;

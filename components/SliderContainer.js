@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+
 import { openOrClose } from "../redux/sliderSlice";
 
 const SliderContainer = ({ children }) => {

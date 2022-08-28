@@ -1,4 +1,5 @@
 import React from "react";
+
 import ProductCard from "../ProductCard";
 
 const CategoryPage = ({ slug, title, id, products }) => {

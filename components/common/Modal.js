@@ -1,6 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, React } from "react";
-import PropTypes from "prop-types";
 
 export default function Modal(props) {
   const {

@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from "react";
-import Location from "../Svg/Location";
 import Image from "next/image";
-import Authenticate from "../Form/Authenticate";
-import CartIcon from "../Svg/CartIcon";
-import Hamburger from "../Svg/Hamburger";
-import Nav from "./Nav";
-import { useDispatch } from "react-redux";
-import { openSliderComponent } from "../../redux/sliderSlice";
-import ProfileNavLink from "../Profile/ProfileNavLink";
+import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useDispatch } from "react-redux";
+
+import { openSliderComponent } from "../../redux/sliderSlice";
+import { signInUser } from "../../redux/userSlice";
 import { getFirebase } from "../../src/firebase";
 import { getUser } from "../../src/firebase/util";
+import Authenticate from "../Form/Authenticate";
+import ProfileNavLink from "../Profile/ProfileNavLink";
+import CartIcon from "../Svg/CartIcon";
+import Hamburger from "../Svg/Hamburger";
+import Location from "../Svg/Location";
+import Nav from "./Nav";
 
 const { auth } = getFirebase();
 
@@ -20,7 +22,7 @@ const Header = () => {
 
   useEffect(() => {
     if (user) {
-      console.log(getUser(user));
+      dispatch(signInUser(getUser(user)));
     }
   }, [user]);
 

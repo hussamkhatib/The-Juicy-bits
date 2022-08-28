@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+
+import { userLoggedState } from "../../redux/userSlice";
 // import { updateShippingDetails } from "../../firebase/config";
 import SliderHeader from "../SliderHeader";
-import { useSelector } from "react-redux";
-import { userLoggedState } from "../../redux/userSlice";
 
 const EditProfile = () => {
   const userShippingDetails = useSelector(userLoggedState);
@@ -23,7 +24,7 @@ const EditProfile = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateShippingDetails(state);
+    // updateShippingDetails(state);
   };
 
   return (

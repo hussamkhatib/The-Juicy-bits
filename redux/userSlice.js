@@ -8,7 +8,7 @@ export const slice = createSlice({
       return action.payload;
     },
     signOutUser: () => {
-      return initialState;
+      return null;
     },
   },
 });

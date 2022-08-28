@@ -1,8 +1,9 @@
 import {
-  signInWithEmailAndPassword as firebaseSignInWithEmailAndPassword,
   createUserWithEmailAndPassword as firebaseCreateUserWithEmailAndPassword,
   sendEmailVerification,
+  signInWithEmailAndPassword as firebaseSignInWithEmailAndPassword,
 } from "firebase/auth";
+
 import { getFirebase } from ".";
 
 const { auth } = getFirebase();

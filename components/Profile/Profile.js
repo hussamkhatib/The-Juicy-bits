@@ -1,10 +1,12 @@
 import { useSelector } from "react-redux";
-import ProfileItems from "./ProfileItems";
+
 import { userSelector } from "../../redux/userSlice";
 import Cancel from "../Buttons/Cancel";
+import ProfileItems from "./ProfileItems";
 
 const Profile = () => {
   const user = useSelector(userSelector);
+  console.log({ user });
   return (
     <>
       <div className="flex items-center justify-between">

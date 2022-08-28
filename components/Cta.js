@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
 import Link from "next/link";
+import PropTypes from "prop-types";
+import React from "react";
 
 function Cta(props) {
   const { title, route, link } = props;

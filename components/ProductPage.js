@@ -1,11 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
-import { useState, useEffect } from "react";
-import { urlFor, PortableText, getClient } from "../utils/sanity";
-import { useSelector, useDispatch } from "react-redux";
-import { addProductId, auth } from "../firebase/config";
-import CartIcon from "./Svg/CartIcon";
-import { selectItem, addItem } from "./Cart/cartSlice";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+// import { addProductId, auth } from "../firebase/config";
 import { openSliderComponent } from "../redux/sliderSlice";
+import { getClient, PortableText, urlFor } from "../utils/sanity";
+import { addItem, selectItem } from "./Cart/cartSlice";
+import CartIcon from "./Svg/CartIcon";
 
 function ProductPage(props) {
   const [addedToCart, setAddedToCart] = useState(false);
@@ -25,7 +26,7 @@ function ProductPage(props) {
 
   const addToCart = () => {
     dispatch(addItem(props));
-    addProductId(auth.currentUser.uid, id);
+    // addProductId(auth.currentUser.uid, id);
     console.log("called");
   };
 

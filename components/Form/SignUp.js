@@ -1,7 +1,8 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { signInUser } from "../../redux/userSlice";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+
+import { signInUser } from "../../redux/userSlice";
 import { createUserWithEmailAndPassword } from "../../src/firebase/util";
 
 const SignUp = ({ closeDialog, toggleForm }) => {

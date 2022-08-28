@@ -1,8 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { signInWithEmailAndPassword } from "../../src/firebase/util";
+
 import { signInUser } from "../../redux/userSlice";
+import { signInWithEmailAndPassword } from "../../src/firebase/util";
 
 const SignIn = ({ closeDialog, toggleForm }) => {
   const dispatch = useDispatch();
@@ -16,8 +17,8 @@ const SignIn = ({ closeDialog, toggleForm }) => {
   const onSubmit = async (data) => {
     const { email, password } = data;
     const user = await signInWithEmailAndPassword(email, password);
-    console.log(user);
     dispatch(signInUser(user));
+    closeDialog();
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="p-6 overflow-y-auto">

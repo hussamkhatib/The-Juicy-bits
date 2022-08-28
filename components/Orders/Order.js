@@ -1,7 +1,8 @@
-import SliderHeader from "../SliderHeader";
-import EmptyCart from "../Cart/EmptyCart";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
 import { selectPurchasedItem } from "../../redux/orderSlice";
+import EmptyCart from "../Cart/EmptyCart";
+import SliderHeader from "../SliderHeader";
 
 const Order = () => {
   const purchasedItems = useSelector(selectPurchasedItem);

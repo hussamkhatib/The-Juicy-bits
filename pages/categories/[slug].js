@@ -1,8 +1,9 @@
 import Error from "next/error";
-import { groq } from "next-sanity";
 import { useRouter } from "next/router";
-import { getClient, usePreviewSubscription } from "../../utils/sanity";
+import { groq } from "next-sanity";
+
 import CategoryPage from "../../components/Category/CategoryPage";
+import { getClient, usePreviewSubscription } from "../../utils/sanity";
 
 const query = groq`*[_type == "category"  && slug.current == $slug][0]{
 	slug,title,_id,

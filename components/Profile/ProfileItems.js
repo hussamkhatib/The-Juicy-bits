@@ -1,14 +1,21 @@
-import PrimaryProfileItems from "./PrimaryProfileItems";
-import { openSliderComponent } from "../../redux/sliderSlice";
 import { useDispatch } from "react-redux";
+
+import { openSliderComponent } from "../../redux/sliderSlice";
+import { cancel } from "../../redux/sliderSlice";
+import { signOutUser } from "../../redux/userSlice";
+import { getFirebase } from "../../src/firebase";
+import PrimaryProfileItems from "./PrimaryProfileItems";
+const { auth } = getFirebase();
 
 const ProfileItems = () => {
   const dispatch = useDispatch();
-  // const logOut = () => {
-  //   dispatch(cancel());
-  //   auth.signOut();
-  //   dispatch(setInitiial());
-  // };
+
+  const logOut = () => {
+    dispatch(cancel());
+    auth.signOut();
+    dispatch(signOutUser());
+  };
+
   return (
     <div>
       <PrimaryProfileItems />
@@ -20,10 +27,10 @@ const ProfileItems = () => {
         Edit Profile
       </button>
       <button
-        // onClick={Logout}
+        onClick={logOut}
         className="w-full text-left hover:bg-gray-200 py-1"
       >
-        Logout
+        Sign Out
       </button>
     </div>
   );

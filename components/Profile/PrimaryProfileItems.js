@@ -1,4 +1,5 @@
 import { useDispatch } from "react-redux";
+
 import { openSliderComponent } from "../../redux/sliderSlice";
 
 const PrimaryProfileItems = () => {

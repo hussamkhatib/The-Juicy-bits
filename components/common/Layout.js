@@ -1,13 +1,8 @@
-import { useRouter } from "next/router";
-import { getClient } from "../../utils/sanity";
 import Head from "next/head";
-
-import { addItem, setInitiial } from "../Cart/cartSlice";
-import { userLoggedState, LogInUser, LogOutUser } from "../../redux/userSlice";
-import { cancel } from "../../redux/sliderSlice";
-import Header from "./Header";
+import { useRouter } from "next/router";
 
 import Aside from "./Aside";
+import Header from "./Header";
 
 function Layout({ children }) {
   const router = useRouter();

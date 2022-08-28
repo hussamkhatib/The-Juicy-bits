@@ -1,0 +1,10 @@
+node_modules/
+.sanity-template/
+.next/
+.vercel/
+public/
+package.json
+yarn.lock
+README.md 
+LICENSE
+.eslintrc.json

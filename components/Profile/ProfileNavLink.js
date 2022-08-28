@@ -1,6 +1,7 @@
-import ProfileIcon from "../Svg/ProfileIcon";
 import { useDispatch } from "react-redux";
+
 import { openSliderComponent } from "../../redux/sliderSlice";
+import ProfileIcon from "../Svg/ProfileIcon";
 
 const ProfileNavLink = () => {
   const dispatch = useDispatch();

@@ -1,7 +1,8 @@
 import Error from "next/error";
 import { useRouter } from "next/router";
-import { getClient, usePreviewSubscription } from "../../utils/sanity";
+
 import CategoriesPage from "../../components/Category/CategoriesPage";
+import { getClient, usePreviewSubscription } from "../../utils/sanity";
 
 const query = `*[_type == 'category' && defined(slug.current)]{
   title,

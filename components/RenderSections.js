@@ -1,6 +1,7 @@
-import React, { Fragment } from "react";
-import PropTypes from "prop-types";
 import { upperFirst } from "lodash";
+import PropTypes from "prop-types";
+import React, { Fragment } from "react";
+
 import * as SectionComponents from "./sections";
 
 function resolveSections(section) {
@@ -28,7 +29,7 @@ function RenderSections(props) {
       {sections.map((section) => {
         const SectionComponent = resolveSections(section);
         if (!SectionComponent) {
-          return <div>Missing section {section._type}</div>;
+          return <div key={section._key}>Missing section {section._type}</div>;
         }
         return <SectionComponent {...section} key={section._key} />;
       })}
