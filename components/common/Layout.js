@@ -45,13 +45,7 @@ function Layout({ children }) {
   //     }
   //   });
   // }
-  // useEffect(() => {
-  //   const unsubscribe = onAuthStateChange();
-  //   return () => {
-  //     unsubscribe();
-  //   };
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+
   const fullUrl = router.pathname;
   const slashIndex = fullUrl.slice(1).indexOf("/");
   const mainUrl =
@@ -88,7 +82,7 @@ function Layout({ children }) {
           key="ogdesc"
         />
       </Head>
-      <div className="bg-white">
+      <div className="min-h-screen grid grid-rows-[auto_auto_max-content] bg-white">
         <Header />
 
         <main className="my-8">{children}</main>
@@ -101,7 +95,9 @@ function Layout({ children }) {
             >
               Evolution.
             </a>
-            <p className="py-2 text-gray-500 sm:py-0">All rights reserved</p>
+            <small className="text-sm py-2 text-gray-500 sm:py-0">
+              All rights reserved
+            </small>
           </div>
         </footer>
       </div>
