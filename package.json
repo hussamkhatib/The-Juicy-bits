@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.6.6",
+    "@heroicons/react": "^2.0.8",
     "@reduxjs/toolkit": "^1.8.5",
     "@sanity/client": "^2.7.1",
     "@sanity/image-url": "^0.140.22",

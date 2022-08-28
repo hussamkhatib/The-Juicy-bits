@@ -1,7 +1,7 @@
+import { UserIcon } from "@heroicons/react/24/outline";
 import { useDispatch } from "react-redux";
 
 import { openSliderComponent } from "../../redux/sliderSlice";
-import ProfileIcon from "../Svg/ProfileIcon";
 
 const ProfileNavLink = () => {
   const dispatch = useDispatch();
@@ -10,7 +10,7 @@ const ProfileNavLink = () => {
       onClick={() => dispatch(openSliderComponent("profile"))}
       className="text-gray-600 flex flex-col items-center w-full "
     >
-      <ProfileIcon />
+      <UserIcon className="h-6 w-6" aria-hidden />
       <div className="text-xs focus:outline-none sm:mx-0">Profile</div>
     </button>
   );
