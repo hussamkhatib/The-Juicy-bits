@@ -11,15 +11,11 @@ import {
   removeProductFromCart,
 } from "../../src/redux/cartSlice";
 import { urlFor } from "../../utils/sanity";
-import EmptyCart from "./EmptyCart";
 
 const CartItems = () => {
   const dispatch = useDispatch();
 
   const cart = useSelector(cartSelector);
-  if (Array.isArray(cart) && !cart.length) {
-    return <EmptyCart />;
-  }
 
   return (
     <>

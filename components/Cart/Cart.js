@@ -5,9 +5,16 @@ import { cartSelector } from "../../src/redux/cartSlice";
 import Cancel from "../Buttons/Cancel";
 import CartItems from "./CartItems";
 import Checkout from "./Checkout";
+import EmptyCart from "./EmptyCart";
 
 function Cart() {
   const cart = useSelector(cartSelector);
+
+  // useEffect(() => {}, []);
+
+  if (Array.isArray(cart) && !cart.length) {
+    return <EmptyCart />;
+  }
 
   return (
     <>
@@ -17,7 +24,7 @@ function Cart() {
       </div>
       <hr />
       <CartItems />
-      {Array.isArray(cart) && cart.length ? <Checkout /> : null}
+      <Checkout />
     </>
   );
 }

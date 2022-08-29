@@ -6,7 +6,6 @@ import ProfileItems from "./ProfileItems";
 
 const Profile = () => {
   const user = useSelector(userSelector);
-  console.log({ user });
   return (
     <>
       <div className="flex items-center justify-between">

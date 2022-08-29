@@ -7,8 +7,16 @@ import {
   setDoc,
 } from "firebase/firestore";
 
+import { getClient } from "../../utils/sanity";
 import { getFirebase } from ".";
+import { getUser } from "./util";
 const { firestore, auth } = getFirebase();
+
+export const createUser = async (user, overide) => {
+  const docRef = doc(firestore, `users/${auth.currentUser.uid}`);
+  const userDetails = getUser(user);
+  await setDoc(docRef, { ...userDetails, ...overide });
+};
 
 export const getUserDetails = async () => {
   const docRef = doc(firestore, `users/${auth.currentUser.uid}`);
@@ -25,7 +33,23 @@ export const getUserDetails = async () => {
 export const getUserCart = async () => {
   const docRef = collection(firestore, `users/${auth.currentUser.uid}/cart`);
   const docSnap = await getDocs(docRef);
-  return docSnap.docs.map((doc) => doc.data());
+  const firebaseData = docSnap.docs.map((doc) => doc.data());
+  const productIds = firebaseData.map((i) => `'${i.id}'`).join(",");
+  const query = `*[_type == "product" && _id in 
+    [
+    ${productIds}
+    ]
+  ]
+  `;
+  const products = getClient()
+    .fetch(query)
+    .then((productsArr) => {
+      return productsArr.map((product, i) => ({
+        ...product,
+        count: firebaseData[i].count,
+      }));
+    });
+  return products;
 };
 
 export async function addProductToCartFB(id) {

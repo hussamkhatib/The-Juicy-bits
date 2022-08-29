@@ -6,23 +6,32 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useDispatch } from "react-redux";
 
 import { getFirebase } from "../../src/firebase";
+import { getUserCart } from "../../src/firebase/helper";
 import { getUser } from "../../src/firebase/util";
+import { initCart } from "../../src/redux/cartSlice";
 import { openSliderComponent } from "../../src/redux/sliderSlice";
 import { signInUser } from "../../src/redux/userSlice";
 import Authenticate from "../Form/Authenticate";
 import ProfileNavLink from "../Profile/ProfileNavLink";
 import Nav from "./Nav";
-
 const { auth } = getFirebase();
 
 const Header = () => {
   const dispatch = useDispatch();
   const [user] = useAuthState(auth);
 
+  async function fetchCart() {
+    const userCart = await getUserCart();
+    dispatch(initCart(userCart));
+  }
+
   useEffect(() => {
     if (user) {
       dispatch(signInUser(getUser(user)));
+      fetchCart();
     }
+    //  'dispatch' and 'fetchCart' are intentionally not in the dependency list
+    //  Cart is initially not rendered, we are just making it available beforehand to avoid a loading state later
   }, [user]);
 
   const [menuOpen, setMenuOpen] = useState(false);

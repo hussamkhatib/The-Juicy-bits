@@ -17,6 +17,9 @@ export const slice = createSlice({
     setInitiial: () => {
       return initialState;
     },
+    initCart: (state, action) => {
+      return action.payload;
+    },
     increment: (state, action) => {
       const item = state.find((item) => item.id === action.payload);
       item.count += 1;
@@ -34,6 +37,7 @@ export const {
   addProductToCart,
   removeProductFromCart,
   setInitiial,
+  initCart,
   increment,
   decrement,
 } = slice.actions;
