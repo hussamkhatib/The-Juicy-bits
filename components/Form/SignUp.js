@@ -2,29 +2,26 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 
+import { createUser } from "../../src/firebase/helper";
 import { createUserWithEmailAndPassword } from "../../src/firebase/util";
-import { signInUser } from "../../src/redux/userSlice";
 
 const SignUp = ({ closeDialog, toggleForm }) => {
   // const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
-  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm();
 
   const onSubmit = async (data) => {
-    const { email, password, confirmPassword } = data;
+    const { email, password, confirmPassword, displayName } = data;
     console.log(email, password);
     if (password === confirmPassword) {
       const user = await createUserWithEmailAndPassword(email, password, {
         sendEmailVerification: false,
       });
-      user && dispatch(signInUser(user));
-      alert("Profile Updated");
+      createUser(user, { displayName });
       closeDialog();
     }
   };
