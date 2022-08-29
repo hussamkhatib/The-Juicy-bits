@@ -4,7 +4,9 @@ import {
   doc,
   getDoc,
   getDocs,
+  increment,
   setDoc,
+  updateDoc,
 } from "firebase/firestore";
 
 import { getClient } from "../../utils/sanity";
@@ -63,4 +65,11 @@ export async function addProductToCartFB(id) {
 export async function deleteProductFromCartFB(id) {
   const docRef = doc(firestore, `users/${auth.currentUser.uid}/cart/${id}`);
   await deleteDoc(docRef);
+}
+
+export async function updateProductCountInCartFB(id, count) {
+  const docRef = doc(firestore, `users/${auth.currentUser.uid}/cart/${id}`);
+  await updateDoc(docRef, {
+    count: increment(count),
+  });
 }
