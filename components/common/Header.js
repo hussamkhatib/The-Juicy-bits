@@ -9,7 +9,7 @@ import { getFirebase } from "../../src/firebase";
 import { getUserCart } from "../../src/firebase/helper";
 import { getUser } from "../../src/firebase/util";
 import { initCart } from "../../src/redux/cartSlice";
-import { openSliderComponent } from "../../src/redux/sliderSlice";
+import { openSlider } from "../../src/redux/sliderSlice";
 import { signInUser } from "../../src/redux/userSlice";
 import Authenticate from "../Form/Authenticate";
 import ProfileNavLink from "../Profile/ProfileNavLink";
@@ -54,7 +54,7 @@ const Header = () => {
             {user ? null : <Authenticate />}
 
             <button
-              onClick={() => dispatch(openSliderComponent("Cart"))}
+              onClick={() => dispatch(openSlider("Cart"))}
               className="px-4 text-xs text-gray-600 focus:outline-none"
             >
               <ShoppingCartIcon className="h-6 w-6" aria-hidden />

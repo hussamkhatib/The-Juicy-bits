@@ -1,8 +1,8 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-import Aside from "./Aside";
 import Header from "./Header";
+import Slider from "./Slider";
 
 function Layout({ children }) {
   const router = useRouter();
@@ -47,7 +47,7 @@ function Layout({ children }) {
         <Header />
 
         <main className="my-8">{children}</main>
-        <Aside />
+        <Slider />
         <footer className="bg-gray-200">
           <div className="container flex items-center justify-between px-6 py-3 mx-auto">
             <a

@@ -1,36 +1,32 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
-// import { updateShippingDetails } from "../../firebase/config";
-import SliderHeader from "../SliderHeader";
-
 const EditProfile = () => {
-  const userShippingDetails = useSelector();
+  // const userShippingDetails = useSelector();
 
-  const [state, setState] = useState({
-    mobileNumber: userShippingDetails.mobileNumber,
-    location: userShippingDetails.location,
-    pincode: userShippingDetails.pincode,
-  });
+  // const [state, setState] = useState({
+  //   mobileNumber: userShippingDetails.mobileNumber,
+  //   location: userShippingDetails.location,
+  //   pincode: userShippingDetails.pincode,
+  // });
 
-  function handleChange(evt) {
-    const value = evt.target.value;
-    setState({
-      ...state,
-      [evt.target.name]: value,
-    });
-  }
+  // function handleChange(evt) {
+  //   const value = evt.target.value;
+  //   setState({
+  //     ...state,
+  //     [evt.target.name]: value,
+  //   });
+  // }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // updateShippingDetails(state);
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   // updateShippingDetails(state);
+  // };
 
   return (
     <div>
-      <SliderHeader Component="Edit Profile" />
-
-      <form onSubmit={handleSubmit} className="flex flex-col">
+      Hey wait for it.
+      {/* <form onSubmit={handleSubmit} className="flex flex-col">
         <div className="flex flex-col">
           <label htmlFor="mobileNumber">Mobile number</label>
           <input
@@ -74,7 +70,7 @@ const EditProfile = () => {
         <button className="bg-red-500 text-white py-2  px-1 my-3">
           CHANGE PASSWORD
         </button>
-      </form>
+      </form> */}
     </div>
   );
 };

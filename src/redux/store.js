@@ -4,10 +4,11 @@ import itemReducer from "./cartSlice";
 import orderReducer from "./orderSlice";
 import sliderReducer from "./sliderSlice";
 import userReducer from "./userSlice";
+
 export default configureStore({
   reducer: {
     cart: itemReducer,
-    openSlider: sliderReducer,
+    slider: sliderReducer,
     user: userReducer,
     order: orderReducer,
   },

@@ -1,25 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = [];
+
 export const slice = createSlice({
-  name: "openSlider",
-  initialState: {
-    value: false,
-    open: "",
-  },
+  name: "slider",
+  initialState,
   reducers: {
-    openSliderComponent: (state, action) => {
-      state.value = true;
-      state.open = action.payload;
+    openSlider: (state, action) => {
+      state.push(action.payload);
     },
-    cancel: (state) => {
-      state.value = !state.value;
-      state.open = null;
+    goToPrevSlider: (state) => {
+      state.pop();
+    },
+    closeSlider: () => {
+      return initialState;
     },
   },
 });
 
-export const { cancel, openSliderComponent } = slice.actions;
-export const openOrClose = (state) => state.openSlider.value;
-export const openSliderComponentState = (state) => state.openSlider.open;
+export const { closeSlider, openSlider, goToPrevSlider } = slice.actions;
+export const sliderSelector = (state) => state.slider.at(-1);
+export const tempSelector = (state) => state.slider;
 
 export default slice.reducer;

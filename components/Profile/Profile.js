@@ -1,22 +1,38 @@
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-import { userSelector } from "../../src/redux/userSlice";
-import Cancel from "../Buttons/Cancel";
-import ProfileItems from "./ProfileItems";
+import { getFirebase } from "../../src/firebase";
+import { openSlider } from "../../src/redux/sliderSlice";
+import { cancel } from "../../src/redux/sliderSlice";
+import { signOutUser } from "../../src/redux/userSlice";
+import PrimaryProfileItems from "./PrimaryProfileItems";
+const { auth } = getFirebase();
 
 const Profile = () => {
-  const user = useSelector(userSelector);
+  const dispatch = useDispatch();
+
+  const logOut = () => {
+    dispatch(cancel());
+    auth.signOut();
+    dispatch(signOutUser());
+  };
+
   return (
-    <>
-      <div className="flex items-center justify-between">
-        <h3 className="text-2xl font-medium text-gray-700">
-          Hello {user.displayName}
-        </h3>
-        <Cancel />
-      </div>
+    <div>
+      <PrimaryProfileItems />
       <hr className="my-3" />
-      <ProfileItems />
-    </>
+      <button
+        onClick={() => dispatch(openSlider("Edit Profile"))}
+        className="w-full hover:bg-gray-200 py-1 block text-left"
+      >
+        Edit Profile
+      </button>
+      <button
+        onClick={logOut}
+        className="w-full text-left hover:bg-gray-200 py-1"
+      >
+        Sign Out
+      </button>
+    </div>
   );
 };
 
