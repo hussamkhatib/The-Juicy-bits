@@ -1,6 +1,3 @@
-import GoBack from "./Buttons/GoBack";
-import Cancel from "./common/Cancel";
-
 const ContactUs = () => {
   return (
     <>

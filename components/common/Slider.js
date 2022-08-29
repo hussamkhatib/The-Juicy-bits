@@ -8,9 +8,9 @@ import {
   sliderSelector,
   tempSelector,
 } from "../../src/redux/sliderSlice";
-import Cart from "../Cart/Cart";
+import Cart from "../Cart";
 import ContactUs from "../ContactUs";
-import Order from "../Orders/Order";
+import Order from "../Orders";
 import EditProfile from "../Profile/EditProfile";
 import Profile from "../Profile/Profile";
 
