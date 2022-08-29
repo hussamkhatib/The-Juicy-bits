@@ -1,21 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
-import { doc } from "firebase/firestore";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useDocument } from "react-firebase-hooks/firestore";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { getFirebase } from "../src/firebase";
 import { addProductToCartFB } from "../src/firebase/helper";
+import { cartIdsSelector } from "../src/redux/cartSlice";
 import { addProductToCart } from "../src/redux/cartSlice";
 import { openSliderComponent } from "../src/redux/sliderSlice";
 import { PortableText, urlFor } from "../utils/sanity";
 
-const { firestore, auth } = getFirebase();
-
 function ProductPage(props) {
   const { title, defaultProductVariant, mainImage, body } = props;
-  const [user, isloading, error] = useAuthState(auth);
 
   return (
     <div className="container mx-auto px-6">
@@ -39,7 +33,7 @@ function ProductPage(props) {
           <hr className="my-3" />
 
           <div className="flex items-center mt-6">
-            {user?.uid ? <CTA props={props} useruid={user.uid} /> : null}
+            <CTA props={props} />
           </div>
         </div>
       </div>
@@ -53,20 +47,16 @@ function ProductPage(props) {
 
 export default ProductPage;
 
-const CTA = ({ props, useruid }) => {
+const CTA = ({ props }) => {
+  const cartIds = useSelector(cartIdsSelector);
   const dispatch = useDispatch();
-  const [value, loading, error] = useDocument(
-    doc(firestore, "users", useruid, "cart", props.id)
-  );
+
   const addToCart = () => {
     dispatch(addProductToCart(props));
     addProductToCartFB(props.id);
   };
 
-  // TODO LOADING AND ERROR
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
-  return value?.exists() ? (
+  return cartIds.includes(props.id) ? (
     <>
       <div className="px-4">Item added</div>
       <button

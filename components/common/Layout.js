@@ -7,45 +7,6 @@ import Header from "./Header";
 function Layout({ children }) {
   const router = useRouter();
 
-  // async function onAuthStateChange() {
-  //   return auth.onAuthStateChanged(async (user) => {
-  //     if (user) {
-  //       dispatch(toggleForm(true));
-  //       const userDetails = await getUserDetails(auth.currentUser.uid);
-  //       if (userDetails) {
-  //         dispatch(
-  //           LogInUser([
-  //             user.displayName,
-  //             userDetails.mobileNumber,
-  //             userDetails.location,
-  //             userDetails.pincode,
-  //           ])
-  //         );
-  //         const { products } = userDetails;
-  //         if (products != []) {
-  //           const query = `*[_type == "product" && _id in
-  //           [
-  //             ${products.map((i) => `'${i}'`).join(",")}
-  //             ]
-  //           ]
-  //           `;
-  //           const cartData = [];
-  //           await getClient()
-  //             .fetch(query)
-  //             .then((product) => {
-  //               product.forEach((pro) => {
-  //                 cartData.push(pro);
-  //                 dispatch(addItem(pro));
-  //               });
-  //             });
-  //         }
-  //       }
-  //     } else {
-  //       dispatch(LogOutUser());
-  //     }
-  //   });
-  // }
-
   const fullUrl = router.pathname;
   const slashIndex = fullUrl.slice(1).indexOf("/");
   const mainUrl =

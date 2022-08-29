@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
-import { userLoggedState } from "../../src/redux/userSlice";
 // import { updateShippingDetails } from "../../firebase/config";
 import SliderHeader from "../SliderHeader";
 
 const EditProfile = () => {
-  const userShippingDetails = useSelector(userLoggedState);
+  const userShippingDetails = useSelector();
 
   const [state, setState] = useState({
     mobileNumber: userShippingDetails.mobileNumber,

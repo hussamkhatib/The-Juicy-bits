@@ -9,13 +9,9 @@ import EmptyCart from "./EmptyCart";
 
 function Cart() {
   const cart = useSelector(cartSelector);
-
-  // useEffect(() => {}, []);
-
   if (Array.isArray(cart) && !cart.length) {
     return <EmptyCart />;
   }
-
   return (
     <>
       <div className="flex items-center justify-between">
