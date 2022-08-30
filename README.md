@@ -18,28 +18,31 @@ You can find the code for the in-studio preview over in `/studio/src/components/
 
 ## Running Locally
 
-To run locally,add your project ID to `.env`  from [manage.sanity.io](https://manage.sanity.io).
+To run locally,add your project ID to `.env` from [manage.sanity.io](https://manage.sanity.io).
 
 If you have already set up deployments on Vercel, you can also do `vercel env pull` to copy environment variables to your development environment.
 
 NOTE: If your Vercel project is set up to use the Next.js framework preset, you'll have to go to the project settings under https://vercel.com and under Build & Develpment change the _development command_ to: `npm run dev`
 
 To start the development server:
-```bash
-npm start
-```
-This will run the frontend at http://localhost:3000 and the Sanity Studio at http://localhost:3000/studio
 
-To start the frondtend only
 ```bash
-next dev
+yarn dev
 ```
-This will run the frontend at http://localhost:3000 
-- redux toolkit
+
+This will run the frontend at http://localhost:3000
+
+```bash
+yarn studio
+```
+
+This will run Sanity Studio at http://localhost:3000/studio
 
 ## Tech stack
-- Next.js
-- Vercel
-- Sanity
-- firebase
-- tailwind
+
+- [Next.js](https://nextjs.org/)
+- [Redux Toolkit](https://redux-toolkit.js.org/)
+- [Vercel](https://vercel.com/)
+- [Sanity.io](https://www.sanity.io/)
+- [Firebase](https://firebase.google.com/)
+- [Tailwind](https://tailwindcss.com/)
