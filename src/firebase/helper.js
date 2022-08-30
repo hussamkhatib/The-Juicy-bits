@@ -83,3 +83,17 @@ export async function completeCheckout(products, shippingAddress, total) {
   });
   return id;
 }
+
+export async function getUserOrders() {
+  const docRef = collection(firestore, `users/${auth.currentUser.uid}/order`);
+  const docSnap = await getDocs(docRef);
+  const data = docSnap.docs.map((doc) => {
+    const data = doc.data();
+    // nano-seconds is not important, hence appending 000 to it
+    const orderCompletedAt = new Date(
+      +`${data.orderCompletedAt.seconds}000`
+    ).toDateString();
+    return { ...data, orderCompletedAt };
+  });
+  return data;
+}

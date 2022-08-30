@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 
+import allOrdersReducer from "./allOrders";
 import orderReducer from "./orderSlice";
 import shippingAddressReducer from "./shippingAddressSlice";
 import sliderReducer from "./sliderSlice";
@@ -11,5 +12,6 @@ export default configureStore({
     user: userReducer,
     order: orderReducer,
     shippingAddress: shippingAddressReducer,
+    allOrders: allOrdersReducer,
   },
 });

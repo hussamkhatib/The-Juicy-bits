@@ -6,8 +6,9 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useDispatch } from "react-redux";
 
 import { getFirebase } from "../../src/firebase";
-import { getUserCart } from "../../src/firebase/helper";
+import { getUserCart, getUserOrders } from "../../src/firebase/helper";
 import { getUserDetails } from "../../src/firebase/user.firebase";
+import { initAllOrders } from "../../src/redux/allOrders";
 import { initOrder } from "../../src/redux/orderSlice";
 import { initShippingAddress } from "../../src/redux/shippingAddressSlice";
 import { openSlider } from "../../src/redux/sliderSlice";
@@ -23,9 +24,10 @@ const Header = () => {
 
   async function fetchCart() {
     const { total, products } = await getUserCart();
-
+    const orders = await getUserOrders();
     const userDetails = await getUserDetails();
     const shippingAddress = userDetails.ShippingAddress;
+    dispatch(initAllOrders(orders));
     dispatch(initShippingAddress(shippingAddress));
     dispatch(
       initOrder({
