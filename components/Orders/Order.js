@@ -1,12 +1,5 @@
-import { useSelector } from "react-redux";
-
-import { selectPurchasedItem } from "../../src/redux/orderSlice";
-import EmptyCart from "../Cart/EmptyCart";
-
 const Order = () => {
-  const purchasedItems = useSelector(selectPurchasedItem);
-
-  return <>{purchasedItems.length ? null : <EmptyCart />}</>;
+  return <div>Order Slider WIP</div>;
 };
 
 export default Order;
