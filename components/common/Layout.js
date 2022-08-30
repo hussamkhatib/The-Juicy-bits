@@ -9,15 +9,19 @@ function Layout({ children }) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta charSet="utf-8" />
-        <title>Evolution</title>
+        <title>The Juicy bits.</title>
 
         {/* Open Graph */}
         <meta property="og:image" content={"/static/logo.png"} key="ogimage" />
-        <meta property="og:site_name" content="Evolution" key="ogsitename" />
+        <meta
+          property="og:site_name"
+          content="The Juicy bits."
+          key="ogsitename"
+        />
         <meta property="og:title" content="Shop online juices" key="ogtitle" />
         <meta
           property="og:description"
-          content="Online Shopping site for juices in India"
+          content="Buy Juices online"
           key="ogdesc"
         />
       </Head>
@@ -32,7 +36,7 @@ function Layout({ children }) {
               href="#"
               className="text-xl font-bold text-gray-500 hover:text-gray-400"
             >
-              Evolution.
+              The Juicy bits.
             </a>
             <small className="text-sm py-2 text-gray-500 sm:py-0">
               All rights reserved

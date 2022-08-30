@@ -1,5 +1,5 @@
 {
-  "name": "evolution",
+  "name": "the-juicy-bits.",
   "version": "1.0.0",
   "private": true,
   "description": "Juice Shop",
@@ -10,12 +10,11 @@
     "lint": "next lint",
     "pretty": "prettier --write \"./**/*.{js,jsx,json,ts,tsx}\"",
     "start": "vercel dev",
-    "postinstall": "lerna bootstrap",
-    "check-template": "sanity-template check"
+    "postinstall": "lerna bootstrap"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hussamkhatib/evolution.git"
+    "url": "git+https://github.com/hussamkhatib/The-Juicy-bits.git"
   },
   "dependencies": {
     "@headlessui/react": "^1.6.6",
@@ -57,5 +56,5 @@
   "keywords": [],
   "author": "Hussam Khatib <hussamkhatib20@gmail.com>",
   "license": "MIT",
-  "homepage": "https://github.com/hussamkhatib/evolution#readme"
+  "homepage": "https://github.com/hussamkhatib/The-Juicy-bits#readme"
 }
