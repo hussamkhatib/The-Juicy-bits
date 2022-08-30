@@ -3,13 +3,11 @@ import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getFirebase } from "../src/firebase";
+import { auth } from "../src/firebase";
 import { addProductToCartFB } from "../src/firebase/helper";
 import { addProductToCart, cartIdsSelector } from "../src/redux/orderSlice";
 import { openSlider } from "../src/redux/sliderSlice";
 import { PortableText, urlFor } from "../utils/sanity";
-
-const { auth } = getFirebase();
 
 function ProductPage(props) {
   const { title, defaultProductVariant, mainImage, body } = props;

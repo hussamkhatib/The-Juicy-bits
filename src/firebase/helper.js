@@ -11,8 +11,7 @@ import {
 } from "firebase/firestore";
 
 import { getClient } from "../../utils/sanity";
-import { getFirebase } from ".";
-const { firestore, auth } = getFirebase();
+import { auth, firestore } from ".";
 
 export const getUserCart = async () => {
   const docRef = collection(firestore, `users/${auth.currentUser.uid}/cart`);

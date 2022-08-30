@@ -6,9 +6,7 @@ import {
 } from "firebase/auth";
 import { arrayUnion, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 
-import { getFirebase } from ".";
-
-const { firestore, auth } = getFirebase();
+import { auth, firestore } from ".";
 
 export const signInWithEmailAndPassword = async (email, password) => {
   try {

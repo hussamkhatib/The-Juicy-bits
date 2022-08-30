@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useDispatch } from "react-redux";
 
-import { getFirebase } from "../../src/firebase";
+import { auth } from "../../src/firebase";
 import { getUserCart, getUserOrders } from "../../src/firebase/helper";
 import { getUserDetails } from "../../src/firebase/user.firebase";
 import { initAllOrders } from "../../src/redux/allOrders";
@@ -15,8 +15,6 @@ import { openSlider } from "../../src/redux/sliderSlice";
 import Authenticate from "../form/Authenticate";
 import ProfileNavLink from "../Profile/ProfileNavLink";
 import Nav from "./Nav";
-
-const { auth } = getFirebase();
 
 const Header = () => {
   const dispatch = useDispatch();

@@ -1,10 +1,9 @@
 import { useDispatch } from "react-redux";
 
-import { getFirebase } from "../../src/firebase";
+import { auth } from "../../src/firebase";
 import { closeSlider, openSlider } from "../../src/redux/sliderSlice";
 import { signOutUser } from "../../src/redux/userSlice";
 import PrimaryProfileItems from "./PrimaryProfileItems";
-const { auth } = getFirebase();
 
 const Profile = () => {
   const dispatch = useDispatch();
