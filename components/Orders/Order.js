@@ -20,6 +20,7 @@ const Order = () => {
     <div>
       {allOrders.map((order) => {
         return (
+          // TODO: replace with Link to order page, once the page is ready.
           <Link href="/" key={order.orderCompletedAt.seconds}>
             <a className="flex justify-between items-center py-2 my-2">
               <div>

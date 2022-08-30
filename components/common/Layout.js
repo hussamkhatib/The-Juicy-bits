@@ -1,45 +1,23 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
 
 import Header from "./Header";
 import Slider from "./Slider";
 
 function Layout({ children }) {
-  const router = useRouter();
-
-  const fullUrl = router.pathname;
-  const slashIndex = fullUrl.slice(1).indexOf("/");
-  const mainUrl =
-    fullUrl === "/"
-      ? "Home"
-      : slashIndex === -1
-      ? fullUrl.slice(1)
-      : fullUrl.slice(0, slashIndex).slice(1);
-  const renderTitle = `${mainUrl[0].toUpperCase()}${mainUrl.slice(
-    1
-  )} | Evolutiongifts`;
   return (
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta charSet="utf-8" />
-        <title>{renderTitle}</title>
+        <title>Evolution</title>
 
         {/* Open Graph */}
         <meta property="og:image" content={"/static/logo.png"} key="ogimage" />
-        <meta
-          property="og:site_name"
-          content="Evolution Gifts"
-          key="ogsitename"
-        />
-        <meta
-          property="og:title"
-          content="Online Shopping India - Shop online gifts"
-          key="ogtitle"
-        />
+        <meta property="og:site_name" content="Evolution" key="ogsitename" />
+        <meta property="og:title" content="Shop online juices" key="ogtitle" />
         <meta
           property="og:description"
-          content="Online Shopping site for gifts in India"
+          content="Online Shopping site for juices in India"
           key="ogdesc"
         />
       </Head>

@@ -1,4 +1,4 @@
-# Evolutiongifts
+# Evolution
 
 This is an e-commerce apllication that features a studio with Next.js frontend.
 
