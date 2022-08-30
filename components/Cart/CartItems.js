@@ -3,26 +3,24 @@ import { MinusCircleIcon, PlusCircleIcon } from "@heroicons/react/24/outline";
 import { TrashIcon } from "@heroicons/react/24/solid";
 import debounce from "lodash.debounce";
 import React, { useMemo, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import {
   deleteProductFromCartFB,
   updateProductCountInCartFB,
 } from "../../src/firebase/helper";
 import {
-  cartSelector,
   decrementProductCountFromCart,
   incrementProductCountFromCart,
   removeProductFromCart,
-} from "../../src/redux/cartSlice";
+} from "../../src/redux/orderSlice";
 import { urlFor } from "../../utils/sanity";
 
-const CartItems = () => {
-  const cart = useSelector(cartSelector);
+const CartItems = ({ cart }) => {
   return (
     <>
       {cart.map((product) => (
-        <Product key={product.id} product={product} />
+        <Product key={product._id} product={product} />
       ))}
     </>
   );
@@ -46,7 +44,7 @@ const Product = ({ product }) => {
   };
 
   const deleteProduct = () => {
-    dispatch(removeProductFromCart(product._id));
+    dispatch(removeProductFromCart(product));
     deleteProductFromCartFB(product._id);
   };
 
@@ -95,6 +93,49 @@ const Product = ({ product }) => {
         <button onClick={() => deleteProduct()}>
           <TrashIcon className="h-5 w-5" aria-hidden />
         </button>
+      </div>
+    </div>
+  );
+};
+
+export const ReadOnlyCartItems = ({ cart }) => {
+  return (
+    <>
+      {cart.map((product) => (
+        <ReadOnlyProduct key={product._id} product={product} />
+      ))}
+    </>
+  );
+};
+
+const ReadOnlyProduct = ({ product }) => {
+  const {
+    title,
+    count,
+    mainImage,
+    defaultProductVariant: { price },
+  } = product;
+  return (
+    <div className="flex justify-between mt-6">
+      <div className="flex">
+        <img
+          className="h-20 w-20 object-cover rounded"
+          src={urlFor(mainImage)
+            .auto("format")
+            .width(200)
+            .fit("crop")
+            .quality(80)}
+          alt={mainImage?.alt || `Photo of ${title}`}
+        />
+        <div className="mx-3">
+          <h3 className="text-sm text-gray-600">{title}</h3>
+          <p>Rs {price * count}</p>
+        </div>
+      </div>
+      <div className="flex items-end  ">
+        <span className="w-6 h-6 flex items-center justify-center p-2 text-sm rounded-full bg-gray-200">
+          {count}
+        </span>
       </div>
     </div>
   );

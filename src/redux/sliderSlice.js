@@ -20,6 +20,5 @@ export const slice = createSlice({
 
 export const { closeSlider, openSlider, goToPrevSlider } = slice.actions;
 export const sliderSelector = (state) => state.slider.at(-1);
-export const tempSelector = (state) => state.slider;
 
 export default slice.reducer;

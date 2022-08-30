@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 
-import { cancel } from "../../src/redux/sliderSlice";
+import { closeSlider } from "../../src/redux/sliderSlice";
 import EmptyCartIcon from "../Icons/EmptyCartIcon";
 
 const EmptyCart = () => {
@@ -12,7 +12,7 @@ const EmptyCart = () => {
       <EmptyCartIcon />
       <button
         className="bg-blue-500 text-white py-2  px-1 my-3"
-        onClick={() => dispatch(cancel())}
+        onClick={() => dispatch(closeSlider())}
       >
         Continue Shopping
       </button>

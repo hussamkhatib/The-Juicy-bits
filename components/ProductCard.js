@@ -2,7 +2,6 @@ import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 import { urlFor } from "../utils/sanity";
-import CartIcon from "./Svg/CartIcon";
 
 function ProductCard({ _id, title, mainImage, slug, defaultProductVariant }) {
   return (

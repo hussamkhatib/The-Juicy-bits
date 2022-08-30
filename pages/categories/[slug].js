@@ -26,7 +26,7 @@ function CategoryContainer({ categoryData, preview }) {
   const { _id, title, slug, products } = category;
   return (
     <CategoryPage
-      id={_id}
+      _id={_id}
       title={title}
       slug={slug?.current}
       products={products}

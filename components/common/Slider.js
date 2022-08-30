@@ -6,10 +6,11 @@ import {
   closeSlider,
   goToPrevSlider,
   sliderSelector,
-  tempSelector,
 } from "../../src/redux/sliderSlice";
 import Cart from "../Cart";
 import ContactUs from "../ContactUs";
+import Checkout from "../form/Checkout";
+import ShippingAddress from "../form/ShippingAddress";
 import Order from "../Orders";
 import EditProfile from "../Profile/EditProfile";
 import Profile from "../Profile/Profile";
@@ -20,13 +21,13 @@ const sliders = {
   "Your Orders": <Order />,
   "Contact Us": <ContactUs />,
   "Edit Profile": <EditProfile />,
+  "Shipping Address": <ShippingAddress />,
+  Checkout: <Checkout />,
 };
 
 const Slider = () => {
   const dispatch = useDispatch();
   const sliderState = useSelector(sliderSelector);
-  const temp = useSelector(tempSelector);
-  console.log({ sliderState }, { temp });
   return (
     <div
       className={`${

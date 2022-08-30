@@ -1,12 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
 
-import { signInWithEmailAndPassword } from "../../src/firebase/util";
-import { signInUser } from "../../src/redux/userSlice";
+// import { useDispatch } from "react-redux";
+import { signInWithEmailAndPassword } from "../../src/firebase/user.firebase";
+// import { signInUser } from "../../src/redux/userSlice";
 
 const SignIn = ({ closeDialog, toggleForm }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const {
     register,
@@ -17,7 +17,7 @@ const SignIn = ({ closeDialog, toggleForm }) => {
   const onSubmit = async (data) => {
     const { email, password } = data;
     const user = await signInWithEmailAndPassword(email, password);
-    dispatch(signInUser(user));
+    // dispatch(signInUser(user));
     closeDialog();
   };
   return (

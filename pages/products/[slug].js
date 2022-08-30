@@ -34,7 +34,7 @@ function ProductPageContainer({ productData, preview }) {
   } = product;
   return (
     <ProductPage
-      id={_id}
+      _id={_id}
       title={title}
       defaultProductVariant={defaultProductVariant}
       mainImage={mainImage}

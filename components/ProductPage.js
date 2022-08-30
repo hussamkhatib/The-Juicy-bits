@@ -1,12 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useDispatch, useSelector } from "react-redux";
 
+import { getFirebase } from "../src/firebase";
 import { addProductToCartFB } from "../src/firebase/helper";
-import { cartIdsSelector } from "../src/redux/cartSlice";
-import { addProductToCart } from "../src/redux/cartSlice";
-import { openSliderComponent } from "../src/redux/sliderSlice";
+import { addProductToCart, cartIdsSelector } from "../src/redux/orderSlice";
+import { openSlider } from "../src/redux/sliderSlice";
 import { PortableText, urlFor } from "../utils/sanity";
+
+const { auth } = getFirebase();
 
 function ProductPage(props) {
   const { title, defaultProductVariant, mainImage, body } = props;
@@ -48,19 +51,22 @@ function ProductPage(props) {
 export default ProductPage;
 
 const CTA = ({ props }) => {
+  const [user] = useAuthState(auth);
+
   const cartIds = useSelector(cartIdsSelector);
   const dispatch = useDispatch();
 
   const addToCart = () => {
     dispatch(addProductToCart(props));
-    addProductToCartFB(props.id);
+    addProductToCartFB(props._id);
   };
 
-  return cartIds.includes(props.id) ? (
+  if (!user) return null;
+  return cartIds.includes(props._id) ? (
     <>
       <div className="px-4">Item added</div>
       <button
-        onClick={() => dispatch(openSliderComponent("Cart"))}
+        onClick={() => dispatch(openSlider("Cart"))}
         className="flex px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500"
       >
         Move to cart

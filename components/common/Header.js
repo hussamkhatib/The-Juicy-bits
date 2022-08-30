@@ -7,13 +7,14 @@ import { useDispatch } from "react-redux";
 
 import { getFirebase } from "../../src/firebase";
 import { getUserCart } from "../../src/firebase/helper";
-import { getUser } from "../../src/firebase/util";
-import { initCart } from "../../src/redux/cartSlice";
+import { getUserDetails } from "../../src/firebase/user.firebase";
+import { initOrder } from "../../src/redux/orderSlice";
+import { initShippingAddress } from "../../src/redux/shippingAddressSlice";
 import { openSlider } from "../../src/redux/sliderSlice";
-import { signInUser } from "../../src/redux/userSlice";
-import Authenticate from "../Form/Authenticate";
+import Authenticate from "../form/Authenticate";
 import ProfileNavLink from "../Profile/ProfileNavLink";
 import Nav from "./Nav";
+
 const { auth } = getFirebase();
 
 const Header = () => {
@@ -21,16 +22,25 @@ const Header = () => {
   const [user] = useAuthState(auth);
 
   async function fetchCart() {
-    const userCart = await getUserCart();
-    dispatch(initCart(userCart));
+    const { total, products } = await getUserCart();
+
+    const userDetails = await getUserDetails();
+    const shippingAddress = userDetails.ShippingAddress;
+    dispatch(initShippingAddress(shippingAddress));
+    dispatch(
+      initOrder({
+        cart: products,
+        total,
+        shippingAddress: null,
+      })
+    );
   }
 
   useEffect(() => {
     if (user) {
-      dispatch(signInUser(getUser(user)));
       fetchCart();
     }
-    //  'dispatch' and 'fetchCart' are intentionally not in the dependency list
+    //  'fetchCart' are intentionally not in the dependency list
     //  Cart is initially not rendered, we are just making it available beforehand to avoid a loading state later
   }, [user]);
 

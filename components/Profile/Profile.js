@@ -1,8 +1,7 @@
 import { useDispatch } from "react-redux";
 
 import { getFirebase } from "../../src/firebase";
-import { openSlider } from "../../src/redux/sliderSlice";
-import { cancel } from "../../src/redux/sliderSlice";
+import { closeSlider, openSlider } from "../../src/redux/sliderSlice";
 import { signOutUser } from "../../src/redux/userSlice";
 import PrimaryProfileItems from "./PrimaryProfileItems";
 const { auth } = getFirebase();
@@ -11,7 +10,7 @@ const Profile = () => {
   const dispatch = useDispatch();
 
   const logOut = () => {
-    dispatch(cancel());
+    dispatch(closeSlider());
     auth.signOut();
     dispatch(signOutUser());
   };

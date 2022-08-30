@@ -1,9 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
 
-import { createUser } from "../../src/firebase/helper";
-import { createUserWithEmailAndPassword } from "../../src/firebase/util";
+// import { useDispatch } from "react-redux";
+import { createUserWithEmailAndPassword } from "../../src/firebase/user.firebase";
 
 const SignUp = ({ closeDialog, toggleForm }) => {
   // const [updateProfile, updating, updateError] = useUpdateProfile(auth);
@@ -16,12 +15,11 @@ const SignUp = ({ closeDialog, toggleForm }) => {
 
   const onSubmit = async (data) => {
     const { email, password, confirmPassword, displayName } = data;
-    console.log(email, password);
     if (password === confirmPassword) {
-      const user = await createUserWithEmailAndPassword(email, password, {
+      await createUserWithEmailAndPassword(email, password, {
         sendEmailVerification: false,
+        displayName,
       });
-      createUser(user, { displayName });
       closeDialog();
     }
   };
