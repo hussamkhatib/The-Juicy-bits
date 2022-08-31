@@ -1,46 +1,44 @@
+import classNames from "classnames";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
+
+const routes = [
+  {
+    name: "Home",
+    href: "/",
+  },
+  {
+    name: "Shop",
+    href: "/products",
+  },
+  {
+    name: "About",
+    href: "/about",
+  },
+];
 
 const Nav = () => {
   const router = useRouter();
 
   return (
-    <nav className={` sm:flex sm:justify-center sm:items-center mt-4`}>
+    <nav className="sm:flex sm:justify-center sm:items-center mt-4">
       <ul className="flex flex-col sm:flex-row">
-        <Link href="/">
-          <a
-            className={
-              router.pathname == "/"
-                ? "mt-3 text-blue-500 hover:underline sm:mx-3 sm:mt-0"
-                : "mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0"
-            }
-          >
-            Home
-          </a>
-        </Link>
-        <Link href="/products">
-          <a
-            className={
-              router.pathname.startsWith("/products")
-                ? "mt-3 text-blue-500 hover:underline sm:mx-3 sm:mt-0"
-                : "mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0"
-            }
-          >
-            Shop
-          </a>
-        </Link>
-        <Link href="/about">
-          <a
-            className={
-              router.pathname == "/[slug]"
-                ? "mt-3 text-blue-500 hover:underline sm:mx-3 sm:mt-0"
-                : "mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0"
-            }
-          >
-            About
-          </a>
-        </Link>
+        {routes.map((route) => {
+          const isCurrent = router.asPath === route.href;
+          return (
+            <Link key={route.name} href={route.href}>
+              <a
+                className={classNames(
+                  isCurrent ? "text-blue-500" : "text-gray-600",
+                  "mt-3 hover:underline sm:mx-3 sm:mt-0"
+                )}
+              >
+                {route.name}
+              </a>
+            </Link>
+          );
+        })}
       </ul>
     </nav>
   );
