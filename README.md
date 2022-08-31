@@ -10,7 +10,7 @@ The quickest way to get up and running is to go to https://www.sanity.io/create?
 
 ## Enabling live preview
 
-You can append `?preview` to the landing pages, product pages,categories pages and the products overview to enable preview mode when you are logged into your Sanity project. For example:
+You can append `?preview` to the landing pages, product pages and the products overview to enable preview mode when you are logged into your Sanity project. For example:
 
 `https://<your-project>.vercel.app/products/roji?preview`
 

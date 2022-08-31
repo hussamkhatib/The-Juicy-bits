@@ -29,7 +29,6 @@ function ProductPageContainer({ productData, preview }) {
     body,
     tags,
     vendor,
-    categories,
     slug,
   } = product;
   return (
@@ -42,7 +41,6 @@ function ProductPageContainer({ productData, preview }) {
       body={body}
       tags={tags}
       vendor={vendor}
-      categories={categories}
       slug={slug?.current}
     />
   );

@@ -30,17 +30,6 @@ const Nav = () => {
             Shop
           </a>
         </Link>
-        <Link href="/categories">
-          <a
-            className={
-              router.pathname.startsWith("/categories")
-                ? "mt-3 text-blue-500 hover:underline sm:mx-3 sm:mt-0"
-                : "mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0"
-            }
-          >
-            Categories
-          </a>
-        </Link>
         <Link href="/about">
           <a
             className={

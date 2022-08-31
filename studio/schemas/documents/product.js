@@ -70,17 +70,6 @@ export default {
       type: "localeBlockContent",
     },
     {
-      name: "categories",
-      title: "Categories",
-      type: "array",
-      of: [
-        {
-          type: "reference",
-          to: { type: "category" },
-        },
-      ],
-    },
-    {
       name: "slug",
       title: "Slug",
       type: "slug",
