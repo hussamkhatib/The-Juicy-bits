@@ -29,7 +29,7 @@ const Order = () => {
                   {order.products.length === 1 ? "Product" : "Products"}
                 </p>
                 <p className="text-gray-500">
-                  On <time>{order.orderCompletedAt}</time>
+                  On <span>{order.orderCompletedAt}</span>
                 </p>
               </div>
               <ChevronRightIcon className="h-6 w-6" aria-hidden />

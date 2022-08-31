@@ -3,30 +3,52 @@ import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { completeCheckout } from "../../src/firebase/helper";
+import { addOrder } from "../../src/redux/allOrders";
 import {
   cartSelector,
   setInitialOrder,
   totalAmountSelector,
 } from "../../src/redux/orderSlice";
 import { shippingAddressSelector } from "../../src/redux/orderSlice";
+import { closeSlider } from "../../src/redux/sliderSlice";
 import { ReadOnlyCartItems } from "../Cart/CartItems";
 import Modal from "../common/Modal";
 import { EditShippingAddress } from "./ShippingAddress";
 
 const Checkout = () => {
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(false);
+  const [isOrderCompleted, setIsOrderCompleted] = useState(false);
   const cart = useSelector(cartSelector);
   const shippingAddress = useSelector(shippingAddressSelector);
   const total = useSelector(totalAmountSelector);
   const idRef = useRef();
 
   const placeOrder = async () => {
-    const id = await completeCheckout(cart, shippingAddress, total);
+    const { id, orderCompletedAt } = await completeCheckout(
+      cart,
+      shippingAddress,
+      total
+    );
     idRef.current = id;
+    dispatch(
+      addOrder({
+        prodcuts: cart,
+        total,
+        shippingAddress,
+        orderCompletedAt,
+      })
+    );
     dispatch(setInitialOrder());
-    setOpen(true);
+    dispatch(closeSlider());
+    setIsOrderCompleted(true);
   };
+  if (isOrderCompleted)
+    return (
+      <Modal
+        main={<OrderSucessfull id={idRef.current} />}
+        state={{ open: isOrderCompleted, setOpen: setIsOrderCompleted }}
+      />
+    );
 
   return (
     <div>
@@ -45,10 +67,6 @@ const Checkout = () => {
       >
         Complete Order
       </button>
-      <Modal
-        main={<OrderSucessfull id={idRef.current} />}
-        state={{ open, setOpen }}
-      />
     </div>
   );
 };
@@ -62,6 +80,7 @@ const OrderSucessfull = ({ id }) => {
       <p className="text-center my-2">
         You have successfully completed the order.
       </p>
+      {/* TODO: add this page */}
       <Link href={`/orders/${id}`}>
         <a className="w-full flex items-center justify-center px-3 mt-2 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
           View Order

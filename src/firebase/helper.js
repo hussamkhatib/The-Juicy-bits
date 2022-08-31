@@ -74,13 +74,14 @@ export async function completeCheckout(products, shippingAddress, total) {
       price: product.defaultProductVariant.price,
     };
   });
+  const orderCompletedAt = serverTimestamp();
   const { id } = await addDoc(orderCol, {
-    orderCompletedAt: serverTimestamp(),
+    orderCompletedAt,
     shippingAddress,
     products: productsArr,
     total,
   });
-  return id;
+  return { id, orderCompletedAt };
 }
 
 export async function getUserOrders() {

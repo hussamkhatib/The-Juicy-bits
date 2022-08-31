@@ -18,7 +18,7 @@ export const slice = createSlice({
       state.total += action.payload.defaultProductVariant.price;
       state.cart.push({
         ...action.payload,
-        unt: 1,
+        count: 1,
       });
     },
     removeProductFromCart: (state, action) => {
