@@ -1,5 +1,5 @@
-import React from "react";
 import { DiffFromTo } from "@sanity/field/diff";
+import React from "react";
 
 export function ColorFieldDiff({ diff, schemaType }) {
   return (

@@ -7,9 +7,9 @@ import { addOrder } from "../../src/redux/allOrders";
 import {
   cartSelector,
   setInitialOrder,
+  shippingAddressSelector,
   totalAmountSelector,
 } from "../../src/redux/orderSlice";
-import { shippingAddressSelector } from "../../src/redux/orderSlice";
 import { closeSlider } from "../../src/redux/sliderSlice";
 import { ReadOnlyCartItems } from "../Cart/CartItems";
 import Modal from "../common/Modal";
