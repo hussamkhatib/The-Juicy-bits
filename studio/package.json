@@ -16,9 +16,9 @@
   "dependencies": {
     "@sanity/base": "^2.1.1",
     "@sanity/block-content-to-react": "^2.0.7",
+    "@sanity/color-input": "^2.1.0",
     "@sanity/components": "^2.1.0",
     "@sanity/core": "^2.1.0",
-    "@sanity/color-input": "^2.1.0",
     "@sanity/default-layout": "^2.1.1",
     "@sanity/default-login": "^2.1.0",
     "@sanity/desk-tool": "^2.1.1",
