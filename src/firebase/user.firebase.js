@@ -18,10 +18,9 @@ export const signInWithEmailAndPassword = async (email, password) => {
       email,
       password
     );
-    return getUser(user);
-  } catch (err) {
-    console.error(err);
-    return err;
+    return { user: getUser(user) };
+  } catch (error) {
+    return { error };
   }
 };
 
@@ -67,10 +66,9 @@ export const createUserWithEmailAndPassword = async (
       await sendEmailVerification(user.user, options.emailVerificationOptions);
     }
     createUser(user, { displayName: options.displayName });
-    return getUser(user);
+    return { user: getUser(user) };
   } catch (error) {
-    console.error(error);
-    return null;
+    return { error };
   }
 };
 

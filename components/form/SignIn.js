@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
@@ -18,16 +18,18 @@ const SignIn = ({ closeDialog }) => {
   } = useForm({
     resolver: zodResolver(schema),
   });
-
+  const [error, setError] = useState(null);
   const onSubmit = async (data) => {
     const { email, password } = data;
-    await signInWithEmailAndPassword(email, password);
-    closeDialog();
+    const { user, error } = await signInWithEmailAndPassword(email, password);
+    if (user) closeDialog();
+    if (error) setError(error);
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="overflow-y-auto">
       <p className="text-sm">All the fields marked with * are required</p>
+      {error && <span>{error}</span>}
       <div className="py-2 flex flex-col">
         <label htmlFor="email">Email*</label>
         <input

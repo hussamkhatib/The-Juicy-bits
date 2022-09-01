@@ -20,23 +20,30 @@ const SignUp = ({ closeDialog }) => {
   } = useForm({
     resolver: zodResolver(schema),
   });
+  const [error, setError] = useState(null);
   const [passMatchErr, setPassMatchErr] = useState(false);
   const onSubmit = async (data) => {
     const { email, password, confirmPassword, displayName } = data;
 
     if (password === confirmPassword) {
-      passMatchErr(false);
-      await createUserWithEmailAndPassword(email, password, {
-        sendEmailVerification: false,
-        displayName,
-      });
-      closeDialog();
+      setPassMatchErr(false);
+      const { user, error } = await createUserWithEmailAndPassword(
+        email,
+        password,
+        {
+          sendEmailVerification: false,
+          displayName,
+        }
+      );
+      if (user) closeDialog();
+      if (error) setError(error);
     }
     setPassMatchErr(true);
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="overflow-y-auto">
+      {error && <span>{error}</span>}
       <p className="text-sm">All the fields marked with * are required</p>
       <div className="py-1 md:py-2 flex flex-col">
         <label>Display name*</label>
