@@ -1,7 +1,6 @@
 # The Juicy bits.
 
-![home-page](https://user-images.githubusercontent.com/52914487/187914298-35601508-af48-403f-976e-aaa6f053e5ae.png)
-![image](https://user-images.githubusercontent.com/52914487/187914464-80b1883e-6472-4755-8c21-fed468518bc2.png)
+![products-page](https://user-images.githubusercontent.com/52914487/187914464-80b1883e-6472-4755-8c21-fed468518bc2.png)
 
 This is an e-commerce apllication that features a studio with Next.js frontend.
 
