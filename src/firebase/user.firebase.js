@@ -1,8 +1,11 @@
 import cuid from "cuid";
 import {
   createUserWithEmailAndPassword as firebaseCreateUserWithEmailAndPassword,
+  getAdditionalUserInfo,
+  GoogleAuthProvider,
   sendEmailVerification,
   signInWithEmailAndPassword as firebaseSignInWithEmailAndPassword,
+  signInWithPopup,
 } from "firebase/auth";
 import { arrayUnion, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 
@@ -16,6 +19,26 @@ export const signInWithEmailAndPassword = async (email, password) => {
       password
     );
     return getUser(user);
+  } catch (err) {
+    console.error(err);
+    return err;
+  }
+};
+
+export const logInWithGoogle = async () => {
+  try {
+    const provider = new GoogleAuthProvider();
+    await signInWithPopup(auth, provider).then(async (result) => {
+      if (getAdditionalUserInfo(result).isNewUser) {
+        const user = result.user;
+        const { displayName, email, uid } = user;
+        createUser({
+          displayName,
+          email,
+          uid,
+        });
+      }
+    });
   } catch (err) {
     console.error(err);
     return err;

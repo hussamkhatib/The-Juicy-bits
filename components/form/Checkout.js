@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -38,17 +38,8 @@ const Checkout = () => {
         orderCompletedAt,
       })
     );
-    dispatch(setInitialOrder());
-    dispatch(closeSlider());
     setIsOrderCompleted(true);
   };
-  if (isOrderCompleted)
-    return (
-      <Modal
-        main={<OrderSucessfull id={idRef.current} />}
-        state={{ open: isOrderCompleted, setOpen: setIsOrderCompleted }}
-      />
-    );
 
   return (
     <div>
@@ -62,11 +53,22 @@ const Checkout = () => {
       </section>
       <h3 className="my-6 text-lg font-semibold text-end">Total: Rs {total}</h3>
       <button
+        disabled={isOrderCompleted}
         className="w-full flex items-center justify-center mt-4 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
         onClick={() => placeOrder()}
       >
         Complete Order
       </button>
+      {isOrderCompleted && (
+        <Modal
+          main={<OrderSucessfull id={idRef.current} />}
+          state={{ open: isOrderCompleted, setOpen: setIsOrderCompleted }}
+          onClose={() => {
+            dispatch(closeSlider());
+            dispatch(setInitialOrder());
+          }}
+        />
+      )}
     </div>
   );
 };
@@ -74,18 +76,26 @@ const Checkout = () => {
 export default Checkout;
 
 const OrderSucessfull = ({ id }) => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const viewOrder = () => {
+    /* TODO: add this page */
+    router.push(`/order/${id}`);
+    dispatch(closeSlider());
+    dispatch(setInitialOrder());
+  };
   return id ? (
     <div>
       <h1 className="text-center font-bold text-xl">Order Successfull!</h1>
       <p className="text-center my-2">
         You have successfully completed the order.
       </p>
-      {/* TODO: add this page */}
-      <Link href={`/orders/${id}`}>
-        <a className="w-full flex items-center justify-center px-3 mt-2 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
-          View Order
-        </a>
-      </Link>
+      <button
+        className="w-full flex items-center justify-center px-3 mt-2 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
+        onClick={() => viewOrder()}
+      >
+        View Order
+      </button>
     </div>
   ) : null;
 };

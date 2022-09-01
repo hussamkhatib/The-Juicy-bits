@@ -1,13 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-// import { useDispatch } from "react-redux";
 import { signInWithEmailAndPassword } from "../../src/firebase/user.firebase";
-// import { signInUser } from "../../src/redux/userSlice";
 
 const SignIn = ({ closeDialog, toggleForm }) => {
-  // const dispatch = useDispatch();
-
   const {
     register,
     handleSubmit,
@@ -16,12 +12,12 @@ const SignIn = ({ closeDialog, toggleForm }) => {
 
   const onSubmit = async (data) => {
     const { email, password } = data;
-    const user = await signInWithEmailAndPassword(email, password);
-    // dispatch(signInUser(user));
+    await signInWithEmailAndPassword(email, password);
     closeDialog();
   };
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="p-6 overflow-y-auto">
+    <form onSubmit={handleSubmit(onSubmit)} className="overflow-y-auto">
       <div className="py-2 flex flex-col">
         <label htmlFor="email">email</label>
         <input
@@ -46,23 +42,6 @@ const SignIn = ({ closeDialog, toggleForm }) => {
           Sign In
         </button>
       </div>
-      <p className="text-center">or</p>
-      <button
-        // onClick={signInWithGoogle}
-        className="bg-red-500 hover:bg-red-600 w-full py-2 text-white"
-      >
-        Sign In with Google
-      </button>
-
-      <p className="text-center">
-        Dont have an account?{" "}
-        <button
-          onClick={() => toggleForm()}
-          className="text-blue-500 hover:text-blue-600"
-        >
-          Sign up here
-        </button>
-      </p>
     </form>
   );
 };

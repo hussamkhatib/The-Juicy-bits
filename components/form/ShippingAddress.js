@@ -13,6 +13,7 @@ import {
   setShippingAddress,
   shippingAddressSelector,
 } from "../../src/redux/orderSlice";
+import { addShippingAddress } from "../../src/redux/shippingAddressSlice";
 import { shippingAddressesSelector } from "../../src/redux/shippingAddressSlice";
 import { openSlider } from "../../src/redux/sliderSlice";
 
@@ -40,7 +41,7 @@ export default ShippingAddress;
 const AddNewShippingAddress = () => {
   const [formIsOpen, setFormIsOpen] = useState(false);
   return formIsOpen ? (
-    <AddNewShippingAddressForm />
+    <AddNewShippingAddressForm setFormIsOpen={setFormIsOpen} />
   ) : (
     <>
       <SelectAddress />
@@ -54,16 +55,18 @@ const AddNewShippingAddress = () => {
   );
 };
 
-const AddNewShippingAddressForm = () => {
+const AddNewShippingAddressForm = ({ setFormIsOpen }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm();
-
+  const dispatch = useDispatch();
   const onSubmit = async (data) => {
     await updateUserShippingDetails(data);
+    setFormIsOpen(false);
+    dispatch(addShippingAddress(data));
   };
 
   return (

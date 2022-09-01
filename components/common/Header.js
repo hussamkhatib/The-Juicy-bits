@@ -23,7 +23,7 @@ const Header = () => {
     const { total, products } = await getUserCart();
     const orders = await getUserOrders();
     const userDetails = await getUserDetails();
-    const shippingAddress = userDetails.ShippingAddress;
+    const shippingAddress = userDetails?.ShippingAddress || [];
     dispatch(initAllOrders(orders));
     dispatch(initShippingAddress(shippingAddress));
     dispatch(
