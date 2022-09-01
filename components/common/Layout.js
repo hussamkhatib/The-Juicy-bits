@@ -12,7 +12,6 @@ function Layout({ children }) {
         <title>The Juicy bits.</title>
 
         {/* Open Graph */}
-        <meta property="og:image" content={"/static/logo.png"} key="ogimage" />
         <meta
           property="og:site_name"
           content="The Juicy bits."
