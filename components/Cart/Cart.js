@@ -30,7 +30,7 @@ const Checkout = () => {
       onClick={() => dispatch(openSlider("Shipping Address"))}
       className="w-full flex items-center justify-center mt-4 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
     >
-      <span>Chechout</span>
+      <span>Checkout</span>
       <ArrowRightIcon className="h-5 w-5 ml-2" aria-hidden />
     </button>
   );
