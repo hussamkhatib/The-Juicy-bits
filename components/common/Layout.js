@@ -24,10 +24,10 @@ function Layout({ children }) {
           key="ogdesc"
         />
       </Head>
-      <div className="min-h-screen grid grid-rows-[auto_auto_max-content] bg-white">
+      <div className="min-h-screen grid grid-rows-[max-content_auto_max-content] bg-white">
         <Header />
 
-        <main className="my-8">{children}</main>
+        <main>{children}</main>
         <Slider />
         <footer className="bg-gray-200">
           <div className="container flex items-center justify-between px-6 py-3 mx-auto">
