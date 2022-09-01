@@ -11,15 +11,14 @@ const query = `//groq
 function IndexPage(props) {
   const { productsData, preview } = props;
   const router = useRouter();
-
-  if (!router.isFallback && !productsData) {
-    return <Error statusCode={404} />;
-  }
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { data: products } = usePreviewSubscription(query, {
     initialData: productsData,
     enabled: preview || router.query.preview !== null,
   });
+
+  if (!router.isFallback && !productsData) {
+    return <Error statusCode={404} />;
+  }
 
   return (
     <div className="my-8">
@@ -32,7 +31,7 @@ function IndexPage(props) {
 
 export async function getStaticProps({ params = {}, preview = false }) {
   const productsData = await getClient(preview).fetch(query);
-
+  console.log({ productsData });
   return {
     props: {
       preview,

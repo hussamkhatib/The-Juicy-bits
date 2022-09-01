@@ -1,6 +1,5 @@
 import { MapPinIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
 import { Bars3Icon } from "@heroicons/react/24/solid";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useDispatch } from "react-redux";
@@ -50,16 +49,14 @@ const Header = () => {
   return (
     <header>
       <div className="container px-6 py-3 mx-auto">
-        <div className="flex items-center justify-between">
+        <div className="flex justify-between items-center  md:grid md:grid-cols-[1fr_auto_1fr] ">
           <address className="hidden w-full text-gray-600 md:flex md:items-center">
             <MapPinIcon className="h-6 w-6" aria-hidden />
             <span className="mx-1 text-sm">BLR</span>
           </address>
-          <h1>
-            <Image src="/static/logo.png" alt="logo" height={192} width={518} />
-          </h1>
+          <h1 className="font-bold text-lg md:text-2xl">The Juicy bits</h1>
 
-          <div className="flex items-center justify-end w-full">
+          <div className="flex items-center justify-end ">
             <div className="px-4">{user && <ProfileNavLink />}</div>
             {user ? null : <Authenticate />}
 

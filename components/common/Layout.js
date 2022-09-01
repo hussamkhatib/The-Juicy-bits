@@ -18,10 +18,10 @@ function Layout({ children }) {
           content="The Juicy bits."
           key="ogsitename"
         />
-        <meta property="og:title" content="Shop online juices" key="ogtitle" />
+        <meta property="og:title" content="Buy Juices online" key="ogtitle" />
         <meta
           property="og:description"
-          content="Buy Juices online"
+          content="We make juices.That's mostly it."
           key="ogdesc"
         />
       </Head>
