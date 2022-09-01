@@ -31,7 +31,6 @@ function IndexPage(props) {
 
 export async function getStaticProps({ params = {}, preview = false }) {
   const productsData = await getClient(preview).fetch(query);
-  console.log({ productsData });
   return {
     props: {
       preview,

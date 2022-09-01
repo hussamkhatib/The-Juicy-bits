@@ -1,5 +1,6 @@
 import { MapPinIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
 import { Bars3Icon } from "@heroicons/react/24/solid";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useDispatch } from "react-redux";
@@ -14,7 +15,6 @@ import { openSlider } from "../../src/redux/sliderSlice";
 import Authenticate from "../form/Authenticate";
 import ProfileNavLink from "../Profile/ProfileNavLink";
 import Nav from "./Nav";
-
 const Header = () => {
   const dispatch = useDispatch();
   const [user] = useAuthState(auth);
@@ -54,7 +54,11 @@ const Header = () => {
             <MapPinIcon className="h-6 w-6" aria-hidden />
             <span className="mx-1 text-sm">BLR</span>
           </address>
-          <h1 className="font-bold text-lg md:text-2xl">The Juicy bits</h1>
+          <Link href="/">
+            <a>
+              <h1 className="font-bold text-lg md:text-2xl">The Juicy bits</h1>
+            </a>
+          </Link>
 
           <div className="flex items-center justify-end ">
             <div className="px-4">{user && <ProfileNavLink />}</div>
