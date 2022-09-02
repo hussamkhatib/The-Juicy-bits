@@ -21,7 +21,6 @@ const tags = ["kombucha", "drink", "ritual", "lowcal", "nice", "milky"];
 
 async function fetchProducts(tags, search) {
   const query = queryWithFilters(tags, search);
-  console.log(query);
   const res = await getClient().fetch(query);
   return res;
 }

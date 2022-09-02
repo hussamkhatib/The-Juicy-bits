@@ -3,6 +3,7 @@ import {
   collection,
   deleteDoc,
   doc,
+  getDoc,
   getDocs,
   increment,
   serverTimestamp,
@@ -93,7 +94,44 @@ export async function getUserOrders() {
     const orderCompletedAt = new Date(
       +`${data.orderCompletedAt.seconds}000`
     ).toDateString();
-    return { ...data, orderCompletedAt };
+    return { ...data, id: doc.id, orderCompletedAt };
   });
   return data;
+}
+
+export async function getUserOrder(id) {
+  const docRef = doc(firestore, `/users/${auth.currentUser.uid}/order/${id}`);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    const data = docSnap.data();
+    const productIds = data.products
+      .map((product) => `'${product.id}'`)
+      .join(",");
+
+    const query = `*[_type == "product" && _id in 
+    [
+    ${productIds}
+    ]
+  ]
+  `;
+    const products = await getClient()
+      .fetch(query)
+      .then((productsArr) => {
+        return productsArr.map((product, i) => ({
+          ...product,
+          count: data.products[i].count,
+        }));
+      });
+    const orderCompletedAt = new Date(
+      +`${data.orderCompletedAt.seconds}000`
+    ).toDateString();
+    return {
+      products,
+      total: data.total,
+      orderCompletedAt,
+      shippingAddress: data.shippingAddress,
+    };
+  } else {
+    throw new Error("Order not found");
+  }
 }
