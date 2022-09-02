@@ -2,17 +2,9 @@
 
 ![products-page](https://user-images.githubusercontent.com/52914487/187914464-80b1883e-6472-4755-8c21-fed468518bc2.png)
 
-This is an e-commerce apllication that features a studio with Next.js frontend.
+This is an e-commerce application that features a studio with Next.js frontend.
 
 It uses the [Next.js toolkit for Sanity.io](https://github.com/sanity-io/next-sanity).
-
-## Enabling live preview
-
-You can append `?preview` to the landing pages, product pages and the products overview to enable preview mode when you are logged into your Sanity project. For example:
-
-`https://<your-project>.vercel.app/products/roji?preview`
-
-You can find the code for the in-studio preview over in `/studio/src/components/product`.
 
 ## Running Locally
 
