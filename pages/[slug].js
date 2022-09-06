@@ -2,7 +2,7 @@ import Error from "next/error";
 import { useRouter } from "next/router";
 import { groq } from "next-sanity";
 
-import Layout from "../components/common/Layout";
+import Layout, { siteConfig } from "../components/common/Layout";
 import LandingPage from "../components/LandingPage";
 import { getClient, usePreviewSubscription } from "../utils/sanity";
 
@@ -23,13 +23,16 @@ function ProductPageContainer({ pageData, preview, slug }) {
     enabled: preview || router.query.preview !== null,
   });
 
+  if (!router.isFallback && !pageData) {
+    return (
+      <Layout>
+        <Error statusCode={404} />;
+      </Layout>
+    );
+  }
   return (
-    <Layout>
-      {!router.isFallback && !pageData ? (
-        <Error statusCode={404} />
-      ) : (
-        <LandingPage page={page} />
-      )}
+    <Layout title={`${siteConfig.name} | ${slug}`}>
+      <LandingPage page={page} />
     </Layout>
   );
 }
