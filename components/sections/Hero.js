@@ -26,8 +26,8 @@ function Hero(props) {
             <img
               className="h-full w-full rounded-md object-cover max-w-lg mx-auto"
               src={urlFor(backgroundImage)
-                .auto("format")
                 .width(1051)
+                .auto("format")
                 .fit("crop")
                 .quality(80)}
               alt={backgroundImage.alt}
