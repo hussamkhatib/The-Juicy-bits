@@ -1,6 +1,7 @@
 import Error from "next/error";
 import { useRouter } from "next/router";
 
+import Layout from "../components/common/Layout";
 import ProductsPage from "../components/ProductsPage";
 import { getClient, usePreviewSubscription } from "../utils/sanity";
 
@@ -16,16 +17,18 @@ function IndexPage(props) {
     enabled: preview || router.query.preview !== null,
   });
 
-  if (!router.isFallback && !productsData) {
-    return <Error statusCode={404} />;
-  }
-
   return (
-    <div className="my-8">
-      <div className="mt-4">
-        <ProductsPage products={products} />
-      </div>
-    </div>
+    <Layout>
+      {!router.isFallback && !productsData ? (
+        <Error statusCode={404} />
+      ) : (
+        <div className="my-8">
+          <div className="mt-4">
+            <ProductsPage products={products} />
+          </div>
+        </div>
+      )}
+    </Layout>
   );
 }
 

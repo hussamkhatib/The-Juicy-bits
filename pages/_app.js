@@ -5,7 +5,6 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Provider } from "react-redux";
 import { useDispatch } from "react-redux";
 
-import Layout from "../components/common/Layout";
 import { auth } from "../src/firebase";
 import { getUserCart, getUserOrders } from "../src/firebase/helper";
 import { getUserDetails } from "../src/firebase/user.firebase";
@@ -17,9 +16,7 @@ import store from "../src/redux/store";
 function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <Component {...pageProps} />
       <InitUser />
     </Provider>
   );

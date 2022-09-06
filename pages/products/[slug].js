@@ -2,6 +2,7 @@ import Error from "next/error";
 import { useRouter } from "next/router";
 import { groq } from "next-sanity";
 
+import Layout from "../../components/common/Layout";
 import ProductPage from "../../components/ProductPage";
 import { getClient, usePreviewSubscription } from "../../utils/sanity";
 
@@ -9,16 +10,19 @@ const query = groq`*[_type == "product" && slug.current == $slug][0]`;
 
 function ProductPageContainer({ productData, preview }) {
   const router = useRouter();
-  if (!router.isFallback && !productData?.slug) {
-    return <Error statusCode={404} />;
-  }
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { data: product = {} } = usePreviewSubscription(query, {
     params: { slug: productData?.slug?.current },
     initialData: productData,
     enabled: preview || router.query.preview !== null,
   });
+
+  if (!router.isFallback && !productData?.slug)
+    return (
+      <Layout>
+        <Error statusCode={404} />;
+      </Layout>
+    );
 
   const {
     _id,
@@ -32,17 +36,19 @@ function ProductPageContainer({ productData, preview }) {
     slug,
   } = product;
   return (
-    <ProductPage
-      _id={_id}
-      title={title}
-      defaultProductVariant={defaultProductVariant}
-      mainImage={mainImage}
-      blurb={blurb}
-      body={body}
-      tags={tags}
-      vendor={vendor}
-      slug={slug?.current}
-    />
+    <Layout>
+      <ProductPage
+        _id={_id}
+        title={title}
+        defaultProductVariant={defaultProductVariant}
+        mainImage={mainImage}
+        blurb={blurb}
+        body={body}
+        tags={tags}
+        vendor={vendor}
+        slug={slug?.current}
+      />
+    </Layout>
   );
 }
 
