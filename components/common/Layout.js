@@ -47,10 +47,10 @@ const Head = ({
   );
 };
 
-function Layout({ children }) {
+function Layout({ children, ...seoProps }) {
   return (
     <>
-      <Head />
+      <Head {...seoProps} />
       <div className="min-h-screen grid grid-rows-[max-content_auto_max-content] bg-white">
         <Header />
         <main>{children}</main>

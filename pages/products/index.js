@@ -26,7 +26,7 @@ async function fetchProducts(tags, search) {
   return res;
 }
 
-function ProductsPageContainer({ productsData, preview }) {
+function ProductsPageContainer({ productsData }) {
   const [isLoaded, setIsLoaded] = useState(true);
   const [data, setData] = useState(productsData);
   const [error, setError] = useState(null);

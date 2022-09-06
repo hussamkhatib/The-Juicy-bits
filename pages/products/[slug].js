@@ -4,7 +4,7 @@ import { groq } from "next-sanity";
 
 import Layout from "../../components/common/Layout";
 import ProductPage from "../../components/ProductPage";
-import { getClient, usePreviewSubscription } from "../../utils/sanity";
+import { getClient, urlFor, usePreviewSubscription } from "../../utils/sanity";
 
 const query = groq`*[_type == "product" && slug.current == $slug][0]`;
 
@@ -36,7 +36,7 @@ function ProductPageContainer({ productData, preview }) {
     slug,
   } = product;
   return (
-    <Layout>
+    <Layout image={urlFor(mainImage)}>
       <ProductPage
         _id={_id}
         title={title}
