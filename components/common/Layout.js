@@ -1,5 +1,6 @@
 import NextHead from "next/head";
 
+import Footer from "./Footer";
 import Header from "./Header";
 import Slider from "./Slider";
 
@@ -52,22 +53,9 @@ function Layout({ children }) {
       <Head />
       <div className="min-h-screen grid grid-rows-[max-content_auto_max-content] bg-white">
         <Header />
-
         <main>{children}</main>
         <Slider />
-        <footer className="bg-gray-200">
-          <div className="container flex items-center justify-between px-6 py-3 mx-auto">
-            <a
-              href="#"
-              className="text-xl font-bold text-gray-500 hover:text-gray-400"
-            >
-              The Juicy bits
-            </a>
-            <small className="text-sm py-2 text-gray-500 sm:py-0">
-              All rights reserved
-            </small>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );
