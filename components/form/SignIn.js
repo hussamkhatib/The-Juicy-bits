@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 import { signInWithEmailAndPassword } from "../../src/firebase/user.firebase";
+import Button from "../common/Button";
 
 const schema = z.object({
   email: z.string().email(),
@@ -61,11 +62,9 @@ const SignIn = ({ closeDialog }) => {
         </span>
       </div>
 
-      <div className="flex py-4">
-        <button type="submit" className="py-2 bg-blue-500 text-white w-full">
-          Sign In
-        </button>
-      </div>
+      <Button type="submit" variant="primary" className="w-full">
+        Sign In
+      </Button>
     </form>
   );
 };

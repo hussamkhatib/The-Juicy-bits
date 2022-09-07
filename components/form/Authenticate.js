@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { logInWithGoogle } from "../../src/firebase/user.firebase";
+import Button from "../common/Button";
 import Modal from "../common/Modal";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
@@ -39,12 +40,13 @@ const Authenticate = () => {
       )}
       <div>
         <p className="text-center">or</p>
-        <button
+        <Button
           onClick={() => logInWithGoogle()}
-          className="bg-red-500 hover:bg-red-600 w-full py-1 mt-2 md:py-2 text-white"
+          variant="custom"
+          className="bg-red-500 hover:bg-red-600 w-full"
         >
-          Sign In with Google
-        </button>
+          Sign in with Google
+        </Button>
       </div>
       {signinOrSignup ? (
         <p className="text-center">
@@ -73,12 +75,9 @@ const Authenticate = () => {
 
   return (
     <>
-      <button
-        className="p-2 text-white bg-blue-500 hover:bg-blue-300"
-        onClick={() => setOpen(true)}
-      >
+      <Button onClick={() => setOpen(true)} variant="primary">
         Sign Up
-      </button>
+      </Button>
       <Modal title={title} main={main} state={{ open, setOpen }} />
     </>
   );

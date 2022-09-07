@@ -3,6 +3,7 @@ import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useDispatch, useSelector } from "react-redux";
 
+import Button from "../components/common/Button";
 import { auth } from "../src/firebase";
 import { addProductToCartFB } from "../src/firebase/helper";
 import { addProductToCart, cartIdsSelector } from "../src/redux/orderSlice";
@@ -60,25 +61,28 @@ const CTA = ({ props }) => {
   };
 
   if (!user) return null;
+  console.log(cartIds, props._id);
   return cartIds.includes(props._id) ? (
     <>
       <div className="px-4">Item added</div>
-      <button
+      <Button
+        variant="primary"
+        padding="px-8 py-2"
+        className="text-sm font-medium"
         onClick={() => dispatch(openSlider("Cart"))}
-        className="flex px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500"
       >
         Move to cart
-      </button>
+      </Button>
     </>
   ) : (
-    <div className="mt-2">
-      <button
-        onClick={() => addToCart()}
-        className="flex px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500"
-      >
-        Add to Cart
-        <ShoppingCartIcon className="h-5 w-5 ml-2" aria-hidden />
-      </button>
-    </div>
+    <Button
+      className="flex text-sm font-medium"
+      padding="px-8 py-2"
+      variant="primary"
+      onClick={() => addToCart()}
+    >
+      Add to Cart
+      <ShoppingCartIcon className="h-5 w-5 ml-2" aria-hidden />
+    </Button>
   );
 };

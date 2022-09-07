@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 import { createUserWithEmailAndPassword } from "../../src/firebase/user.firebase";
+import Button from "../common/Button";
 
 const schema = z.object({
   displayName: z.string(),
@@ -112,11 +113,10 @@ const SignUp = ({ closeDialog }) => {
             (passMatchErr && "Password does not match")}
         </span>
       </div>
-      <div className="flex py-2">
-        <button type="submit" className="py-2 bg-blue-500 text-white w-full">
-          Sign up
-        </button>
-      </div>
+
+      <Button className=" w-full" variant="primary">
+        Sign Up
+      </Button>
     </form>
   );
 };

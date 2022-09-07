@@ -12,6 +12,7 @@ import {
 } from "../../src/redux/orderSlice";
 import { closeSlider } from "../../src/redux/sliderSlice";
 import { ReadOnlyCartItems } from "../Cart/CartItems";
+import Button from "../common/Button";
 import Modal from "../common/Modal";
 import { EditShippingAddress } from "./ShippingAddress";
 
@@ -52,13 +53,15 @@ const Checkout = () => {
         <ReadOnlyCartItems cart={cart} />
       </section>
       <h3 className="my-6 text-lg font-semibold text-end">Total: Rs {total}</h3>
-      <button
+      <Button
+        variant="primary"
         disabled={isOrderCompleted}
-        className="w-full flex items-center justify-center mt-4 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
+        padding="px-3 py-2"
+        className="w-full flex items-center justify-center mt-4 text-sm uppercase font-medium"
         onClick={() => placeOrder()}
       >
         Complete Order
-      </button>
+      </Button>
       {isOrderCompleted && (
         <Modal
           main={<OrderSucessfull id={idRef.current} />}
@@ -79,7 +82,6 @@ const OrderSucessfull = ({ id }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const viewOrder = () => {
-    /* TODO: add this page */
     router.push(`/order/${id}`);
     dispatch(closeSlider());
     dispatch(setInitialOrder());
@@ -90,12 +92,13 @@ const OrderSucessfull = ({ id }) => {
       <p className="text-center my-2">
         You have successfully completed the order.
       </p>
-      <button
-        className="w-full flex items-center justify-center px-3 mt-2 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
+      <Button
+        variant="primary"
+        className="w-full flex items-center justify-center mt-2 text-sm uppercase font-medium"
         onClick={() => viewOrder()}
       >
         View Order
-      </button>
+      </Button>
     </div>
   ) : null;
 };

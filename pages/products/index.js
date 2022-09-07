@@ -4,6 +4,7 @@ import Error from "next/error";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
+import Button from "../../components/common/Button";
 import Layout from "../../components/common/Layout";
 import LoadingProductCard from "../../components/LoadingProductCard";
 import ProductsPage from "../../components/ProductsPage";

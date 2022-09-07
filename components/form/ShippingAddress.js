@@ -16,6 +16,7 @@ import {
 import { addShippingAddress } from "../../src/redux/shippingAddressSlice";
 import { shippingAddressesSelector } from "../../src/redux/shippingAddressSlice";
 import { openSlider } from "../../src/redux/sliderSlice";
+import Button from "../common/Button";
 
 const ShippingAddress = () => {
   const dispatch = useDispatch();
@@ -25,13 +26,14 @@ const ShippingAddress = () => {
   return (
     <div>
       <AddNewShippingAddress />
-      <button
+      <Button
         disabled={!shippingAddress}
-        className="w-full flex items-center justify-center mt-4 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none disabled:opacity-50 focus:bg-blue-500"
+        padding="px-3 py-2"
+        className="w-full flex items-center justify-center mt-4 text-sm uppercase font-medium"
         onClick={() => dispatch(openSlider("Checkout"))}
       >
         Continue
-      </button>
+      </Button>
     </div>
   );
 };
@@ -45,12 +47,14 @@ const AddNewShippingAddress = () => {
   ) : (
     <>
       <SelectAddress />
-      <button
-        className="w-full flex items-center justify-center mt-4 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
+      <Button
+        variant="primary"
+        padding="px-3 py-2"
+        className="w-full flex items-center justify-center mt-4 text-sm uppercase font-medium"
         onClick={() => setFormIsOpen(true)}
       >
         Add New Address <PlusIcon className="h-5 w-5 ml-2" aria-hidden />
-      </button>
+      </Button>
     </>
   );
 };
@@ -133,15 +137,12 @@ const AddNewShippingAddressForm = ({ setFormIsOpen }) => {
       </div>
 
       <div className="flex gap-x-4 py-4">
-        <button
-          className="py-2 border-black border-[1px] focus:border-2 text-black w-full"
-          type="button"
-        >
+        <Button className="w-full" type="button">
           Cancel
-        </button>
-        <button className="py-2 bg-blue-500 text-white w-full" type="submit">
+        </Button>
+        <Button variant="primary" className="w-full" type="submit">
           Add
-        </button>
+        </Button>
       </div>
     </form>
   );
