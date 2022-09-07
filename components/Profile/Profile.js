@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { auth } from "../../src/firebase";
 import { closeSlider, openSlider } from "../../src/redux/sliderSlice";
 import { signOutUser } from "../../src/redux/userSlice";
-import PrimaryProfileItems from "./PrimaryProfileItems";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -35,3 +34,23 @@ const Profile = () => {
 };
 
 export default Profile;
+
+const mainItems = ["Your Orders", "Cart", "Contact us"];
+
+const PrimaryProfileItems = () => {
+  const dispatch = useDispatch();
+
+  return (
+    <>
+      {mainItems.map((item) => (
+        <button
+          key={item}
+          onClick={() => dispatch(openSlider(item))}
+          className="w-full hover:bg-gray-200 py-1 block text-left"
+        >
+          {item}
+        </button>
+      ))}
+    </>
+  );
+};
