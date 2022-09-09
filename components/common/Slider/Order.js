@@ -2,8 +2,8 @@ import { ChevronRightIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 
-import { allOrdersSelector } from "../../src/redux/allOrders";
-import EmptyCartIcon from "../Icons/EmptyCartIcon";
+import { allOrdersSelector } from "../../../src/redux/allOrders";
+import EmptyCartIcon from "../../Icons/EmptyCartIcon";
 
 const Order = () => {
   const allOrders = useSelector(allOrdersSelector);

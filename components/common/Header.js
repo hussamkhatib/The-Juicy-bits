@@ -34,7 +34,7 @@ const Header = () => {
           <div className="flex items-center justify-end gap-4">
             {user && (
               <Button
-                className="flex flex-col items-center my-0"
+                className="flex flex-col items-center"
                 padding="p-0"
                 onClick={() => dispatch(openSlider("Profile"))}
               >
@@ -48,7 +48,7 @@ const Header = () => {
             <Button
               onClick={() => dispatch(openSlider("Cart"))}
               padding="p-0"
-              className="text-xs my-0"
+              className="text-xs"
             >
               <ShoppingCartIcon className="h-6 w-6" aria-hidden />
               <div className="text-xs focus:outline-none sm:mx-0">Cart</div>

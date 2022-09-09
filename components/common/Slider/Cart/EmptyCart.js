@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 
-import { closeSlider } from "../../src/redux/sliderSlice";
-import EmptyCartIcon from "../Icons/EmptyCartIcon";
+import { closeSlider } from "../../../../src/redux/sliderSlice";
+import EmptyCartIcon from "../../../Icons/EmptyCartIcon";
 
 const EmptyCart = () => {
   const dispatch = useDispatch();

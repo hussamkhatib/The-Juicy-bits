@@ -114,7 +114,7 @@ const SignUp = ({ closeDialog }) => {
         </span>
       </div>
 
-      <Button className=" w-full" variant="primary">
+      <Button className="my-1 w-full" variant="primary">
         Sign Up
       </Button>
     </form>

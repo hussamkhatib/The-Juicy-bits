@@ -43,7 +43,7 @@ const Authenticate = () => {
         <Button
           onClick={() => logInWithGoogle()}
           variant="custom"
-          className="bg-red-500 hover:bg-red-600 w-full"
+          className="bg-red-500 hover:bg-red-600 w-full my-1"
         >
           Sign in with Google
         </Button>
@@ -51,23 +51,24 @@ const Authenticate = () => {
       {signinOrSignup ? (
         <p className="text-center">
           Dont have an account?{" "}
-          <button
-            type="button"
+          <Button
             onClick={() => setSignInOrSignUp(0)}
-            className="text-blue-500 hover:text-blue-600"
+            padding="py-0"
+            className="my-0"
           >
             Sign up here
-          </button>
+          </Button>
         </p>
       ) : (
         <p className="text-center">
           Already have an account?{" "}
-          <button
+          <Button
             onClick={() => setSignInOrSignUp(1)}
-            className="text-blue-500 hover:text-blue-600"
+            padding="py-0"
+            className="my-0"
           >
             Sign in here
-          </button>
+          </Button>
         </p>
       )}
     </>

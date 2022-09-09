@@ -2,9 +2,9 @@ import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { cartSelector } from "../../src/redux/orderSlice";
-import { openSlider } from "../../src/redux/sliderSlice";
-import Button from "../common/Button";
+import { cartSelector } from "../../../../src/redux/orderSlice";
+import { openSlider } from "../../../../src/redux/sliderSlice";
+import Button from "../../Button";
 import CartItems from "./CartItems";
 import EmptyCart from "./EmptyCart";
 

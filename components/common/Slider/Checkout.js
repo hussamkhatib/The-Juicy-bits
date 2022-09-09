@@ -2,18 +2,18 @@ import { useRouter } from "next/router";
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { completeCheckout } from "../../src/firebase/helper";
-import { addOrder } from "../../src/redux/allOrders";
+import { completeCheckout } from "../../../src/firebase/helper";
+import { addOrder } from "../../../src/redux/allOrders";
 import {
   cartSelector,
   setInitialOrder,
   shippingAddressSelector,
   totalAmountSelector,
-} from "../../src/redux/orderSlice";
-import { closeSlider } from "../../src/redux/sliderSlice";
-import { ReadOnlyCartItems } from "../Cart/CartItems";
-import Button from "../common/Button";
-import Modal from "../common/Modal";
+} from "../../../src/redux/orderSlice";
+import { closeSlider } from "../../../src/redux/sliderSlice";
+import Button from "../Button";
+import Modal from "../Modal";
+import { ReadOnlyCartItems } from "./Cart/CartItems";
 import { EditShippingAddress } from "./ShippingAddress";
 
 const Checkout = () => {

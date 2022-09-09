@@ -36,7 +36,11 @@ function ProductPageContainer({ productData, preview }) {
     slug,
   } = product;
   return (
-    <Layout image={urlFor(mainImage)} description={blurb.en} title={title}>
+    <Layout
+      image={urlFor(mainImage)}
+      description={blurb?.en || null}
+      title={title}
+    >
       <ProductPage
         _id={_id}
         title={title}

@@ -8,13 +8,13 @@ import { useDispatch } from "react-redux";
 import {
   deleteProductFromCartFB,
   updateProductCountInCartFB,
-} from "../../src/firebase/helper";
+} from "../../../../src/firebase/helper";
 import {
   decrementProductCountFromCart,
   incrementProductCountFromCart,
   removeProductFromCart,
-} from "../../src/redux/orderSlice";
-import { urlFor } from "../../utils/sanity";
+} from "../../../../src/redux/orderSlice";
+import { urlFor } from "../../../../utils/sanity";
 
 const CartItems = ({ cart }) => {
   return (

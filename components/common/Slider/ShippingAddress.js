@@ -8,15 +8,15 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 
-import { updateUserShippingDetails } from "../../src/firebase/user.firebase";
+import { updateUserShippingDetails } from "../../../src/firebase/user.firebase";
 import {
   setShippingAddress,
   shippingAddressSelector,
-} from "../../src/redux/orderSlice";
-import { addShippingAddress } from "../../src/redux/shippingAddressSlice";
-import { shippingAddressesSelector } from "../../src/redux/shippingAddressSlice";
-import { openSlider } from "../../src/redux/sliderSlice";
-import Button from "../common/Button";
+} from "../../../src/redux/orderSlice";
+import { addShippingAddress } from "../../../src/redux/shippingAddressSlice";
+import { shippingAddressesSelector } from "../../../src/redux/shippingAddressSlice";
+import { openSlider } from "../../../src/redux/sliderSlice";
+import Button from "../Button";
 
 const ShippingAddress = () => {
   const dispatch = useDispatch();
@@ -137,7 +137,11 @@ const AddNewShippingAddressForm = ({ setFormIsOpen }) => {
       </div>
 
       <div className="flex gap-x-4 py-4">
-        <Button className="w-full" type="button">
+        <Button
+          onClick={() => setFormIsOpen(false)}
+          className="w-full"
+          type="button"
+        >
           Cancel
         </Button>
         <Button variant="primary" className="w-full" type="submit">

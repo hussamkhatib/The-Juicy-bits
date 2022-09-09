@@ -6,7 +6,7 @@ const Button = (props) => {
 
   const disabled = props.disabled || loading;
 
-  const baseStyles = "text-white my-3 rounded-sm";
+  const baseStyles = "text-white rounded-sm";
   const basePadding = "p-2";
   const classes = classNames(
     baseStyles,
