@@ -1,8 +1,10 @@
 import NextHead from "next/head";
+import { lazy, Suspense } from "react";
 
 import Footer from "./Footer";
 import Header from "./Header";
-import Slider from "./Slider";
+
+const Slider = lazy(() => import("./Slider"));
 
 export const siteConfig = {
   name: "The Juicy bits",
@@ -54,7 +56,9 @@ function Layout({ children, ...seoProps }) {
       <div className="min-h-screen grid grid-rows-[max-content_auto_max-content] bg-white">
         <Header />
         <main>{children}</main>
-        <Slider />
+        <Suspense fallback={<div>Loading</div>}>
+          <Slider />
+        </Suspense>
         <Footer />
       </div>
     </>
