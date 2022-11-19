@@ -4,6 +4,7 @@ import {
   getAdditionalUserInfo,
   GoogleAuthProvider,
   sendEmailVerification,
+  signInAnonymously as firebaseSignInAnonymously,
   signInWithEmailAndPassword as firebaseSignInWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
@@ -18,6 +19,15 @@ export const signInWithEmailAndPassword = async (email, password) => {
       email,
       password
     );
+    return { user: getUser(user) };
+  } catch (error) {
+    return { error };
+  }
+};
+
+export const signInAnonymously = async () => {
+  try {
+    const { user } = await firebaseSignInAnonymously(auth);
     return { user: getUser(user) };
   } catch (error) {
     return { error };
@@ -44,13 +54,6 @@ export const logInWithGoogle = async () => {
   }
 };
 
-/**
- *
- * @param { string } email - useremail
- * @param { string } password - userpassword
- * @param { Object } options - { sendEmailVerification ,displayName,}
- * @returns
- */
 export const createUserWithEmailAndPassword = async (
   email,
   password,
@@ -90,9 +93,6 @@ export const getUserDetails = async () => {
   }
 };
 
-/**
- * @param {Object} userDetails
- */
 export const updateUserDetails = async (userDetails) => {
   const docRef = doc(firestore, `users/${auth.currentUser.uid}`);
   await updateDoc(docRef, userDetails);
@@ -101,9 +101,15 @@ export const updateUserDetails = async (userDetails) => {
 export const updateUserShippingDetails = async (details) => {
   const docRef = doc(firestore, `users/${auth.currentUser.uid}`);
   const id = cuid();
-  await updateDoc(docRef, {
-    ShippingAddress: arrayUnion({ ...details, id }),
-  });
+  await setDoc(
+    docRef,
+    {
+      ShippingAddress: arrayUnion({ ...details, id }),
+    },
+    {
+      merge: true,
+    }
+  );
 };
 
 function getUser(user) {
@@ -111,7 +117,5 @@ function getUser(user) {
     uid: user.uid,
     displayName: user.displayName,
     email: user.email,
-    // phoneNumber: user.phoneNumber,
-    // photoURL: user.photoURL,
   };
 }

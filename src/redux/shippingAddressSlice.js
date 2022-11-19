@@ -12,9 +12,9 @@ export const slice = createSlice({
     addShippingAddress: (state, action) => {
       state.push(action.payload);
     },
-    removeShippingAddress: (state, action) => {
-      //   state.splice(action.payload, 1);
-    },
+    // removeShippingAddress: (state, action) => {
+    //   state.splice(action.payload, 1);
+    // },
   },
 });
 

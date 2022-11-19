@@ -4,7 +4,7 @@ import {
   PencilIcon,
   PlusIcon,
 } from "@heroicons/react/24/solid";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 

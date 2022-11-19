@@ -10,7 +10,7 @@ const Order = () => {
 
   if (!allOrders.length)
     return (
-      <div className="flex flex-col justify-center mt-6 text-xl">
+      <div className="flex flex-col items-center mt-6 text-xl">
         <EmptyCartIcon />
         <p className="mt-2">You have no previous Orders.</p>
       </div>

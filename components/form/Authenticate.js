@@ -1,6 +1,9 @@
 import { useState } from "react";
 
-import { logInWithGoogle } from "../../src/firebase/user.firebase";
+import {
+  logInWithGoogle,
+  signInAnonymously,
+} from "../../src/firebase/user.firebase";
 import Button from "../common/Button";
 import Modal from "../common/Modal";
 import SignIn from "./SignIn";
@@ -40,13 +43,22 @@ const Authenticate = () => {
       )}
       <div>
         <p className="text-center">or</p>
-        <Button
-          onClick={() => logInWithGoogle()}
-          variant="custom"
-          className="bg-red-500 hover:bg-red-600 w-full my-1"
-        >
-          Sign in with Google
-        </Button>
+        <div className="flex gap-x-2">
+          <Button
+            onClick={() => logInWithGoogle()}
+            variant="custom"
+            className="bg-red-500 hover:bg-red-600 w-full my-1"
+          >
+            Sign in with Google
+          </Button>
+          <Button
+            onClick={() => signInAnonymously()}
+            variant="plain"
+            className="w-full"
+          >
+            Sign in Anonymously
+          </Button>
+        </div>
       </div>
       {signinOrSignup ? (
         <p className="text-center">
