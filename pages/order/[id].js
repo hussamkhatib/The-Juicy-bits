@@ -4,8 +4,10 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { Fragment, useEffect } from "react";
 import { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 import Layout from "../../components/common/Layout";
+import { auth } from "../../src/firebase";
 import { getUserOrder } from "../../src/firebase/helper";
 import { urlFor } from "../../utils/sanity";
 
@@ -14,9 +16,10 @@ const OrderPage = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [data, setData] = useState();
   const [error, setError] = useState();
+  const [user] = useAuthState(auth);
 
   useEffect(() => {
-    if (router.query.id) {
+    if (router.query.id && user) {
       setIsLoaded(false);
       (async () => {
         const data = await getUserOrder(router.query.id);
@@ -25,7 +28,7 @@ const OrderPage = () => {
         setIsLoaded(true);
       })();
     }
-  }, [router.query.id]);
+  }, [router.query.id, user]);
 
   return (
     <Layout>

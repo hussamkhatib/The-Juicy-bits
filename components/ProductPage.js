@@ -61,7 +61,6 @@ const CTA = ({ props }) => {
   };
 
   if (!user) return null;
-  console.log(cartIds, props._id);
   return cartIds.includes(props._id) ? (
     <>
       <div className="px-4">Item added</div>
