@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { completeCheckout } from "../../../src/firebase/helper";
-import { addOrder } from "../../../src/redux/allOrders";
+import { addOrdertoAllOrders } from "../../../src/redux/allOrdersSlice";
 import {
   cartSelector,
   setInitialOrder,
@@ -32,8 +32,9 @@ const Checkout = () => {
     );
     idRef.current = id;
     dispatch(
-      addOrder({
-        prodcuts: cart,
+      addOrdertoAllOrders({
+        id,
+        products: cart,
         total,
         shippingAddress,
         orderCompletedAt,

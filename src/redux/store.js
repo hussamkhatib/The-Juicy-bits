@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import allOrdersReducer from "./allOrders";
+import allOrdersReducer from "./allOrdersSlice";
 import orderReducer from "./orderSlice";
 import shippingAddressReducer from "./shippingAddressSlice";
 import sliderReducer from "./sliderSlice";

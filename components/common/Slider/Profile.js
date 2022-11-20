@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 
 import { auth } from "../../../src/firebase";
@@ -6,12 +7,14 @@ import { signOutUser } from "../../../src/redux/userSlice";
 import Button from "../Button";
 
 const Profile = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
 
   const logOut = () => {
     dispatch(closeSlider());
     auth.signOut();
     dispatch(signOutUser());
+    router.replace("/");
   };
 
   return (

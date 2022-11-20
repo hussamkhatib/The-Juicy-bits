@@ -9,13 +9,13 @@ export const slice = createSlice({
     initAllOrders: (state, action) => {
       return action.payload;
     },
-    addOrder: (state, action) => {
+    addOrdertoAllOrders: (state, action) => {
       state.push(action.payload);
     },
   },
 });
 
-export const { initAllOrders, addOrder } = slice.actions;
+export const { initAllOrders, addOrdertoAllOrders } = slice.actions;
 export const allOrdersSelector = (state) => state.allOrders;
 
 export default slice.reducer;

@@ -9,6 +9,7 @@ import {
 } from "../../../src/redux/sliderSlice";
 import Button from "../Button";
 import { Cart, Checkout, Order, Profile, ShippingAddress } from ".";
+
 const sliders = {
   Cart: <Cart />,
   Profile: <Profile />,

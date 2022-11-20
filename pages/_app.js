@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { auth } from "../src/firebase";
 import { getUserCart, getUserOrders } from "../src/firebase/helper";
 import { getUserDetails } from "../src/firebase/user.firebase";
-import { initAllOrders } from "../src/redux/allOrders";
+import { initAllOrders } from "../src/redux/allOrdersSlice";
 import { initOrder } from "../src/redux/orderSlice";
 import { initShippingAddress } from "../src/redux/shippingAddressSlice";
 import store from "../src/redux/store";

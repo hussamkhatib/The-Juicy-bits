@@ -82,7 +82,10 @@ export async function completeCheckout(products, shippingAddress, total) {
     products: productsArr,
     total,
   });
-  return { id, orderCompletedAt };
+  return {
+    id,
+    orderCompletedAt: new Date().toDateString(),
+  };
 }
 
 export async function getUserOrders() {
