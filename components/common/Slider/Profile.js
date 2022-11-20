@@ -18,12 +18,6 @@ const Profile = () => {
     <div>
       <PrimaryProfileItems />
       <hr className="my-3" />
-      <Button
-        onClick={() => dispatch(openSlider("Edit Profile"))}
-        className="w-full text-left my-0"
-      >
-        Edit Profile
-      </Button>
       <Button onClick={logOut} className="w-full text-left my-0">
         Sign Out
       </Button>
